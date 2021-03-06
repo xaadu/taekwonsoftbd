@@ -1,0 +1,44 @@
+version: "3.7"
+
+services: 
+  db:
+    container_name: db_container
+    image: mysql:5.7.33
+    restart: unless-stopped
+    env_file: 
+      - .env
+    volumes: 
+      - dbdata:/var/lib/mysql
+  app:
+    container_name: app_container
+    restart: unless-stopped
+    env_file: 
+      - .env
+    build:
+      context: ./app
+      dockerfile: Dockerfile_PROD
+    volumes: 
+      - assets:/assets
+    depends_on: 
+      - db
+  proxy:
+    container_name: proxy_container
+    restart: unless-stopped
+    env_file: 
+      - .env
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile_PROD
+    volumes: 
+      - assets:/assets
+      - sslfiles:/sslfiles
+    ports:
+      - 80:80
+      - 443:443
+    depends_on: 
+      - app
+
+volumes: 
+  dbdata:
+  assets:
+  sslfiles:

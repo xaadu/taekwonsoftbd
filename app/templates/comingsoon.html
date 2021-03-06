@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaekwonSoftBD</title>
+
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+
+    <link rel="stylesheet" href="{% static 'comingsoon/main.css' %}">
+</head>
+
+<body>
+    <div class="bgimg">
+        <div class="topleft">
+            <p>TaekwonSoftBD</p>
+        </div>
+        <div class="middle">
+            <h1>COMING SOON</h1>
+            <hr>
+            <p id="demo" style="font-size:30px"></p>
+        </div>
+        <div class="bottom">
+            <p>All Rights Reserved &copy; <span id="year"></span></p>
+            <p>Crafted By <a href="https://zayedabdullah.com/" target="_blank">Xayed</a></p>
+        </div>
+    </div>
+
+    <script src="{% static 'comingsoon/main.js' %}"></script>
+</body>
+
+</html>

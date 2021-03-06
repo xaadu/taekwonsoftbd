@@ -1,0 +1,25 @@
+FROM nginx:alpine
+
+COPY ./default.conf /etc/nginx/conf.d/default.conf
+COPY ./uwsgi_params /etc/nginx/uwsgi_params
+
+RUN mkdir /sslfiles
+
+COPY ./shell/ /home/
+
+RUN chmod +x /home/entry.sh
+RUN chmod +x /home/get_cert.sh
+RUN chmod +x /home/backup.sh
+RUN chmod +x /home/restore.sh
+RUN chmod +x /home/renew.sh
+
+RUN apk update \
+    && apk add certbot certbot-nginx \
+    && echo '0 12 * * * "/home/renew.sh"' > /etc/crontabs/root \
+    && chmod +x /home/entry.sh \
+    && chmod +x /home/get_cert.sh \
+    && chmod +x /home/backup.sh \
+    && chmod +x /home/restore.sh \
+    && chmod +x /home/renew.sh
+
+CMD ["/home/entry.sh"]
