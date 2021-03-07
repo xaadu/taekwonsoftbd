@@ -22,7 +22,7 @@
     }
 </style>
 <div id="formContainer" class="container px-5 py-3 my-5">
-    <div class="heading text-center my-3">
+    <div class="heading text-center mb-4">
         <h1 class="display-1 d-inline-block">Register</h1><small class="text-muted text-right">as {{ type }}</small>
     </div>
 
@@ -78,9 +78,9 @@
                 {{ hidden_field }}
                 {% endfor %}
             </div>
-            <div class="col-12 mx-1 py-2">
+            <div class="col-12 py-2">
                 <button class="btn btn-primary px-5" type="submit">Register</button>
-                <small class="text-primary px-3"> Already have an account? <a
+                <small class="text-primary px-3"> Already have an account? <a class=""
                         href="{% url 'account:sample' %}">LogIn</a>
                 </small>
             </div>
