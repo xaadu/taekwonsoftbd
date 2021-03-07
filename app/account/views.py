@@ -27,7 +27,6 @@ def sample(request):
     pic_urls = list()
     for user in users:
         pic_urls.append(user.get_prof_pic_url())
-    print(pic_urls)
     return render(request, 'account/sample.html', context={'users': users, 'pic_urls': pic_urls})
 
 
