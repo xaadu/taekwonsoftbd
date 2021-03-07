@@ -3,11 +3,22 @@
 {% load widget_tweaks %}
 
 {% block main %}
-<ul>
-    <li><a href="{% url 'account:register' %}">Register</a></li>
-    <li><a href="{% url 'account:judge_register' %}">Judge Register</a></li>
-    <li><a href="{% url 'account:login' %}">Login</a></li>
-    <li><a href="{% url 'account:logout' %}">Logout</a></li>
-    <li><a href="{% url 'account:sample' %}">#</a></li>
-</ul>
+<div class="container">
+    <h1 class="display-1 text-center">Welcome</h1>
+    {% if user.is_authenticated %}
+    <h3 class="h3">Hey, {{ user.first_name }} {{ user.last_name }}</h3>
+    <p>
+        You're a
+        {% if user.is_judge %} Judge.
+        {% elif user.is_tl %} Team Leader.
+        {% elif user.is_admin %} Admin.
+        {% else %} Unwanted Person.
+        {% endif %} Enjoy!
+    </p>
+    {% else %}
+    <p>
+        You're not logged in. Please login first.
+    </p>
+    {% endif %}
+</div>
 {% endblock %}
