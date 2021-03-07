@@ -17,6 +17,9 @@ RUN adduser user
 RUN chown -R user:user /assets
 RUN chmod -R 755 /assets
 
+RUN chown -R user:user /app
+RUN chmod -R 755 /app
+
 RUN chmod +x "entrypoint.sh"
 
 USER user
