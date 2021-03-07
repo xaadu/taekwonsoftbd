@@ -106,3 +106,24 @@ def judge_registration_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home:comingsoon')
+
+
+def login_view(request):
+    errors = []
+
+    if request.POST:
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home:comingsoon')
+        else:
+            errors.append('Check E-mail/Password and try again.')
+
+    context = {
+        'recaptcha_token': envs.get('CLIENT_KEY'),
+        'errors': errors,
+    }
+
+    return render(request, 'account/login.html', context=context)

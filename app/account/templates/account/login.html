@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block main %}
+<style>
+    #formContainer {
+        max-width: 540px;
+        background: rgba(0, 0, 255, .02);
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 255, .08);
+    }
+</style>
+<div id="formContainer" class="container px-5 py-3 my-5">
+    <div class="heading text-center mb-4">
+        <h1 class="display-1">Log In</h1>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="py-2">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+            </div>
+            <div class="py-2">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password"
+                    placeholder="name@example.com">
+            </div>
+
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div class="g-recaptcha py-3" data-sitekey="{% if recaptcha_token %}{{ recaptcha_token }}{% endif %}"></div>
+
+            {% for e in errors %}
+            <small class="text-danger">
+                {{ e }}
+            </small>
+            {% endfor %}
+
+            <div class="col-12 py-2">
+                <button class="btn btn-primary px-5" type="submit">Login</button>
+                <small class="text-primary px-3"> Don't have an account? <a
+                        href="{% url 'account:sample' %}">Register</a>
+                </small>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
