@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    {% for pic_url in pic_urls %}
-    <img src="{{ pic_url }}" alt="">
-    {% endfor %}
-</body>
-
-</html>
+{% block main %}
+<ul>
+    <li><a href="{% url 'account:register' %}">Register</a></li>
+    <li><a href="{% url 'account:judge_register' %}">Judge Register</a></li>
+    <li><a href="{% url 'account:login' %}">Login</a></li>
+    <li><a href="{% url 'account:logout' %}">Logout</a></li>
+    <li><a href="{% url 'account:sample' %}">#</a></li>
+</ul>
+{% endblock %}

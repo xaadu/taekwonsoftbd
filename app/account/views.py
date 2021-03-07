@@ -28,7 +28,7 @@ def sample(request):
     for user in users:
         pic_urls.append(user.get_prof_pic_url())
     print(pic_urls)
-    return render(request, 'account/sample.html', context={'pic_urls': pic_urls})
+    return render(request, 'account/sample.html', context={'users': users, 'pic_urls': pic_urls})
 
 
 def registration_view(request):
@@ -51,7 +51,7 @@ def registration_view(request):
                 raw_password = form.cleaned_data.get('password1')
                 account = authenticate(email=email, password=raw_password)
                 login(request, account)
-                return redirect('home:comingsoon')
+                return redirect('account:sample')
             else:
                 print('Not Succeed!!')
                 errors.append('Captcha Not Provided')
@@ -87,7 +87,7 @@ def judge_registration_view(request):
                 raw_password = form.cleaned_data.get('password1')
                 account = authenticate(email=email, password=raw_password)
                 login(request, account)
-                return redirect('home:comingsoon')
+                return redirect('account:sample')
             else:
                 print('Not Succeed!!')
                 errors.append('Captcha Not Provided')
@@ -105,7 +105,7 @@ def judge_registration_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('home:comingsoon')
+    return redirect('account:sample')
 
 
 def login_view(request):
@@ -117,7 +117,7 @@ def login_view(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home:comingsoon')
+            return redirect('account:sample')
         else:
             errors.append('Check E-mail/Password and try again.')
 
