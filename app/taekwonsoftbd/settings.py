@@ -39,8 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # INSTALLED
+    'widget_tweaks',
+
     # CUSTOM
     'home.apps.HomeConfig',
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
@@ -87,7 +91,8 @@ conf_mysql = {
     'USER': os.environ.get('MYSQL_USER'),
     'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
     'HOST': 'db',
-    'PORT': "3306"
+    'PORT': "3306",
+    'OPTIONS': {'charset': 'utf8mb4'},
 }
 
 DATABASES = {
@@ -127,6 +132,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+# Extras
+AUTH_USER_MODEL = 'account.User'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
