@@ -3,6 +3,7 @@
 A software for Event Managing in Bangladesh Taekwondo Federation
 
 # See Live
+
 Here's the live version: [https://taekwonsoftbd.com/](https://taekwonsoftbd.com/)
 
 
@@ -31,7 +32,11 @@ REGISTER_EMAIL=
 
 # GLOBAL
 DOMAIN=
+IPLOOKUP_TOKEN=
 
+# RE-CAPTCHA
+CLIENT_KEY=
+OWNER_KEY=
 ```
 
 Then this command is enough:
@@ -42,4 +47,5 @@ docker-compose -f docker-compose-prod.yaml up --build
 Now the app is up and Running
 
 # Licence
+
 This is a custom web application and licenced only to Bangladesh Taekwondo Federation.
