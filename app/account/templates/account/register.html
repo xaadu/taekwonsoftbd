@@ -98,7 +98,7 @@
     $("#id_country").countrySelect({
         defaultCountry: "bd",
     });
-    $.get("https://ipinfo.io/json?token={% if ipinfo_token %}{{ ipinfo_token }}{% endif %}2", function () { }, "json").always(function (resp) {
+    $.get("https://ipinfo.io/json?token={% if ipinfo_token %}{{ ipinfo_token }}{% endif %}", function () { }, "json").always(function (resp) {
         var countryCode = (resp && resp.country) ? resp.country : "bd";
         $("#id_country").countrySelect("selectCountry", countryCode);
         $("#id_telephone").intlTelInput({
