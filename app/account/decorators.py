@@ -7,6 +7,7 @@ from django.contrib.auth import logout
 def unauthenticated_user(view_func):
     def wrapper_func(request, *args, **kwargs):
         if request.user.is_authenticated:
+            messages.info(request, 'You\'re already logged in.')
             return redirect('account:sample')
         else:
             return view_func(request, *args, **kwargs)
@@ -24,13 +25,11 @@ def allowed_users(allowed_roles=[]):
                 elif 'admin' in allowed_roles and request.user.is_superuser:
                     return view_func(request, *args, **kwrgs)
                 else:
-                    logout(request)
                     messages.error(
                         request, 'You are not authorized to view the page. Please login with a permitted account.')
                     return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
             else:
-                messages.error(
-                    request, 'You are not logged in. Login to view the page.')
-                return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+                messages.error(request, 'Login first to view the page.')
+                return redirect('account:sample')
         return wrapper_func
     return decorator
