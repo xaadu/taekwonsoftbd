@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls', 'home')),
     path('account/', include('account.urls', 'account')),
+    path('team-leader/', include('team_leader.urls', 'team_leader')),
 ] + \
     static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
     static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

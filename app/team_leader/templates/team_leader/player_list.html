@@ -1,0 +1,79 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block main_content %}
+<style>
+    .player_pic {
+        height: 80px;
+    }
+
+    .player_pic img {
+        height: 100%;
+    }
+
+    .player_list>.row:nth-child(odd) {
+        background: rgba(0, 0, 0, .04);
+    }
+</style>
+<div class="container py-5">
+    <h2 class="display-6 text-center py-3">Registered Players</h2>
+
+    <div class="players py-5">
+        <div class="player_list">
+            <div class="row py-2 h5 list_heading">
+                <div class="col-md-1">ID</div>
+                <div class="col-md-3">Picture</div>
+                <div class="col-md-5">Name</div>
+                <div class="col-md-3 text-center">Modify/Delete</div>
+            </div>
+            {% for player in players %}
+            <div class="row py-2 player_details">
+                <div class="col-md-1">{{ player.id }}</div>
+                <div class="col-md-3">
+                    <div class="player_pic">
+                        <img class="img-fluid" src="{{ player.picture.url }}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-5">{{ player.name }}</div>
+                <div class="col-md-3 text-center">
+                    <a class="btn btn-primary d-inline-block my-1" href="#">Modify</a>
+                    <a class="btn btn-danger d-inline-block my-1" href="#">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <ul class="pagination justify-content-center">
+        {% if players.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page=1">First</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ players.previous_page_number }}">Previous</a>
+        </li>
+        {% endif %}
+
+        {% for num in players.paginator.page_range %}
+        <li class="page-item">{% if players.number == num %}
+            <a class="btn btn-primary mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > players.number|add:'-3' and num < players.number|add:'3' %} <a class="page-link"
+                href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+        </li>
+
+
+        {% endfor %}
+
+        {% if players.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ players.next_page_number }}">Next</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ players.paginator.num_pages }}">Last</a>
+        </li>
+        {% endif %}
+    </ul>
+
+</div>
+{% endblock %}

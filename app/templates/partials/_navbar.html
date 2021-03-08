@@ -20,7 +20,13 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         {% if user.is_authenticated %}
-                        <li><a class="dropdown-item" href="{% url 'account:sample' %}">Dashboard</a></li>
+                        <li>
+                            {% if user.is_tl %}
+                            <a class="dropdown-item" href="{% url 'team_leader:dashboard' %}">Dashboard</a>
+                            {% else %}
+                            <a class="dropdown-item" href="{% url 'account:sample' %}">Logout</a>
+                            {% endif %}
+                        </li>
                         <li><a class="dropdown-item" href="{% url 'account:logout' %}">Logout</a></li>
                         {% else %}
                         <li><a class="dropdown-item" href="{% url 'account:login' %}">Login</a></li>

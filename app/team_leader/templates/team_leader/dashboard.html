@@ -1,0 +1,110 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block main_content %}
+<style>
+    #prof_pic {
+        height: 180px;
+        width: 180px;
+        border-radius: 50%;
+    }
+
+    .counter_wrapper {
+        height: 100%;
+    }
+
+    .counter {
+        font-size: 6rem;
+    }
+
+    .card {
+        height: 100%;
+        box-shadow: 0 0 40px rgba(200, 10, 255, .26);
+        background: linear-gradient(to right bottom, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), linear-gradient(to right bottom, #6A82FB, #FC5C7D);
+        border-radius: 20px;
+        border: none;
+        backdrop-filter: blur(10px);
+    }
+
+    .card,
+    td {
+        color: white;
+    }
+
+    h3 {
+        position: relative;
+    }
+
+    h3:after {
+        content: "";
+        width: 100%;
+        height: 1px;
+        background: rgba(60, 60, 60, 0.6);
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
+</style>
+<div class="container py-5">
+    <div class="text-center">
+        <img id="prof_pic" src="{{ pic_url }}" alt="">
+    </div>
+    <h2 class="display-5 text-center pt-3 pb-5">{{ user.first_name }} {{ user.last_name }}</h2>
+    <div class="info row">
+        <div class="info__profile col-md-4">
+            <div class="card m-2 p-2 p-md-3 p-lg-4">
+                <h3 class="h3 text-center py-1 pb-3">Profile Info</h3>
+                <table class="mx-1 mx-sm-3">
+                    <tr>
+                        <td>Name:</td>
+                        <td>{{ user.first_name }} {{ user.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Club:</td>
+                        <td>{{ user.teamleadermodel.club_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Gender:</td>
+                        <td>{{ user.gender }}</td>
+                    </tr>
+                    <tr>
+                        <td>Country:</td>
+                        <td>{{ user.country }}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone:</td>
+                        <td>{{ user.phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>Rank:</td>
+                        <td>{{ user.rank }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="info__numOfPlayer col-md-4 my-4 my-md-0">
+            <div class="card m-2 p-2 p-md-3 p-lg-4">
+                <h3 class="h3 text-center py-1 pb-3">Number Of Players</h3>
+                <div class="counter_wrapper d-flex justify-content-center align-items-center">
+                    <div class="display-1 py-4 py-md-0 counter">{{ players|length }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="info_numOfTeam col-md-4 mb-4 my-md-0">
+            <div class="card m-2 p-2 p-md-3 p-lg-4">
+                <h3 class="h3 text-center py-1 pb-3">Number Of Teams</h3>
+                <div class="counter_wrapper d-flex justify-content-center align-items-center">
+                    <div class="display-1 py-4 py-md-0 counter">{{ teams|length }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="players py-5 mt-5">
+        <h1 class="disply-2 text-center py-3">Registered Players</h1>
+        <table class="table table-striped table-hover">
+
+        </table>
+    </div>-->
+</div>
+{% endblock %}
