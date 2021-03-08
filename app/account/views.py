@@ -4,8 +4,8 @@ import requests
 
 from django.shortcuts import render, redirect
 
+from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
 
 from .forms import TLRegistrationForm, JudgeRegistrationForm
 
@@ -47,6 +47,7 @@ def registration_view(request):
                 raw_password = form.cleaned_data.get('password1')
                 account = authenticate(email=email, password=raw_password)
                 login(request, account)
+                messages.success(request, 'Successfully Registered.')
                 return redirect('account:sample')
             else:
                 print('Not Succeed!!')
@@ -84,6 +85,7 @@ def judge_registration_view(request):
                 raw_password = form.cleaned_data.get('password1')
                 account = authenticate(email=email, password=raw_password)
                 login(request, account)
+                messages.success(request, 'Successfully Registered.')
                 return redirect('account:sample')
             else:
                 print('Not Succeed!!')
@@ -110,6 +112,7 @@ def login_view(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
+            messages.success(request, 'Successfully Logged In.')
             next = request.GET.get('next')
             if next:
                 return redirect(next)
