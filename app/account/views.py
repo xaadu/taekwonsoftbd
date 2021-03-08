@@ -8,18 +8,13 @@ from django.contrib.auth import login, authenticate, logout
 
 from .forms import TLRegistrationForm, JudgeRegistrationForm
 
-from .models import (
-    User,
-    TeamLeaderModel,
-)
+from .models import User
+
+from .decorators import unauthenticated_user
 
 # Create your views here.
 
 envs = dict(os.environ)
-
-
-def loginView(request):
-    return
 
 
 def sample(request):
@@ -30,6 +25,7 @@ def sample(request):
     return render(request, 'account/sample.html', context={'users': users, 'pic_urls': pic_urls})
 
 
+@unauthenticated_user
 def registration_view(request):
     form = TLRegistrationForm()
     errors = []
@@ -66,6 +62,7 @@ def registration_view(request):
     return render(request, 'account/register.html', context)
 
 
+@unauthenticated_user
 def judge_registration_view(request):
     form = JudgeRegistrationForm()
     errors = []
@@ -102,11 +99,7 @@ def judge_registration_view(request):
     return render(request, 'account/register.html', context)
 
 
-def logout_view(request):
-    logout(request)
-    return redirect('account:sample')
-
-
+@unauthenticated_user
 def login_view(request):
     errors = []
 
@@ -126,3 +119,8 @@ def login_view(request):
     }
 
     return render(request, 'account/login.html', context=context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('account:sample')
