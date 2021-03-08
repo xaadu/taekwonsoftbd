@@ -126,7 +126,6 @@ def login_view(request):
     return render(request, 'account/login.html', context=context)
 
 
-@login_required
 def logout_view(request):
     logout(request)
     return redirect('account:sample')
