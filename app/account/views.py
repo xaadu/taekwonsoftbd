@@ -5,6 +5,7 @@ import requests
 from django.shortcuts import render, redirect
 
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 
 from .forms import TLRegistrationForm, JudgeRegistrationForm
 
@@ -109,7 +110,11 @@ def login_view(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('account:sample')
+            next = request.GET.get('next')
+            if next:
+                return redirect(next)
+            else:
+                return redirect('account:sample')
         else:
             errors.append('Check E-mail/Password and try again.')
 
@@ -121,6 +126,7 @@ def login_view(request):
     return render(request, 'account/login.html', context=context)
 
 
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('account:sample')
