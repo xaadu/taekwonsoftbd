@@ -27,9 +27,9 @@ def allowed_users(allowed_roles=[]):
                 else:
                     messages.error(
                         request, 'You are not authorized to view the page. Please login with a permitted account.')
-                    return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+                    return redirect('account:sample')
             else:
                 messages.error(request, 'Login first to view the page.')
-                return redirect('account:sample')
+                return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
         return wrapper_func
     return decorator
