@@ -82,7 +82,7 @@ def add_player(request):
             player = form.save(commit=False)
             player.teamleader = request.user.teamleadermodel
             player.save()
-            messages.success(request, 'Successfully Registered.')
+            messages.success(request, 'Player Added Successfully.')
             return redirect('team_leader:players')
     context = {
         'form': form,
@@ -102,7 +102,7 @@ def add_team(request):
             team = form.save(commit=False)
             team.teamleader = request.user.teamleadermodel
             team.save()
-            messages.success(request, 'Successfully Registered.')
+            messages.success(request, 'Team Added Successfully.')
             return redirect('team_leader:teams')
     context = {
         'form': form,
@@ -123,7 +123,7 @@ def update_player(request, pk):
             player = form.save(commit=False)
             player.teamleader = request.user.teamleadermodel
             player.save()
-            messages.success(request, 'Successfully Registered.')
+            messages.success(request, 'Player Updated Successfully.')
             return redirect('team_leader:players')
     context = {
         'form': form,
@@ -144,7 +144,7 @@ def update_team(request, pk):
             team = form.save(commit=False)
             team.teamleader = request.user.teamleadermodel
             team.save()
-            messages.success(request, 'Successfully Registered.')
+            messages.success(request, 'Team Updated Successfully.')
             return redirect('team_leader:teams')
     context = {
         'form': form,
