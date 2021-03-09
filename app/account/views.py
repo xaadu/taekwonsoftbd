@@ -48,7 +48,7 @@ def registration_view(request):
                 account = authenticate(email=email, password=raw_password)
                 login(request, account)
                 messages.success(request, 'Successfully Registered.')
-                return redirect('account:sample')
+                return redirect('team_leader:dashboard')
             else:
                 print('Not Succeed!!')
                 errors.append('Captcha Not Provided')
@@ -116,6 +116,8 @@ def login_view(request):
             next = request.GET.get('next')
             if next:
                 return redirect(next)
+            elif user.is_tl:
+                return redirect('team_leader:dashboard')
             else:
                 return redirect('account:sample')
         else:
