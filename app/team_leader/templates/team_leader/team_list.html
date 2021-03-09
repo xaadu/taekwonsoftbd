@@ -22,7 +22,8 @@
                 <div class="col-md-5">{{ team.name }}</div>
                 <div class="col-md-4">{{ team.district }}</div>
                 <div class="col-md-3 text-center">
-                    <a class="btn btn-primary d-inline-block my-1" href="#">Modify</a>
+                    <a class="btn btn-primary d-inline-block my-1"
+                        href="{% url 'team_leader:update_team' team.id %}">Modify</a>
                     <a class="btn btn-danger d-inline-block my-1" href="#">Delete</a>
                 </div>
             </div>
