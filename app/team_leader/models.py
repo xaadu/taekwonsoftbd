@@ -16,11 +16,12 @@ class Player(models.Model):
     name = models.CharField(max_length=50)
     gender = models.CharField(
         max_length=7, choices=GENDER_CHOICES, default='male')
-    dob = models.DateField()
-    country = models.CharField(max_length=50, null=True)
-    district = models.CharField(max_length=50, null=True)
+    date_of_birth = models.DateField()
+    country = models.CharField(max_length=50)
+    district = models.CharField(max_length=50)
     picture = models.ImageField(
-        upload_to='images/player', null=True, blank=True)
+        upload_to='images/player')
+
     def save(self, *args, **kwargs):
         self.country = re.sub("[\(\[].*?[\)\]]", "", self.country)
         super(Player, self).save(*args, **kwargs)
@@ -32,8 +33,9 @@ class Player(models.Model):
 class Team(models.Model):
     teamleader = models.ForeignKey(TeamLeaderModel, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-    country = models.CharField(max_length=50, null=True)
-    district = models.CharField(max_length=50, null=True)
+    country = models.CharField(max_length=50)
+    district = models.CharField(max_length=50)
+
     def save(self, *args, **kwargs):
         self.country = re.sub("[\(\[].*?[\)\]]", "", self.country)
         super(Team, self).save(*args, **kwargs)
