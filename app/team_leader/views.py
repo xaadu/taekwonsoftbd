@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 
 from account.models import TeamLeaderModel
-from .forms import PlayerCreateForm
+from .forms import PlayerCreateForm, TeamCreateForm
 
 
 # Create your views here.
@@ -68,7 +68,22 @@ def add_player(request):
 
 
 def add_team(request):
-    pass
+    form = TeamCreateForm()
+
+    if request.POST:
+        form = TeamCreateForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            team = form.save(commit=False)
+            team.teamleader = request.user.teamleadermodel
+            team.save()
+            messages.success(request, 'Successfully Registered.')
+            return redirect('team_leader:teams')
+    context = {
+        'form': form,
+        'type': 'Team',
+    }
+    return render(request, 'team_leader/add_data.html', context=context)
 
 
 def update_player(request):
