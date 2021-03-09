@@ -31,7 +31,9 @@
                 <div class="col-md-1">{{ player.id }}</div>
                 <div class="col-md-3">
                     <div class="player_pic">
+                        {% if player.picture %}
                         <img class="img-fluid" src="{{ player.picture.url }}" alt="">
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col-md-5">{{ player.name }}</div>
