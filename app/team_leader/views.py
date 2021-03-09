@@ -1,9 +1,10 @@
+import os
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 from django.contrib import messages
 
 from account.models import TeamLeaderModel
-from .forms import PlayerCreateForm, TeamCreateForm
+from .forms import PlayerCreateForm, TeamCreateForm, TLUpdateForm
 from .models import Player, Team
 
 
@@ -20,6 +21,29 @@ def dashboard(request):
         'teams': teams,
     }
     return render(request, 'team_leader/dashboard.html', context=context)
+
+
+def profile(request):
+    pic_url = request.user.get_prof_pic_url()
+    form = TLUpdateForm(instance=request.user, request=request)
+
+    if request.POST:
+        form = TLUpdateForm(request.POST, request.FILES,
+                            instance=request.user, request=request)
+        if form.is_valid():
+            user = form.save()
+            user.teamleadermodel.club_name = form.cleaned_data.get('club_name')
+            user.teamleadermodel.save()
+            messages.success(request, 'Profile Successfully Updated.')
+            return redirect('team_leader:dashboard')
+
+    context = {
+        'pic_url': pic_url,
+        'type': 'Team Leader',
+        'form': form,
+        'ipinfo_token': os.environ.get('IPLOOKUP_TOKEN'),
+    }
+    return render(request, 'prof_update.html', context)
 
 
 def player_list(request):

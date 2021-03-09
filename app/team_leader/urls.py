@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import (
     dashboard,
+    profile,
     player_list,
     team_list,
     add_player,
@@ -14,6 +15,7 @@ from .views import (
 app_name = 'team_leader'
 urlpatterns = [
     path('', dashboard, name='dashboard'),
+    path('profile/', profile, name='profile'),
     path('players/', player_list, name='players'),
     path('teams/', team_list, name='teams'),
     path('players/add/', add_player, name='add_player'),
