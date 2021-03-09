@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'vendor/countrySelect/css/countrySelect.min.css' %}">
+{% endblock %}
+
+{% block main %}
+<style>
+    #formContainer {
+        max-width: 680px;
+        background: rgba(0, 0, 255, .02);
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 255, .08);
+    }
+
+    .country-select.inside {
+        display: block;
+    }
+</style>
+<div id="formContainer" class="container px-5 py-3 my-5">
+    <div class="heading text-center mb-4">
+        <h2 class="display-2 d-inline-block">{{ type }}</h2><small class="text-muted text-right">entry</small>
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="fields row">
+            {% for field in form.visible_fields %}
+            <div class="py-2 {% if field.label != 'Email' %} col-12 col-sm-6 {% else %} col-12 {% endif %}">
+                <label class="form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+                {% if field.errors %}
+                {% if field.label == 'Date of birth' %}
+                {{ field|add_class:"form-control form-control-sm is-invalid"|attr:"type:date" }}
+                {% else %}
+                {{ field|add_class:"form-control form-control-sm is-invalid" }}
+                {% endif %}
+                {% for error in field.errors %}
+                <small class="text-danger">
+                    {{ error }}
+                </small>
+                {% endfor %}
+                {% else %}
+                {% if field.label == 'Date of birth' %}
+                {{ field|add_class:"form-control form-control-sm"|attr:"type:date" }}
+                {% else %}
+                {{ field|add_class:"form-control form-control-sm" }}
+                {% endif %}
+                {% endif %}
+
+            </div>
+            {% endfor %}
+
+            {% for e in errors %}
+            <small class="text-danger">
+                {{ e }}
+            </small>
+            {% endfor %}
+
+            <div class="errors">
+                {% if form.non_field_errors %}
+                <ul>
+                    {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {% for hidden_field in form.hidden_fields %}
+                {% if hidden_field.errors %}
+                <ul>
+                    {% for error in hidden_field.errors %}
+                    <li>(Hidden field {{ hidden_field.name }}) {{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {{ hidden_field }}
+                {% endfor %}
+            </div>
+            <div class="col-12 py-2 my-3">
+                <button class="btn btn-outline-primary px-5" type="submit">Add Player</button>
+                <a class="btn btn-outline-danger text-right px-5 ms-4" href="{% url 'team_leader:players' %}">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'vendor/countrySelect/js/countrySelect.min.js' %}"></script>
+
+<script>
+    $("#id_country").countrySelect({
+        defaultCountry: "bd",
+    });
+    $.get("https://ipinfo.io/json?token={% if ipinfo_token %}{{ ipinfo_token }}{% endif %}", function () { }, "json").always(function (resp) {
+        var countryCode = (resp && resp.country) ? resp.country : "bd";
+        $("#id_country").countrySelect("selectCountry", countryCode);
+    });
+</script>
+{% endblock %}

@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from typing import ContextManager
+from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 from account.models import TeamLeaderModel
+from .forms import PlayerCreateForm
+
 
 # Create your views here.
 
@@ -45,7 +49,22 @@ def team_list(request):
 
 
 def add_player(request):
-    pass
+    form = PlayerCreateForm()
+
+    if request.POST:
+        form = PlayerCreateForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            player = form.save(commit=False)
+            player.teamleader = request.user.teamleadermodel
+            player.save()
+            messages.success(request, 'Successfully Registered.')
+            return redirect('team_leader:players')
+    context = {
+        'form': form,
+        'type': 'Player',
+    }
+    return render(request, 'team_leader/add_data.html', context=context)
 
 
 def add_team(request):
