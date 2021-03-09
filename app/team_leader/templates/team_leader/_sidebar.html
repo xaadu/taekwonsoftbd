@@ -27,6 +27,10 @@
     {% url 'team_leader:teams' as url %}
     <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Team
         List</a>
+    {% url 'team_leader:add_player' as url %}
+    <a class="col-sm-6 d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Add Player</a>
+    {% url 'team_leader:add_team' as url %}
+    <a class="col-sm-6 d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Add Team</a>
 
     {% elif request.user.is_judge %}
     {% url 'judge:dashboard' as url %}
