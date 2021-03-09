@@ -50,6 +50,7 @@ def profile(request):
 
 @allowed_users(['tl'])
 def player_list(request):
+    pic_url = request.user.get_prof_pic_url()
     player_list = request.user.teamleadermodel.player_set.all()
     page = request.GET.get('page', 1)
 
@@ -59,11 +60,17 @@ def player_list(request):
     except:
         players = paginator.page(1)
 
-    return render(request, 'team_leader/player_list.html', {'players': players})
+    context = {
+        'pic_url': pic_url,
+        'players': players,
+    }
+
+    return render(request, 'team_leader/player_list.html', context=context)
 
 
 @allowed_users(['tl'])
 def team_list(request):
+    pic_url = request.user.get_prof_pic_url()
     team_list = request.user.teamleadermodel.team_set.all()
     page = request.GET.get('page', 1)
 
@@ -73,11 +80,17 @@ def team_list(request):
     except:
         teams = paginator.page(1)
 
-    return render(request, 'team_leader/team_list.html', {'teams': teams})
+    context = {
+        'pic_url': pic_url,
+        'teams': teams,
+    }
+
+    return render(request, 'team_leader/team_list.html', context=context)
 
 
 @allowed_users(['tl'])
 def add_player(request):
+    pic_url = request.user.get_prof_pic_url()
     form = PlayerCreateForm()
 
     if request.POST:
@@ -93,12 +106,14 @@ def add_player(request):
         'form': form,
         'type': 'Player',
         'mode': 'Add',
+        'pic_url': pic_url,
     }
     return render(request, 'team_leader/mod_data.html', context=context)
 
 
 @allowed_users(['tl'])
 def add_team(request):
+    pic_url = request.user.get_prof_pic_url()
     form = TeamCreateForm()
 
     if request.POST:
@@ -114,12 +129,14 @@ def add_team(request):
         'form': form,
         'type': 'Team',
         'mode': 'Add',
+        'pic_url': pic_url,
     }
     return render(request, 'team_leader/mod_data.html', context=context)
 
 
 @allowed_users(['tl'])
 def update_player(request, pk):
+    pic_url = request.user.get_prof_pic_url()
     player = Player.objects.get(pk=pk)
     form = PlayerCreateForm(instance=player)
 
@@ -136,12 +153,14 @@ def update_player(request, pk):
         'form': form,
         'type': 'Player',
         'mode': 'Update',
+        'pic_url': pic_url,
     }
     return render(request, 'team_leader/mod_data.html', context=context)
 
 
 @allowed_users(['tl'])
 def update_team(request, pk):
+    pic_url = request.user.get_prof_pic_url()
     team = Team.objects.get(pk=pk)
     form = TeamCreateForm(instance=team)
 
@@ -158,6 +177,7 @@ def update_team(request, pk):
         'form': form,
         'type': 'Team',
         'mode': 'Update',
+        'pic_url': pic_url,
     }
     return render(request, 'team_leader/mod_data.html', context=context)
 

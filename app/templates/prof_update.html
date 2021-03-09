@@ -28,13 +28,15 @@
     }
 </style>
 <div id="formContainer" class="container px-5 py-3 my-5">
+    <div class="text-center">
+        <img id="prof_pic" src="{{ pic_url }}" alt="">
+    </div>
+    <h2 class="display-5 text-center pt-3 pb-5">{{ user.first_name }} {{ user.last_name }}</h2>
+    {% include 'team_leader/_sidebar.html' %}
     <div class="heading text-center mb-4">
-        <h1 class="display-1 d-inline-block">Update Profile</h1>
+        <h1 class="display-6 d-inline-block">Update Profile</h1>
         <small class="text-muted text-right">as {{ type }}
         </small>
-    </div>
-    <div class="text-center pb-3">
-        <img id="prof_pic" src="{{ pic_url }}" alt="">
     </div>
 
     <form method="post" enctype="multipart/form-data">

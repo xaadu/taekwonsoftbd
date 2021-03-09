@@ -1,0 +1,35 @@
+<style>
+    .dashboard_nav {
+        background: rgba(0, 0, 50, .1);
+    }
+
+    .dashboard_nav a {
+        text-decoration: none;
+        color: rgba(0, 0, 0, .5);
+    }
+
+    .dashboard_nav a.active {
+        background: rgba(0, 0, 50, .2);
+        color: #000;
+    }
+</style>
+
+<div class="dashboard_nav row mb-5 mx-unset text-center">
+    {% if request.user.is_tl %}
+    {% url 'team_leader:dashboard' as url %}
+    <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %}"
+        href="{{ url }}">Dashboard</a>
+    {% url 'team_leader:profile' as url %}
+    <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Profile</a>
+    {% url 'team_leader:players' as url %}
+    <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Player
+        List</a>
+    {% url 'team_leader:teams' as url %}
+    <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Team
+        List</a>
+
+    {% elif request.user.is_judge %}
+    {% url 'judge:dashboard' as url %}
+    JUDGE
+    {% endif %}
+</div>
