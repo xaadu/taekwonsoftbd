@@ -1,6 +1,8 @@
 from account.models import TeamLeaderModel
 from django.db import models
 
+import re
+
 # Create your models here.
 
 
@@ -19,6 +21,9 @@ class Player(models.Model):
     district = models.CharField(max_length=50, null=True)
     picture = models.ImageField(
         upload_to='images/player', null=True, blank=True)
+    def save(self, *args, **kwargs):
+        self.country = re.sub("[\(\[].*?[\)\]]", "", self.country)
+        super(Player, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         return self.name
@@ -29,6 +34,9 @@ class Team(models.Model):
     name = models.CharField(max_length=50)
     country = models.CharField(max_length=50, null=True)
     district = models.CharField(max_length=50, null=True)
+    def save(self, *args, **kwargs):
+        self.country = re.sub("[\(\[].*?[\)\]]", "", self.country)
+        super(Team, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         return self.name
