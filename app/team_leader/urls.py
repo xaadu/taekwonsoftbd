@@ -17,5 +17,5 @@ urlpatterns = [
     path('players/add/', add_player, name='add_player'),
     path('teams/add/', add_team, name='add_team'),
     path('players/update/<str:pk>/', update_player, name='update_player'),
-    path('teams/update', update_team, name='update_team'),
+    path('teams/update/<str:pk>/', update_team, name='update_team'),
 ]
