@@ -156,9 +156,11 @@ def update_team(request, pk):
 
 def remove_player(request, pk):
     Player.objects.get(pk=pk).delete()
+    messages.success(request, 'Player Removed Successfully.')
     return redirect('team_leader:players')
 
 
 def remove_team(request, pk):
     Team.objects.get(pk=pk).delete()
+    messages.success(request, 'Team Removed Successfully.')
     return redirect('team_leader:teams')
