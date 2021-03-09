@@ -1,4 +1,3 @@
-from typing import ContextManager
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 from django.contrib import messages
@@ -129,3 +128,13 @@ def update_team(request, pk):
         'mode': 'Update',
     }
     return render(request, 'team_leader/mod_data.html', context=context)
+
+
+def remove_player(request, pk):
+    Player.objects.get(pk=pk).delete()
+    return redirect('team_leader:players')
+
+
+def remove_team(request, pk):
+    Team.objects.get(pk=pk).delete()
+    return redirect('team_leader:teams')

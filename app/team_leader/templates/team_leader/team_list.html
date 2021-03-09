@@ -24,7 +24,9 @@
                 <div class="col-md-3 text-center">
                     <a class="btn btn-primary d-inline-block my-1"
                         href="{% url 'team_leader:update_team' team.id %}">Modify</a>
-                    <a class="btn btn-danger d-inline-block my-1" href="#">Delete</a>
+                    <a data-id="{{ team.id }}" data-name="{{ team.name }}"
+                        class="btn btn-danger btn-delete d-inline-block my-1"
+                        href="{% url 'team_leader:remove_team' team.id %}">Delete</a>
                 </div>
             </div>
             {% endfor %}
@@ -63,4 +65,37 @@
     </ul>
 
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $('.btn-delete').on('click', function (event) {
+        event.preventDefault();
+        var name = $(this).attr('data-name');
+        var url = $(this).attr('href');
+        $.confirm({
+            title: 'Confirm!',
+            content: 'Delete the team "' + name + '"?',
+            theme: 'modern',
+            type: 'red',
+            typeAnimated: true,
+            icon: 'fal fa-bomb',
+            closeIcon: true,
+            closeIconClass: 'fal fa-times',
+            buttons: {
+                confirm: {
+                    text: 'Delete',
+                    btnClass: 'btn-red',
+                    action: function () {
+                        window.location.href = url;
+                    },
+                },
+                cancel: function () {
+                    text = 'Cancel'
+                },
+            },
+            backgroundDismiss: true,
+        })
+    });
+</script>
 {% endblock %}
