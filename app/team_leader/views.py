@@ -5,6 +5,7 @@ from django.contrib import messages
 
 from account.models import TeamLeaderModel
 from .forms import PlayerCreateForm, TeamCreateForm
+from .models import Player
 
 
 # Create your views here.
@@ -63,8 +64,9 @@ def add_player(request):
     context = {
         'form': form,
         'type': 'Player',
+        'mode': 'Add',
     }
-    return render(request, 'team_leader/add_data.html', context=context)
+    return render(request, 'team_leader/mod_data.html', context=context)
 
 
 def add_team(request):
@@ -82,12 +84,30 @@ def add_team(request):
     context = {
         'form': form,
         'type': 'Team',
+        'mode': 'Add',
     }
-    return render(request, 'team_leader/add_data.html', context=context)
+    return render(request, 'team_leader/mod_data.html', context=context)
 
 
-def update_player(request):
-    pass
+def update_player(request, pk):
+    player = Player.objects.get(pk=pk)
+    form = PlayerCreateForm(instance=player)
+
+    if request.POST:
+        form = PlayerCreateForm(request.POST, request.FILES, instance=player)
+
+        if form.is_valid():
+            player = form.save(commit=False)
+            player.teamleader = request.user.teamleadermodel
+            player.save()
+            messages.success(request, 'Successfully Registered.')
+            return redirect('team_leader:players')
+    context = {
+        'form': form,
+        'type': 'Player',
+        'mode': 'Update',
+    }
+    return render(request, 'team_leader/mod_data.html', context=context)
 
 
 def update_team(request):

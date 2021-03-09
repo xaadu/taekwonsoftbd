@@ -16,6 +16,6 @@ urlpatterns = [
     path('teams/', team_list, name='teams'),
     path('players/add/', add_player, name='add_player'),
     path('teams/add/', add_team, name='add_team'),
-    path('players/update', update_player, name='update_player'),
+    path('players/update/<str:pk>/', update_player, name='update_player'),
     path('teams/update', update_team, name='update_team'),
 ]
