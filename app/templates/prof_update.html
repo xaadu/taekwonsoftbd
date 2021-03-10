@@ -113,7 +113,7 @@
             separateDialCode: false,
             preventInvalidNumbers: true,
         });
-        if ($("#id_telphone").val() == '' || !$("#id_telphone").val()) {
+        if ($("#id_telphone").val() == '' || $("#id_telphone").val()) {
             var getCode = $("#id_telephone").intlTelInput('getSelectedCountryData').dialCode;
             $("#id_telephone").val('+' + getCode);
         }
