@@ -110,8 +110,13 @@
         $("#id_telephone").intlTelInput({
             initialCountry: countryCode,
             utilsScript: "{% static 'vendor/phoneSelect/js/utils.js' %}",
-            separateDialCode: true,
+            separateDialCode: false,
+            preventInvalidNumbers: true,
         });
+        if ($("#id_telphone").val() == '' || !$("#id_telphone").val()) {
+            var getCode = $("#id_telephone").intlTelInput('getSelectedCountryData').dialCode;
+            $("#id_telephone").val('+' + getCode);
+        }
     });
 </script>
 {% endblock %}
