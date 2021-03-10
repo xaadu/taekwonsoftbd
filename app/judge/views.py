@@ -1,0 +1,41 @@
+import os
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
+from account.decorators import allowed_users
+
+from .forms import JudgeUpdateForm
+
+# Create your views here.
+
+
+@allowed_users(['judge'])
+def dashboard(request):
+    pic_url = request.user.get_prof_pic_url()
+    context = {
+        'pic_url': pic_url,
+    }
+    return render(request, 'judge/dashboard.html', context=context)
+
+
+@allowed_users(['judge'])
+def profile(request):
+    pic_url = request.user.get_prof_pic_url()
+    form = JudgeUpdateForm(instance=request.user)
+
+    if request.POST:
+        form = JudgeUpdateForm(request.POST, request.FILES,
+                               instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile Successfully Updated.')
+            return redirect('judge:dashboard')
+
+    context = {
+        'pic_url': pic_url,
+        'type': 'Judge',
+        'form': form,
+        'ipinfo_token': os.environ.get('IPLOOKUP_TOKEN'),
+    }
+    return render(request, 'prof_update.html', context)

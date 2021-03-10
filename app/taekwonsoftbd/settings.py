@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     # CUSTOM
     'home.apps.HomeConfig',
     'account.apps.AccountConfig',
-    'team_leader.apps.TeamLeaderConfig'
+    'team_leader.apps.TeamLeaderConfig',
+    'judge.apps.JudgeConfig',
 ]
 
 MIDDLEWARE = [

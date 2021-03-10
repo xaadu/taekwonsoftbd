@@ -118,6 +118,8 @@ def login_view(request):
                 return redirect(next)
             elif user.is_tl:
                 return redirect('team_leader:dashboard')
+            elif user.is_judge:
+                return redirect('judge:dashboard')
             else:
                 return redirect('account:sample')
         else:

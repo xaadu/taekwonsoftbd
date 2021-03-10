@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('home.urls', 'home')),
     path('account/', include('account.urls', 'account')),
     path('team-leader/', include('team_leader.urls', 'team_leader')),
+    path('judge/', include('judge.urls', 'judge')),
 ] + \
     static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
     static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

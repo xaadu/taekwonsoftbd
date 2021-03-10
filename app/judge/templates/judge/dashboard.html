@@ -1,0 +1,46 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block main_content %}
+<style>
+    #prof_pic {
+        height: 180px;
+        width: 180px;
+        border-radius: 50%;
+    }
+</style>
+<div class="container py-5">
+    <div class="text-center">
+        <img id="prof_pic" src="{{ pic_url }}" alt="">
+    </div>
+    <h2 class="display-5 text-center pt-3 pb-5">{{ user.first_name }} {{ user.last_name }}</h2>
+    {% include 'partials/_sidebar.html' %}
+    <div class="info row">
+        <div class="info__profile col-12">
+            <h3 class="h3 text-center py-1 pb-3">Profile Info</h3>
+            <table class="mx-auto">
+                <tr>
+                    <td>Name:</td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                </tr>
+                <tr>
+                    <td>Gender:</td>
+                    <td>{{ user.gender }}</td>
+                </tr>
+                <tr>
+                    <td>Country:</td>
+                    <td>{{ user.country }}</td>
+                </tr>
+                <tr>
+                    <td>Phone:</td>
+                    <td>{{ user.phone }}</td>
+                </tr>
+                <tr>
+                    <td>Rank:</td>
+                    <td>{{ user.rank }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
