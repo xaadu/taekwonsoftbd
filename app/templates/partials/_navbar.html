@@ -23,6 +23,8 @@
                         <li>
                             {% if user.is_tl %}
                             <a class="dropdown-item" href="{% url 'team_leader:dashboard' %}">Dashboard</a>
+                            {% elif user.is_judge %}
+                            <a class="dropdown-item" href="{% url 'judge:dashboard' %}">Dashboard</a>
                             {% else %}
                             <a class="dropdown-item" href="{% url 'account:sample' %}">Dashboard</a>
                             {% endif %}
