@@ -22,7 +22,7 @@ def allowed_users(allowed_roles=[]):
                     return view_func(request, *args, **kwrgs)
                 elif 'tl' in allowed_roles and request.user.is_tl:
                     return view_func(request, *args, **kwrgs)
-                elif 'admin' in allowed_roles and request.user.is_superuser:
+                elif 'admin' in allowed_roles and request.user.is_admin:
                     return view_func(request, *args, **kwrgs)
                 else:
                     messages.error(

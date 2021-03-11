@@ -38,5 +38,11 @@
         href="{{ url }}">Dashboard</a>
     {% url 'judge:profile' as url %}
     <a class="col-sm-6 d-block d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Profile</a>
+    {% elif request.user.is_admin %}
+    {% url 'host:dashboard' as url %}
+    <a class="col-sm-6 d-block d-block py-3 {% if request.path == url %}active{% endif %}"
+        href="{{ url }}">Dashboard</a>
+    {% url 'host:profile' as url %}
+    <a class="col-sm-6 d-block d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Profile</a>
     {% endif %}
 </div>
