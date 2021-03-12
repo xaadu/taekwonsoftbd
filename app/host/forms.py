@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserChangeForm
 
 from account.models import User
 
+from .models import Event
+
 
 class HostUpdateForm(UserChangeForm):
     phone = forms.CharField(max_length=20, widget=forms.TextInput(
@@ -18,3 +20,9 @@ class HostUpdateForm(UserChangeForm):
             'rank', 'gender',
             'profile_picture',
         ]
+
+
+class EventCreateForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = '__all__'

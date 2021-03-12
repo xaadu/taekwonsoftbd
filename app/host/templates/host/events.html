@@ -1,0 +1,12 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block main_content %}
+<div class="container py-5">
+    <ul>
+        {% for event in events %}
+        <li><a href="{% url 'host:event_details' pk=event.id %}">{{ event }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

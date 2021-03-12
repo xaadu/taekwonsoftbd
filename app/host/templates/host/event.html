@@ -1,0 +1,26 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block main_content %}
+<div class="container py-5">
+    Event Title: {{ event }} <br>
+    {% if teamData %}
+    Teams:
+    <ul>
+        {% for team, players in teamData.items %}
+        <li>
+            {{ team }} <br>
+            {% if players %}
+            Players:
+            <ul>
+                {% for player in players %}
+                <li>{{ player }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}
