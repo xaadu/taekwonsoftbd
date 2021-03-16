@@ -100,9 +100,17 @@ conf_mysql = {
         # 'charset': 'utf8mb4'  # This is the important line
     }
 }
+conf_postgres = {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': os.environ.get('POSTGRES_DB'),
+    'USER': os.environ.get('POSTGRES_USER'),
+    'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+    'HOST': 'db',
+    'PORT': "5432",
+}
 
 DATABASES = {
-    'default': conf_mysql
+    'default': conf_postgres
 }
 
 

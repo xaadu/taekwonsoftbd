@@ -3,15 +3,12 @@ version: "3.7"
 services: 
   db:
     container_name: db_container
-    #image: mysql:5.7.33
+    image: postgres:13.2-alpine
     restart: unless-stopped
     env_file: 
       - .env
-    build:
-      context: ./db
-      dockerfile: Dockerfile
     volumes: 
-      - dbdata:/var/lib/mysql
+      - dbdata:/var/lib/postgresql/data
   app:
     container_name: app_container
     restart: unless-stopped
