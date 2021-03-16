@@ -1,0 +1,15 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block main_content %}
+
+<div class="container">
+    <h1 class="display-3 text-center py-5">Players in <small>{{ team.team.name }}</small></h1>
+    {% for player in players %}
+    <div class="player">
+        * {{ player.player.name }}
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

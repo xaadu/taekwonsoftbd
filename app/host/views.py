@@ -5,8 +5,8 @@ from django.contrib import messages
 
 from account.decorators import allowed_users
 
-from .forms import HostUpdateForm, EventCreateForm
-from .models import Event
+from .forms import HostUpdateForm, EventCreateForm, CategoryCreateForm
+from .models import Event, Category
 
 # Create your views here.
 
@@ -42,23 +42,6 @@ def profile(request):
     return render(request, 'prof_update.html', context)
 
 
-def create_event(request):
-    form = EventCreateForm()
-
-    if request.POST:
-        form = EventCreateForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-        else:
-            print(form.errors)
-
-    context = {
-        'form': form
-    }
-
-    return render(request, 'host/create_event.html', context=context)
-
-
 def events(request):
     objects = Event.objects.all()
 
@@ -86,3 +69,104 @@ def event_details(request, pk):
     }
 
     return render(request, 'host/event.html', context)
+
+
+def create_event(request):
+    form = EventCreateForm()
+
+    if request.POST:
+        form = EventCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+        else:
+            print(form.errors)
+
+    context = {
+        'form': form,
+        'mode': 'Create'
+    }
+
+    return render(request, 'host/create_event.html', context=context)
+
+
+def update_event(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    form = EventCreateForm(instance=event)
+
+    if request.POST:
+        form = EventCreateForm(request.POST, request.FILES, instance=event)
+        if form.is_valid():
+            form.save()
+        else:
+            print(form.errors)
+
+    context = {
+        'form': form,
+        'mode': 'Update',
+    }
+
+    return render(request, 'host/create_event.html', context=context)
+
+
+def delete_event(request, event_id):
+    Event.objects.get(pk=event_id).delete()
+    return redirect('host:events')
+
+
+def categories(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    all_categories = event.category_set.all()
+
+    context = {
+        'categories': all_categories,
+        'event': event,
+    }
+
+    return render(request, 'host/categories.html', context=context)
+
+
+def create_category(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    form = CategoryCreateForm()
+
+    if request.POST:
+        form = CategoryCreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print(form.errors)
+
+    context = {
+        'form': form,
+        'event': event,
+        'mode': 'Create'
+    }
+
+    return render(request, 'host/create_category.html', context=context)
+
+
+def update_category(request, event_id, category_id):
+    event = Event.objects.get(pk=event_id)
+    category = Category.objects.get(pk=category_id)
+    form = CategoryCreateForm(instance=category)
+
+    if request.POST:
+        form = CategoryCreateForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+        else:
+            print(form.errors)
+
+    context = {
+        'form': form,
+        'event': event,
+        'mode': 'Update'
+    }
+
+    return render(request, 'host/create_category.html', context=context)
+
+
+def delete_category(request, event_id, category_id):
+    event = Event.objects.get(pk=event_id).delete()
+    event.category_set.get(pk=category_id).delete()
+    return redirect('host:categories')

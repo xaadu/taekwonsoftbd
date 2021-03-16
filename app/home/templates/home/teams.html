@@ -1,0 +1,17 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block main_content %}
+
+<div class="container">
+    <h1 class="display-3 text-center py-5">Perticipated Teams</h1>
+    {% for team in teams %}
+    <div class="team">
+        <a href="{% url 'home:team_details' event_id=event.id reg_team_id=team.id %}" class="team_link">
+            {{ team.team.name }}
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

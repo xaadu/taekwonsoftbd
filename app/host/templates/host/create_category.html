@@ -14,7 +14,7 @@
 <div id="formContainer" class="container px-5 py-3 my-5">
     {% include 'partials/_sidebar.html' %}
     <div class="heading text-center mb-4">
-        <h2 class="display-2 d-inline-block">Event</h2><small class="text-muted text-right">{{ mode }}</small>
+        <h2 class="display-2 d-inline-block">Category</h2><small class="text-muted text-right">{{ mode }}</small>
     </div>
 
     <form method="post" enctype="multipart/form-data">
@@ -74,7 +74,8 @@
             </div>
             <div class="col-12 py-2 my-3">
                 <button class="btn btn-outline-primary px-5" type="submit">{{ mode }}</button>
-                <a class="btn btn-outline-danger text-right px-5 ms-4" href="{% url 'host:events' %}">Cancel</a>
+                <a class="btn btn-outline-danger text-right px-5 ms-4"
+                    href="{% url 'host:categories' event.id %}">Cancel</a>
             </div>
         </div>
     </form>

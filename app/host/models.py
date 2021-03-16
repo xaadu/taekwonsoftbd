@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-from team_leader.models import Player, Team
+#from team_leader.models import Player, Team
 
 
 class Event(models.Model):
@@ -19,11 +19,20 @@ class Event(models.Model):
         return self.title
 
 
+class Category(models.Model):
+    event = models.ForeignKey(
+        Event, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class RegisteredTeam(models.Model):
     event = models.ForeignKey(
         Event, on_delete=models.CASCADE, null=True, blank=True)
     team = models.ForeignKey(
-        Team, on_delete=models.CASCADE, null=True, blank=True)
+        'team_leader.Team', on_delete=models.CASCADE, null=True, blank=True)
 
     payment_done = models.BooleanField(default=False)
 
@@ -38,7 +47,10 @@ class RegisteredPlayer(models.Model):
         RegisteredTeam, on_delete=models.CASCADE, null=True, blank=True)
 
     player = models.ForeignKey(
-        Player, on_delete=models.CASCADE, null=True, blank=True)
+        'team_leader.Player', on_delete=models.CASCADE, null=True, blank=True)
+
+    category = models.ForeignKey(
+        Category, on_delete=models.SET_NULL, null=True, blank=True)
 
     certificate = models.ImageField(
         upload_to='images/certificates', null=True, blank=True)

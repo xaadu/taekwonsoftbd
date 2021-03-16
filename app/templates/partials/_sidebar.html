@@ -40,9 +40,14 @@
     <a class="col-sm-6 d-block d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Profile</a>
     {% elif request.user.is_admin %}
     {% url 'host:dashboard' as url %}
-    <a class="col-sm-6 d-block d-block py-3 {% if request.path == url %}active{% endif %}"
+    <a class="col-sm-3 d-block d-block py-3 {% if request.path == url %}active{% endif %}"
         href="{{ url }}">Dashboard</a>
     {% url 'host:profile' as url %}
-    <a class="col-sm-6 d-block d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Profile</a>
+    <a class="col-sm-3 d-block d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Profile</a>
+    {% url 'host:events' as url %}
+    <a class="col-sm-3 d-block d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Events</a>
+    {% url 'host:create_event' as url %}
+    <a class="col-sm-3 d-block d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Create
+        Event</a>
     {% endif %}
 </div>

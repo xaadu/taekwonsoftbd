@@ -1,12 +1,30 @@
-{% extends "dashboard.html" %}
+{% extends "base.html" %}
 {% load static %}
 
-{% block main_content %}
-<div class="container py-5">
-    <ul>
-        {% for event in events %}
-        <li><a href="{% url 'host:event_details' pk=event.id %}">{{ event }}</a></li>
-        {% endfor %}
-    </ul>
+{% block main %}
+<style>
+</style>
+<div class="container px-5 py-3 my-5">
+    {% include 'partials/_sidebar.html' %}
+    <div class="heading text-center mb-4">
+        <h2 class="display-2 d-inline-block">Events</h2>
+    </div>
+    <div class="row py-3">
+        <div class="col-sm-1">ID</div>
+        <div class="col-sm-7">Event</div>
+        <div class="col-sm-4 text-center">Modify</div>
+    </div>
+    {% for event in events %}
+    <div class="row py-3">
+        <div class="col-sm-1">{{ event.id }}</div>
+        <div class="col-sm-7">{{ event }}</div>
+        <div class="col-sm-2 text-center">
+            <a class="btn btn-outline-primary" href="{% url 'host:update_event' event.id %}">Update</a>
+        </div>
+        <div class="col-sm-2 text-center">
+            <a class="btn btn-outline-danger" href="{% url 'host:delete_event' event.id %}">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}

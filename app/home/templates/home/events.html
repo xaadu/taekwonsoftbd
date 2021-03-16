@@ -2,11 +2,18 @@
 {% load static %}
 
 {% block main_content %}
+<style>
+    .event_banner_img {
+        width: 90%;
+    }
+</style>
 <div class="container py-5">
-    <ul>
-        {% for event in events %}
-        <li><a href="{% url 'home:event_details' pk=event.id %}">{{ event }}</a></li>
-        {% endfor %}
-    </ul>
+    {% for event in events %}
+    <div class="event_banner_wrapper text-center p-2 p-sm-5">
+        <a class="event_banner_link" href="{% url 'home:event_details' pk=event.id %}">
+            <img class="event_banner_img" src="{{ event.event_banner.url }}" alt="{{ event }}">
+        </a>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}

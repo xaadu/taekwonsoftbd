@@ -17,3 +17,17 @@ class PlayerApplyForm(forms.ModelForm):
             required=True, queryset=teams, widget=forms.Select())
         self.fields['players'] = forms.ModelMultipleChoiceField(
             required=True, queryset=players, widget=forms.CheckboxSelectMultiple())
+
+
+class PlayerUpdateForm(forms.ModelForm):
+    secret = forms.CharField(max_length=1000, widget=forms.HiddenInput())
+
+    class Meta:
+        model = RegisteredTeam
+        fields = ['secret']
+
+    def __init__(self, *args, **kwargs):
+        self.players = kwargs.pop("players")
+        super().__init__(*args, **kwargs)
+        self.fields['players'] = forms.ModelMultipleChoiceField(
+            required=True, queryset=self.players, widget=forms.CheckboxSelectMultiple())

@@ -4,7 +4,12 @@
 {% block main_content %}
 <div class="container py-5">
     Event Title: {{ event }} <br>
-    <a class="btn btn-outline-primary" href="apply">Apply</a>
+    <a class="btn btn-outline-primary" href="{% url 'home:apply' pk=event.id %}">Apply</a>
+    <a class="btn btn-outline-primary" href="{% url 'home:manage' pk=event.id %}">Manage</a>
+    <a class="btn btn-outline-primary" href="{% url 'home:teams' pk=event.id %}">Teams</a>
+    <a class="btn btn-outline-primary" href="{% url 'home:players' pk=event.id %}">Players</a>
+    <br /> <br />
+    <!--
     {% if teamData %}
     Teams:
     <ul>
@@ -23,5 +28,6 @@
         {% endfor %}
     </ul>
     {% endif %}
+    -->
 </div>
 {% endblock %}

@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserChangeForm
 
 from account.models import User
 
-from .models import Event
+from .models import Event, Category
 
 
 class HostUpdateForm(UserChangeForm):
@@ -26,3 +26,9 @@ class EventCreateForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = '__all__'
+
+
+class CategoryCreateForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name']

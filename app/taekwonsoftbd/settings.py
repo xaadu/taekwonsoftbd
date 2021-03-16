@@ -96,6 +96,9 @@ conf_mysql = {
     'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
     'HOST': 'db',
     'PORT': "3306",
+    'OPTIONS': {
+        # 'charset': 'utf8mb4'  # This is the important line
+    }
 }
 
 DATABASES = {

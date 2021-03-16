@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block main %}
+<style>
+</style>
+<div class="container px-5 py-3 my-5">
+    {% include 'partials/_sidebar.html' %}
+    <div class="heading text-center mb-4">
+        <h2 class="display-2 d-inline-block">Categories</h2>
+    </div>
+    <a href="{% url 'host:create_category' event.id %}" class="btn btn-outline-primary mb-5">Add Category</a>
+    <div class="row py-3">
+        <div class="col-sm-1">ID</div>
+        <div class="col-sm-7">Category</div>
+        <div class="col-sm-4 text-center">Modify</div>
+    </div>
+    {% for category in categories %}
+    <div class="row py-3">
+        <div class="col-sm-1">{{ category.id }}</div>
+        <div class="col-sm-7">{{ category }}</div>
+        <div class="col-sm-2 text-center">
+            <a class="btn btn-outline-primary" href="{% url 'host:update_category' event.id category.id %}">Update</a>
+        </div>
+        <div class="col-sm-2 text-center">
+            <a class="btn btn-outline-danger" href="{% url 'host:delete_category' event.id category.id %}">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block main_content %}
+
+<div class="container">
+    <h1 class="display-3 text-center py-5">Perticipated Players</h1>
+    {% for player in players %}
+    <div class="player">
+        <div>
+            {{ player.player.name }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
