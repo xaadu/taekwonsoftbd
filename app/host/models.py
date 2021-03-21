@@ -23,6 +23,7 @@ class Category(models.Model):
     event = models.ForeignKey(
         Event, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=100)
+    round = models.IntegerField(default=1)
 
     def __str__(self) -> str:
         return self.name
@@ -57,3 +58,13 @@ class RegisteredPlayer(models.Model):
 
     def __str__(self) -> str:
         return self.player.name
+
+
+class PlayerResult(models.Model):
+    player = models.ForeignKey(RegisteredPlayer, on_delete=models.CASCADE)
+    judge = models.ForeignKey(
+        'account.JudgeModel', on_delete=models.SET_NULL, null=True)
+    round = models.IntegerField(unique=True)
+
+    def __str__(self) -> str:
+        return self.player.player.name + '(Round: ' + round + ')'
