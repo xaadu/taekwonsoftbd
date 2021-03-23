@@ -193,27 +193,3 @@ def apply(request, pk):
     }
 
     return render(request, 'home/apply.html', context)
-    event = Event.objects.get(pk=pk)
-    form = PlayerApplyForm(request=request)
-
-    if request.POST:
-        form = PlayerApplyForm(request.POST, request=request)
-        if form.is_valid():
-            regTeam = form.save(commit=False)
-            regTeam.event = event
-            regTeam.save()
-            regPlayers = form.cleaned_data.get('players')
-            for player in regPlayers:
-                rp = RegisteredPlayer.objects.create(
-                    event=event,
-                    team=regTeam,
-                    player=player
-                )
-                # rp.player.set(player)
-                rp.save()
-
-    context = {
-        'form': form
-    }
-
-    return render(request, 'home/apply.html', context)
