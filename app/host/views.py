@@ -78,6 +78,7 @@ def create_event(request):
         form = EventCreateForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            return redirect('host:events')
         else:
             print(form.errors)
 

@@ -12,6 +12,13 @@ class Event(models.Model):
     event_date = models.DateField()
     reg_deadline = models.DateField()
 
+    judge_1 = models.ForeignKey(
+        'account.JudgeModel', on_delete=models.SET_NULL, null=True, related_name='Judge1')
+    judge_2 = models.ForeignKey(
+        'account.JudgeModel', on_delete=models.SET_NULL, null=True, related_name='Judge2')
+    judge_3 = models.ForeignKey(
+        'account.JudgeModel', on_delete=models.SET_NULL, null=True, related_name='Judge3')
+
     contact = models.CharField(max_length=50)
     place = models.CharField(max_length=50)
 
