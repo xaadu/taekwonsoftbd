@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'team_leader.apps.TeamLeaderConfig',
     'judge.apps.JudgeConfig',
     'host.apps.HostConfig',
+    'stream.apps.StreamConfig',
 ]
 
 MIDDLEWARE = [
