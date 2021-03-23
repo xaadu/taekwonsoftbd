@@ -31,4 +31,4 @@ class EventCreateForm(forms.ModelForm):
 class CategoryCreateForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ['name']
+        fields = ['name', 'round']
