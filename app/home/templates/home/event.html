@@ -8,6 +8,7 @@
     <a class="btn btn-outline-primary" href="{% url 'home:manage' pk=event.id %}">Manage</a>
     <a class="btn btn-outline-primary" href="{% url 'home:teams' pk=event.id %}">Teams</a>
     <a class="btn btn-outline-primary" href="{% url 'home:players' pk=event.id %}">Players</a>
+    <a class="btn btn-outline-primary" href="{% url 'home:result_categories' event_id=event.id %}">Results</a>
     <br /> <br />
     <!--
     {% if teamData %}

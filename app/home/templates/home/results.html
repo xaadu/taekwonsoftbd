@@ -1,0 +1,40 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block main_content %}
+<div class="container py-5">
+    <div class="heading text-center mb-4">
+        <h2 class="display-2 d-inline-block">Event</h2><small class="text-muted text-right"> Result</small>
+    </div>
+    <div class="results">
+        <div class="row py-2 border-bottom mb-2">
+            <div class="col-sm-1">Position</div>
+            <div class="col-sm-3">Name</div>
+            <div class="col-sm-3">Team</div>
+            <div class="col-sm-2">Country</div>
+            <div class="col-sm-1">Point</div>
+            <div class="col-sm-1">Medal</div>
+            <div class="col-sm-1">Certificate</div>
+        </div>
+        {% for player, point in playerWithResults.items %}
+        <div class="row py-2">
+            <div class="col-sm-1">{{ forloop.counter }}</div>
+            <div class="col-sm-3">{{ player }}</div>
+            <div class="col-sm-3">{{ player.team }}</div>
+            <div class="col-sm-2">{{ player.player.country }}</div>
+            <div class="col-sm-1">{{ point }}</div>
+            <div class="col-sm-1">
+                {% if forloop.counter == 1 %} Gold
+                {% elif forloop.counter == 2 %} Silver
+                {% elif forloop.counter == 3 %} Bronze
+                {% else %} -
+                {% endif %}
+            </div>
+            <div class="col-sm-1">
+                <a href="#"><i class="fal fa-download"></i></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

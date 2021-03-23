@@ -1,0 +1,22 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block main_content %}
+<div class="container py-5">
+    <div class="heading text-center mb-4">
+        <h2 class="display-2 d-inline-block">Event</h2><small class="text-muted text-right"> Result</small>
+    </div>
+    <div class="categories">
+        <div class="row pb-2 mb-2 border-bottom">
+            <div class="col-sm-9">Category</div>
+            <div class="col-sm-3">Total Player</div>
+        </div>
+        {% for category, n in categories.items %}
+        <a href="{% url 'home:results' event_id=event.id category_id=category.id  %}" class="row py-2">
+            <div class="col-sm-9">{{ category }}</div>
+            <div class="col-sm-3">{{ n }}</div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -16,4 +16,8 @@ urlpatterns = [
     path('events/<str:event_id>/delete/<str:reg_team_id>/',
          event_team_delete, name='delete_team'),
     path('events/<str:pk>/apply/', apply, name='apply'),
+    path('events/<int:event_id>/results/',
+         result_categories, name='result_categories'),
+    path('events/<int:event_id>/results/<int:category_id>/',
+         results, name='results'),
 ]

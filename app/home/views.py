@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 
 # Create your views here.
 
-from host.models import Event, RegisteredTeam, RegisteredPlayer
+from host.models import Event, RegisteredTeam, RegisteredPlayer, Category
 
 from .forms import PlayerApplyForm, PlayerUpdateForm
 
@@ -193,3 +193,43 @@ def apply(request, pk):
     }
 
     return render(request, 'home/apply.html', context)
+
+
+def result_categories(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    categories = event.category_set.all()
+    _categories = {}
+    for category in categories:
+        _categories[category] = len(category.registeredplayer_set.all())
+
+    context = {
+        'event': event,
+        'categories': _categories,
+    }
+
+    return render(request, 'home/result_categories.html', context)
+
+
+def results(request, event_id, category_id):
+    event = Event.objects.get(pk=event_id)
+    category = Category.objects.get(pk=category_id)
+    players = category.registeredplayer_set.all()
+    playerWithResults = dict()
+    for player in players:
+        roundResults = player.playerresult_set.all()
+        finalPoint = 0
+        for res in roundResults:
+            finalPoint += res.accuracy+res.presentation
+        try:
+            finalPoint /= len(roundResults)
+        except ZeroDivisionError:
+            finalPoint = 0
+        playerWithResults[player] = '{:.2f}'.format(finalPoint)
+
+    context = {
+        'event': event,
+        'category': category,
+        'playerWithResults': playerWithResults,
+    }
+
+    return render(request, 'home/results.html', context)
