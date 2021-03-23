@@ -71,7 +71,9 @@ class PlayerResult(models.Model):
     player = models.ForeignKey(RegisteredPlayer, on_delete=models.CASCADE)
     judge = models.ForeignKey(
         'account.JudgeModel', on_delete=models.SET_NULL, null=True)
-    round = models.IntegerField(unique=True)
+    round = models.IntegerField()
+    accuracy = models.FloatField(default=0)
+    presentation = models.FloatField(default=0)
 
     def __str__(self) -> str:
         return self.player.player.name + '(Round: ' + round + ')'

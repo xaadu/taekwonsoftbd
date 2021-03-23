@@ -42,5 +42,15 @@
             </table>
         </div>
     </div>
+    <hr>
+    <div class="events">
+        {% for event in total_events %}
+        <div class="row">
+            <div class="col">
+                <a href="{% url 'judge:players' event.id %}">{{ event }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
