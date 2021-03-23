@@ -133,7 +133,10 @@ def create_category(request, event_id):
     if request.POST:
         form = CategoryCreateForm(request.POST)
         if form.is_valid():
-            form.save()
+            c = form.save(commit=False)
+            c.event = event
+            c.save()
+            return redirect('host:categories', event_id=event_id)
         else:
             print(form.errors)
 
