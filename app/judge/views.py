@@ -68,8 +68,7 @@ def set_point(request, event_id, player_id, round):
     judge = request.user.judgemodel
     try:
         roundResult = player.playerresult_set.get(round=round, judge=judge)
-    except Exception as e:
-        print(e)
+    except:
         roundResult = None
     form = MarkingForm(instance=roundResult)
     if request.POST:
