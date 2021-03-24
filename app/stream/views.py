@@ -103,3 +103,40 @@ def roundResult(request, event_id, reg_player_id, round):
         'total': total,
     }
     return render(request, 'stream/splitted/roundResult.html', context)
+
+
+def finalResult(request, event_id, reg_player_id):
+    event = Event.objects.get(pk=event_id)
+    try:
+        reg_player = RegisteredPlayer.objects.get(pk=reg_player_id)
+    except Exception as e:
+        print(e)
+        messages.error(request, 'No Player Found')
+        return redirect('stream:players', event_id=event_id)
+
+    total_round = reg_player.category.round
+
+    results = list()
+
+    for i in range(1, total_round+1):
+        roundResults = reg_player.playerresult_set.filter(round=i)
+        tot = 0
+        for result in roundResults:
+            tot += result.presentation
+            tot += result.accuracy
+        if len(roundResults) > 0:
+            tot /= len(roundResults)
+        results.append("{:.2f}".format(tot))
+    total = 0
+    for r in results:
+        total += float(r)
+
+    if len(results) > 0:
+        total = total/len(results)
+
+    context = {
+        'player': reg_player,
+        'results': results,
+        'total': total,
+    }
+    return render(request, 'stream/splitted/finalResult.html', context)
