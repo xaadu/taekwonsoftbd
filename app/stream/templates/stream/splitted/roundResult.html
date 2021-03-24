@@ -1,0 +1,54 @@
+{% extends 'stream/base.html' %}
+
+{% block main %}
+
+<div class="container card my-5">
+    <h3 class="display-3">{{ player }}</h3>
+    <h6 class="display-6">ID: {{ player.id }}</h6>
+    <h6 class="display-6">Current Round: {{ current_round }}</h6>
+    <h6 class="display-6">Category: {{ player.category.name }}</h6>
+    <h6 class="display-6">Team: {{ player.team }}</h6>
+    <h6 class="display-6">Country: {{ player.player.country }}</h6>
+    <hr>
+    {% if judge1 %}
+    <h3 class="display-3">Judge 1</h3>
+    <h6 class="display-6">Name: {{ judge1.judge.user.first_name }} {{ judge1.judge.user.last_name }}</h6>
+    <h6 class="display-6">Country: {{ judge1.judge.user.country }}</h6>
+    <h6 class="display-6">Image:
+        <img style="height: 100px; width:80px;" src="{{ judge1.judge.user.profile_picture.url }}" alt="">
+    </h6>
+    <h6 class="display-6">Presentation: {{ judge1.presentation }}</h6>
+    <h6 class="display-6">Accuracy: {{ judge1.accuracy }}</h6>
+    {% endif %}
+
+    <hr>
+    {% if judge2 %}
+    <h3 class="display-3">Judge 2</h3>
+    <h6 class="display-6">Name: {{ judge2.judge.user.first_name }} {{ judge2.judge.user.last_name }}</h6>
+    <h6 class="display-6">Country: {{ judge2.judge.user.country }}</h6>
+    <h6 class="display-6">Image:
+        <img style="height: 100px; width:80px;" src="{{ judge2.judge.user.profile_picture.url }}" alt="">
+    </h6>
+    <h6 class="display-6">Presentation: {{ judge2.presentation }}</h6>
+    <h6 class="display-6">Accuracy: {{ judge2.accuracy }}</h6>
+    {% endif %}
+
+    <hr>
+    {% if judge3 %}
+    <h3 class="display-3">Judge 3</h3>
+    <h6 class="display-6">Name: {{ judge3.judge.user.first_name }} {{ judge3.judge.user.last_name }}</h6>
+    <h6 class="display-6">Country: {{ judge3.judge.user.country }}</h6>
+    <h6 class="display-6">Image:
+        <img style="height: 100px; width:80px;" src="{{ judge3.judge.user.profile_picture.url }}" alt="">
+    </h6>
+    <h6 class="display-6">Presentation: {{ judge3.presentation }}</h6>
+    <h6 class="display-6">Accuracy: {{ judge3.accuracy }}</h6>
+    {% endif %}
+
+    <h6 class="display-6">Average Presentation: {{ pre }}</h6>
+    <h6 class="display-6">Average Accuracy: {{ acc }}</h6>
+
+    <h6 class="display-6">Average Total: {{ total }}</h6>
+</div>
+
+{% endblock %}

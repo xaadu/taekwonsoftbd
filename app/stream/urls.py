@@ -7,4 +7,6 @@ urlpatterns = [
     path('events/<int:event_id>/players/', players, name='players'),
     path('events/<int:event_id>/players/<int:reg_player_id>/<int:round>/',
          playerDetails, name='playerDetails'),
+    path('events/<int:event_id>/players/<int:reg_player_id>/<int:round>/round-result/',
+         roundResult, name='roundResult'),
 ]

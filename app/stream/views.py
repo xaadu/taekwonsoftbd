@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, HttpResponse
 
 from django.contrib import messages
 
@@ -42,3 +42,64 @@ def playerDetails(request, event_id, reg_player_id, round):
         'current_round': round
     }
     return render(request, 'stream/splitted/playerDetails.html', context)
+
+
+def roundResult(request, event_id, reg_player_id, round):
+    event = Event.objects.get(pk=event_id)
+    try:
+        reg_player = RegisteredPlayer.objects.get(pk=reg_player_id)
+    except Exception as e:
+        print(e)
+        messages.error(request, 'No Player Found')
+        return redirect('stream:players', event_id=event_id)
+
+    total_round = reg_player.category.round
+    if round > total_round:
+        messages.error(request, 'Round is out of range!')
+        return redirect('stream:players', event_id=event_id)
+
+    results = reg_player.playerresult_set.filter(round=round)
+    judges = [event.judge_1, event.judge_2, event.judge_3]
+
+    try:
+        judge1 = reg_player.playerresult_set.get(judge=judges[0])
+    except:
+        #messages.error(request, 'Judge 1 Not Submitted the Point')
+        judge1 = None
+    try:
+        judge2 = reg_player.playerresult_set.get(judge=judges[1])
+    except:
+        #messages.error(request, 'Judge 2 Not Submitted the Point')
+        judge2 = None
+    try:
+        judge3 = reg_player.playerresult_set.get(judge=judges[2])
+    except:
+        #messages.error(request, 'Judge 3 Not Submitted the Point')
+        judge3 = None
+
+    tot_pre, tot_acc, total = 0, 0, 0
+
+    for result in results:
+        tot_pre += result.presentation
+        tot_acc += result.accuracy
+
+    rl = len(results)
+
+    if rl > 0:
+        tot_acc = "{:.2f}".format(tot_acc/rl)
+        tot_pre = "{:.2f}".format(tot_pre/rl)
+        total = "{:.2f}".format(float(tot_acc)+float(tot_pre))
+
+    context = {
+        'player': reg_player,
+        'current_round': round,
+        'results': results,
+        'judges': judges,
+        'judge1': judge1,
+        'judge2': judge2,
+        'judge3': judge3,
+        'acc': tot_acc,
+        'pre': tot_pre,
+        'total': total,
+    }
+    return render(request, 'stream/splitted/roundResult.html', context)

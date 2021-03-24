@@ -76,4 +76,4 @@ class PlayerResult(models.Model):
     presentation = models.FloatField(default=0)
 
     def __str__(self) -> str:
-        return self.player.player.name + '(Round: ' + round + ')'
+        return self.player.player.name + '(Round: ' + str(self.round) + ')'
