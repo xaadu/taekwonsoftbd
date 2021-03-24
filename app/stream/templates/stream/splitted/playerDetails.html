@@ -1,0 +1,15 @@
+{% extends 'stream/base.html' %}
+
+{% block main %}
+
+<div class="container card my-5">
+    <h3 class="display-3">{{ player }}</h3>
+    <h6 class="display-6">ID: {{ player.id }}</h6>
+    <h6 class="display-6">Current Round: {{ current_round }}</h6>
+    <h6 class="display-6">Category: {{ player.category.name }}</h6>
+    <h6 class="display-6">Team: {{ player.team }}</h6>
+    <h6 class="display-6">Country: {{ player.player.country }}</h6>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'stream/base.html' %}
+
+{% block main %}
+
+{% for event in events %}
+
+<div class="row">
+    <div class="col">
+        <a href="{% url 'stream:players' event.id %}">{{ event }}</a>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

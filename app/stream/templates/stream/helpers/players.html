@@ -1,0 +1,22 @@
+{% extends 'stream/base.html' %}
+
+{% block main %}
+
+<div class="container card my-5">
+    {% for player in players %}
+    {% with ''|center:player.category.round as range %}
+    {% for _ in range %}
+    <div class="row py-2">
+        <div class="col-sm-1">{{ player.id }}</div>
+        <div class="col-sm-8">{{ player }} (Round {{forloop.counter}})</div>
+        <div class="col-sm-2">
+            <a class="btn btn-outline-primary"
+                href="{% url 'stream:playerDetails' event.id player.id forloop.counter %}">Details</a>
+        </div>
+    </div>
+    {% endfor %}
+    {% endwith %}
+    {% endfor %}
+</div>
+
+{% endblock %}
