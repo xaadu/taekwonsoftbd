@@ -22,6 +22,8 @@ class Event(models.Model):
     contact = models.CharField(max_length=50)
     place = models.CharField(max_length=50)
 
+    outline = models.FileField(upload_to='outlines/', null=True, blank=True)
+
     def __str__(self) -> str:
         return self.title
 
