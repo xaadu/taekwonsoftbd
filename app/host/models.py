@@ -1,5 +1,7 @@
 from django.db import models
 
+from datetime import date
+
 # Create your models here.
 
 #from team_leader.models import Player, Team
@@ -23,6 +25,7 @@ class Event(models.Model):
     place = models.CharField(max_length=50)
 
     outline = models.FileField(upload_to='outlines/', null=True, blank=True)
+    allow_reg = models.BooleanField(default=True)
 
     def __str__(self) -> str:
         return self.title
