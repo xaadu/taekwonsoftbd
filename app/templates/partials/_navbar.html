@@ -52,10 +52,15 @@ c19 -8 55 -28 79 -44 l44 -30 31 55 c16 30 43 78 60 107 l30 54 -88 45 c-48
                     <a class="nav-link {% if request.path == url %}active{% endif %}" aria-current="page"
                         href="{{ url }}">Events</a>
                 </li>
-                {% url 'home:events' as url %}
+                {% url 'home:comingsoon' as url %}
                 <li class="nav-item px-3">
                     <a class="nav-link {% if request.path == url %}active{% endif %}" aria-current="page"
-                        href="{{ url }}">About</a>
+                        href="#">Contact</a>
+                </li>
+                {% url 'home:comingsoon' as url %}
+                <li class="nav-item px-3">
+                    <a class="nav-link {% if request.path == url %}active{% endif %}" aria-current="page"
+                        href="#">About</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
