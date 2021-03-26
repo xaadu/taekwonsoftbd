@@ -1,1 +1,151 @@
-/* No CSS *//*# sourceMappingURL=main.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+body {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  color: #666666;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #222222;
+}
+
+h1 {
+  color: white;
+  margin-top: 0;
+  font-size: 200%;
+  word-spacing: 4px;
+}
+
+h2 {
+  word-spacing: 2px;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 100px;
+  background-color: col(primary);
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 110%;
+}
+
+nav svg.logo {
+  height: 34px;
+  fill: #1f2f98;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+nav svg.logo:hover {
+  fill: #7BD5F5;
+}
+
+nav .nav-link {
+  position: relative;
+}
+
+nav .nav-link::after {
+  content: "";
+  width: 0;
+  height: 1px;
+  position: absolute;
+  left: 5%;
+  bottom: 5%;
+  background: -webkit-gradient(linear, left top, right bottom, from(#1CA7EC), to(#1f2f98));
+  background: -webkit-linear-gradient(left top, #1CA7EC, #1f2f98);
+  background: -o-linear-gradient(left top, #1CA7EC, #1f2f98);
+  background: linear-gradient(to right bottom, #1CA7EC, #1f2f98);
+  -webkit-transition: all .3s ease-in-out;
+  -o-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+nav .nav-link:hover::after {
+  width: 90%;
+}
+
+nav .nav-link.active::after {
+  width: 90%;
+}
+
+footer a {
+  color: #1CA7EC;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-transition: all .2s ease-out;
+  -o-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+  font-size: 1.1rem;
+}
+
+footer a:hover {
+  -webkit-transform: translateY(-5%) scale(1.02);
+      -ms-transform: translateY(-5%) scale(1.02);
+          transform: translateY(-5%) scale(1.02);
+}
+
+.btn {
+  border: none;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.btn:hover {
+  -webkit-transform: translateY(-3%) scale(1.04);
+      -ms-transform: translateY(-3%) scale(1.04);
+          transform: translateY(-3%) scale(1.04);
+}
+
+.btn.btn-primary {
+  background: -webkit-gradient(linear, left top, right bottom, from(#1CA7EC), to(#1f2f98));
+  background: -webkit-linear-gradient(left top, #1CA7EC, #1f2f98);
+  background: -o-linear-gradient(left top, #1CA7EC, #1f2f98);
+  background: linear-gradient(to right bottom, #1CA7EC, #1f2f98);
+  -webkit-box-shadow: 5px 5px 20px rgba(120, 127, 246, 0.3);
+          box-shadow: 5px 5px 20px rgba(120, 127, 246, 0.3);
+  color: white;
+}
+
+.btn.btn-primary:hover {
+  -webkit-box-shadow: 5px 5px 20px rgba(120, 127, 246, 0.5);
+          box-shadow: 5px 5px 20px rgba(120, 127, 246, 0.5);
+}
+
+section#home .hero__left {
+  z-index: 2;
+}
+
+section#home .hero__right {
+  z-index: 1;
+}
+
+section#home .hero__right img {
+  width: 100%;
+}
+/*# sourceMappingURL=main.css.map */

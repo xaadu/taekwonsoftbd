@@ -1,43 +1,91 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+{% load static %}
+<nav class="navbar navbar-expand-md navbar-light">
     <div class="container">
-        <a class="navbar-brand" href="/">TaekwonSoftBD</a>
+        <a class="navbar-brand" href="{% url 'home:home' %}">
+            <!--img src="{% static 'images/logo.png' %}" alt="" width="40" height="34"-->
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300.000000 278.000000"
+                preserveAspectRatio="xMidYMid meet" class="logo">
+                <g transform="translate(0.000000,278.000000) scale(0.100000,-0.100000)">
+                    <path d="M1309 2646 c-37 -13 -221 -156 -396 -309 l-102 -88 25 -36 c25 -37
+44 -93 44 -131 0 -19 26 0 149 108 82 72 200 172 262 221 63 50 122 103 132
+117 44 67 -33 146 -114 118z" />
+                    <path d="M1700 2440 l0 -120 225 0 225 0 0 -127 0 -128 -123 -43 c-241 -86
+-490 -223 -654 -361 l-70 -58 -149 141 c-159 150 -278 256 -286 256 -3 0 -11
+-14 -18 -30 -18 -44 -99 -112 -158 -134 -78 -27 -200 -20 -271 16 -62 33 -69
+31 -134 -42 -176 -196 -208 -376 -77 -435 62 -28 180 -17 295 27 104 41 270
+122 280 138 4 6 11 25 15 42 8 27 6 34 -24 64 -22 22 -44 34 -62 34 -15 0 -84
+-27 -153 -59 -69 -32 -150 -66 -179 -74 l-53 -16 27 49 27 49 24 -19 c24 -19
+26 -19 71 -1 26 11 81 35 122 55 81 39 125 44 170 21 40 -21 60 -53 60 -98 0
+-49 -32 -82 -122 -123 l-64 -29 165 -118 c90 -64 166 -119 168 -120 2 -2 -12
+-37 -31 -78 -123 -271 -149 -600 -68 -858 28 -92 103 -141 187 -125 104 19
+147 99 110 205 -29 81 -40 218 -28 341 25 251 129 467 323 671 119 125 232
+209 401 296 112 59 254 121 274 121 3 0 5 -28 5 -63 l0 -64 -67 -12 c-175 -32
+-295 -133 -343 -289 -45 -143 -5 -300 94 -375 56 -43 131 -75 272 -117 219
+-65 274 -88 317 -132 30 -32 37 -46 37 -79 0 -115 -105 -165 -296 -140 -105
+14 -243 66 -326 122 l-58 39 -55 -110 c-30 -60 -55 -113 -55 -118 0 -15 145
+-92 231 -122 112 -39 201 -53 339 -53 289 -1 462 115 500 334 22 125 -15 244
+-101 324 -62 58 -124 88 -271 131 -266 77 -289 85 -329 124 -36 34 -39 41 -39
+92 0 78 38 121 123 142 l27 6 0 -120 0 -120 135 0 135 0 0 100 0 100 36 -15
+c19 -8 55 -28 79 -44 l44 -30 31 55 c16 30 43 78 60 107 l30 54 -88 45 c-48
+26 -111 54 -139 63 l-53 17 0 114 0 113 43 11 c99 24 116 32 146 62 59 61 47
+144 -28 194 -36 23 -48 26 -101 22 l-60 -4 0 93 0 93 225 0 225 0 0 120 0 120
+-585 0 -585 0 0 -120z" />
+                    <path d="M513 2320 c-174 -35 -266 -197 -193 -341 95 -185 419 -182 509 4 88
+181 -98 380 -316 337z" />
+                </g>
+            </svg>
+            TaekwonSoftBD
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'account:sample' %}">Home</a>
+            <ul class="navbar-nav m-auto">
+                {% url 'home:home' as url %}
+                <li class="nav-item px-3">
+                    <a class="nav-link {% if request.path == url %}active{% endif %}" aria-current="page"
+                        href="{{ url }}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home:events' %}">Events</a>
+                {% url 'home:events' as url %}
+                <li class="nav-item px-3">
+                    <a class="nav-link {% if request.path == url %}active{% endif %}" aria-current="page"
+                        href="{{ url }}">Events</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Account
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        {% if user.is_authenticated %}
-                        <li>
-                            {% if user.is_tl %}
-                            <a class="dropdown-item" href="{% url 'team_leader:dashboard' %}">Dashboard</a>
-                            {% elif user.is_judge %}
-                            <a class="dropdown-item" href="{% url 'judge:dashboard' %}">Dashboard</a>
-                            {% elif user.is_admin %}
-                            <a class="dropdown-item" href="{% url 'host:dashboard' %}">Dashboard</a>
-                            {% else %}
-                            <a class="dropdown-item" href="{% url 'account:sample' %}">Dashboard</a>
-                            {% endif %}
-                        </li>
-                        <li><a class="dropdown-item" href="{% url 'account:logout' %}">Logout</a></li>
-                        {% else %}
-                        <li><a class="dropdown-item" href="{% url 'account:login' %}">Login</a></li>
-                        <li><a class="dropdown-item" href="{% url 'account:register' %}">Register</a></li>
-                        <li><a class="dropdown-item" href="{% url 'account:judge_register' %}">Register(Judge)</a></li>
-                        {% endif %}
-                    </ul>
+                {% url 'home:events' as url %}
+                <li class="nav-item px-3">
+                    <a class="nav-link {% if request.path == url %}active{% endif %}" aria-current="page"
+                        href="{{ url }}">About</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item mx-2 my-2">
+                    {% if user.is_authenticated %}
+                <li class="nav-item mx-2 my-2">
+                    {% if user.is_tl %}
+                    <a class="btn btn-primary" href="{% url 'team_leader:dashboard' %}">Dashboard</a>
+                    {% elif user.is_judge %}
+                    <a class="btn btn-primary" href="{% url 'judge:dashboard' %}">Dashboard</a>
+                    {% elif user.is_admin %}
+                    <a class="btn btn-primary" href="{% url 'host:dashboard' %}">Dashboard</a>
+                    {% else %}
+                    <a class="btn btn-primary" href="{% url 'account:sample' %}">Dashboard</a>
+                    {% endif %}
+                </li>
+                <li class="nav-item mx-2 my-2">
+                    <a class="btn btn-primary" href="{% url 'account:logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item mx-2 my-2">
+                    <a class="btn btn-primary" href="{% url 'account:login' %}">Login</a>
+                </li>
+                <li class="nav-item mx-2 my-2">
+                    <a class="btn btn-primary" href="{% url 'account:register' %}">Register</a>
+                </li>
+                <!--li class="nav-item mx-2 my-2">
+                    <a class="btn btn-primary" href="{% url 'account:judge_register' %}">Register(Judge)</a>
+                </li-->
+                {% endif %}
                 </li>
             </ul>
         </div>

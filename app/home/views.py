@@ -11,6 +11,16 @@ def comingsoon(request):
     return render(request, 'comingsoon.html')
 
 
+def home(request):
+    objects = Event.objects.all()[:6]
+
+    context = {
+        'events': objects
+    }
+
+    return render(request, 'home/home.html', context)
+
+
 def events(request):
     objects = Event.objects.all()
 

@@ -1,0 +1,30 @@
+nav {
+    svg.logo {
+        height: 34px;
+        fill: $color-quaternary;
+        transition: all .2s ease-in-out;
+        &:hover {
+            fill: $color-quinary;
+        }
+    }
+    .nav-link {
+        position: relative;
+
+        &::after {
+            content: "";
+            width: 0;
+            height: 1px;
+            position: absolute;
+            left: 5%;
+            bottom: 5%;
+            background: $gradient-secondary;
+            transition: all .3s ease-in-out;
+        }
+        &:hover::after {
+            width: 90%;
+        }
+        &.active::after {
+            width: 90%;
+        }
+    }
+}

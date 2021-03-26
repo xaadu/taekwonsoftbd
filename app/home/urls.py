@@ -3,7 +3,8 @@ from .views import *
 
 app_name = 'home'
 urlpatterns = [
-    path('', comingsoon, name='comingsoon'),
+    #path('', comingsoon, name='comingsoon'),
+    path('', home, name='home'),
     path('events/', events, name='events'),
     path('events/<str:pk>/', event_details, name='event_details'),
     path('events/<str:pk>/teams/', event_teams, name='teams'),

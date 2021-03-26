@@ -1,0 +1,18 @@
+.btn{
+    border: none;
+    transition: all 0.2s ease-out;
+
+    &:hover {
+        transform: translateY(-3%) scale(1.04);
+    }
+
+    &.btn-primary {
+        background: $gradient-secondary;          
+        box-shadow: 5px 5px 20px rgba($color-primary, 0.3);
+        color: white;
+    
+        &:hover {
+            box-shadow: 5px 5px 20px rgba($color-primary, 0.5);
+        }
+    }
+}

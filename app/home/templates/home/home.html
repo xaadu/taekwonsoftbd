@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+
+<section id="home">
+    <div class="row hero container mx-auto">
+        <div class="col-md-5 order-2 order-md-1 hero__left d-flex align-items-center">
+            <div class="content">
+                <h2 class="display-1">Bangladesh Taekwondo</h2>
+                <p class="ps-2">A Place of Tournaments. Here you can register as a team leader and join your team to
+                    compete on National and International Level.</p>
+                <a href="{% url 'home:events' %}" class="btn btn-primary m-2">All Events &#8594;</a>
+            </div>
+        </div>
+        <div class="col-md-7 order-1 order-md-2 hero__right">
+            <img src="{% static 'images/hero.svg' %}" alt="Hero Image">
+        </div>
+    </div>
+</section>
+
+{% endblock %}
