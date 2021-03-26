@@ -219,4 +219,22 @@ section#home .hero__right {
 section#home .hero__right img {
   width: 100%;
 }
+
+section#events .header {
+  min-height: 300px;
+  background: url("../images/header_bg.jpg"), rgba(0, 0, 0, 0.7);
+  background-position: center center;
+  background-size: cover;
+  background-blend-mode: multiply;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 55% 85%, 50% 100%, 45% 85%, 0 85%);
+          clip-path: polygon(0 0, 100% 0, 100% 85%, 55% 85%, 50% 100%, 45% 85%, 0 85%);
+}
+
+section#events .header h2, section#events .header p {
+  color: white;
+}
+
+section#events .event_list .event_banner_wrapper {
+  max-width: 800px;
+}
 /*# sourceMappingURL=main.css.map */

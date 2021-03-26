@@ -1,0 +1,17 @@
+section#events {
+    .header {
+        min-height: 300px;
+        background: url('../images/header_bg.jpg'), rgba($color-black, .7);
+        background-position: center center;
+        background-size: cover;
+        background-blend-mode: multiply;
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 55% 85%, 50% 100%, 45% 85%, 0 85%);
+
+        h2, p {
+            color: white;
+        }
+    }
+    .event_list .event_banner_wrapper {
+        max-width: 800px;
+    }
+}

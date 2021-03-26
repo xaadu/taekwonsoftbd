@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -12,20 +13,22 @@ def comingsoon(request):
 
 
 def home(request):
-    objects = Event.objects.all()[:6]
-
-    context = {
-        'events': objects
-    }
-
-    return render(request, 'home/home.html', context)
+    return render(request, 'home/home.html')
 
 
 def events(request):
-    objects = Event.objects.all()
+    events = Event.objects.all()
+
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(events, 6)
+    try:
+        events = paginator.page(page)
+    except:
+        events = paginator.page(1)
 
     context = {
-        'events': objects
+        'events': events
     }
 
     return render(request, 'home/events.html', context)
