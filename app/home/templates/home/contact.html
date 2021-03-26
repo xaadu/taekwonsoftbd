@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<section id="contact">
+    <div class="container px-2 py-3 p-sm-5 my-3">
+        <div class="row">
+            <div class="col-md-7">
+                <h2 class="display-6">Contact Us</h2>
+                <img class="img-fluid" src="{% static 'images/contact_us.svg' %}" alt="Contact">
+            </div>
+            <div class="col-md-5 pt-5">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input class="form-control px-3 py-2" type="text" id="id_name" name="name"
+                            placeholder="Full Name" 
+                            required {% if form.is_bound %} value="{{form.name.value}}" {% endif %}>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control px-3 py-2" type="email" id="id_email" name="email"
+                            placeholder="Email Address"
+                            required {% if form.is_bound %} value="{{form.email.value}}" {% endif %}>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control px-3 py-2" id="id_message" name="message" placeholder="Message..."
+                            style="height:200px" required>{% if form.is_bound %} {{form.message.value}} {% endif %}</textarea>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary w-100 px-3 py-2" type="submit"> Submit &#8594; </button>
+                    </div>
+                </form>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

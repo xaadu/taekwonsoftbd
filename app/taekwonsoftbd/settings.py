@@ -161,6 +161,10 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
+EAMIL_BACKEND = 'sendgrid.backend.SendgridBackend'
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API')
+SENDGRID_SANDBOX_MODE_IN_DEBUG=False
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 

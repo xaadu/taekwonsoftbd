@@ -1,11 +1,15 @@
+import os
+
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
+from django.core.mail import send_mail, BadHeaderError
+from django.contrib import messages
 
 # Create your views here.
 
 from host.models import Event, RegisteredTeam, RegisteredPlayer, Category
 
-from .forms import PlayerApplyForm, PlayerUpdateForm
+from .forms import ContactForm, PlayerApplyForm, PlayerUpdateForm
 
 
 def comingsoon(request):
@@ -14,6 +18,33 @@ def comingsoon(request):
 
 def home(request):
     return render(request, 'home/home.html')
+
+
+def contact(request):
+    form = ContactForm()
+
+    if request.POST:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = f'Message from {form.cleaned_data["name"]}'
+            sender = {form.cleaned_data["email"]}
+            message = {form.cleaned_data["message"]}
+            receipients = os.environ.get('CONTACT_RECIPIENTS').split(',')
+            try:
+                send_mail(subject, message, sender, receipients, fail_silently=False)
+                messages.success(request, 'Email sent successfully!')
+            except BadHeaderError:
+                messages.error(request, 'Email Could not be send!')
+            return redirect('home:home')
+
+    context = {
+        'form': form
+    }
+    return render(request, 'home/contact.html', context)
+
+
+def about(request):
+    return render(request, 'home/about.html')
 
 
 def events(request):

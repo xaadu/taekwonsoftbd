@@ -237,4 +237,27 @@ section#events .header h2, section#events .header p {
 section#events .event_list .event_banner_wrapper {
   max-width: 800px;
 }
+
+section#contact .container {
+  -webkit-box-shadow: 0 0 20px rgba(31, 47, 152, 0.16);
+          box-shadow: 0 0 20px rgba(31, 47, 152, 0.16);
+  border-radius: 20px;
+}
+
+section#contact .container form input, section#contact .container form textarea {
+  border-radius: 20px;
+  font-size: 0.9rem;
+  border: none;
+  background: rgba(31, 47, 152, 0.1);
+}
+
+section#contact .container form input:focus, section#contact .container form textarea:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+section#contact .container form button {
+  border-radius: 20px;
+  font-weight: 600;
+}
 /*# sourceMappingURL=main.css.map */

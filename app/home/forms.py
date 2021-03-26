@@ -31,3 +31,9 @@ class PlayerUpdateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['players'] = forms.ModelMultipleChoiceField(
             required=True, queryset=self.players, widget=forms.CheckboxSelectMultiple())
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField()
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)

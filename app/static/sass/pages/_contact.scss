@@ -1,0 +1,23 @@
+section#contact {
+    .container {
+        box-shadow: 0 0 20px rgba($color: $color-quaternary, $alpha: 0.16);
+        border-radius: 20px;
+
+        form  {
+            input, textarea {
+                border-radius: 20px;
+                font-size: 0.9rem;
+                border: none;
+                background: rgba($color: $color-quaternary, $alpha: 0.1);
+
+                &:focus {
+                    box-shadow: none;
+                }
+            }
+            button {
+                border-radius: 20px;
+                font-weight: 600;
+            }
+        }
+    }
+}
