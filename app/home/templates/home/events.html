@@ -3,9 +3,24 @@
 
 {% block main %}
 <section id="events">
-    <div class="header pt-3 pb-5 d-flex flex-column align-items-center">
-        <h2 class="display-1">Events</h2>
-        <p>Here are all the events for you.</p>
+    <div class="row header container mx-auto py-5">
+        <div class="col-md-6 header__left">
+            <img class="img-fluid" src="{% static 'images/events.svg' %}" alt="Event List Hero Image">
+        </div>
+        <div class="col-md-6 d-flex flex-column align-items-center justify-content-center text-center header__right">
+            <h4 class="display-4">Event List</h4>
+            <p>Here are all events for you</p>
+            <div class="mouse_scroll my-5">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div>
+                    <span class="m_scroll_arrows unu"></span>
+                    <span class="m_scroll_arrows doi"></span>
+                    <span class="m_scroll_arrows trei"></span>
+                </div>
+        </div>
+        </div>
     </div>
     <div class="container event_list">
         {% for event in events %}

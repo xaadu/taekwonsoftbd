@@ -1,5 +1,5 @@
 section#events {
-    .header {
+    /*.header {
         min-height: 300px;
         background: url('../images/header_bg.jpg'), rgba($color-black, .7);
         background-position: center center;
@@ -10,8 +10,106 @@ section#events {
         h2, p {
             color: white;
         }
-    }
+    }*/
+
     .event_list .event_banner_wrapper {
         max-width: 800px;
+    }
+
+    .header .header__right {
+        //position: relative;
+
+        .mouse_scroll {
+            display: block;
+            margin: 0 auto;
+            width: 24px;
+            height: 100px;
+            /*position: absolute;
+            bottom: -10%;
+            left: 50%;
+            transform: translateX(-50%);*/
+
+            .m_scroll_arrows {
+                display: block;
+                width: 5px;
+                height: 5px;
+                -ms-transform: rotate(45deg); /* IE 9 */
+                -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+                transform: rotate(45deg);
+                
+                border-right: 2px solid $color-text-secondary;
+                border-bottom: 2px solid $color-text-secondary;
+                margin: 0 0 3px 4px;
+                
+                width: 16px;
+                height: 16px;
+            }
+                
+                
+            .unu {
+                margin-top: 1px;
+            }
+            .unu, .doi, .trei {
+                -webkit-animation: mouse-scroll 1s infinite;
+                -moz-animation: mouse-scroll 1s infinite;
+                animation: mouse-scroll 1s infinite;
+            }
+            .unu {
+                -webkit-animation-delay: .1s;
+                -moz-animation-delay: .1s;
+                -webkit-animation-direction: alternate;
+                
+                animation-direction: alternate;
+                animation-delay: alternate;
+            }
+            .doi {
+                -webkit-animation-delay: .2s;
+                -moz-animation-delay: .2s;
+                -webkit-animation-direction: alternate;
+                
+                animation-delay: .2s;
+                animation-direction: alternate;
+                
+                margin-top: -6px;
+            }
+            .trei {
+                -webkit-animation-delay: .3s;
+                -moz-animation-delay: .3s;
+                -webkit-animation-direction: alternate;
+                
+                animation-delay: .3s;
+                animation-direction: alternate;
+                
+                
+                margin-top: -6px;
+            }  
+            .mouse {
+                height: 42px;
+                width: 24px;
+                border-radius: 14px;
+                transform: none;
+                border: 2px solid $color-text-secondary;
+                top: 170px;
+            }  
+            .wheel {
+                height: 5px;
+                width: 2px;
+                display: block;
+                margin: 5px auto;
+                background: $color-text-secondary;
+                position: relative;
+                
+                height: 4px;
+                width: 4px;
+                border: 2px solid $color-text-secondary;
+                -webkit-border-radius: 8px;
+                        border-radius: 8px;
+            } 
+            .wheel {
+                -webkit-animation: mouse-wheel 0.6s linear infinite;
+                -moz-animation: mouse-wheel 0.6s linear infinite;
+                animation: mouse-wheel 0.6s linear infinite;
+            }
+        }
     }
 }

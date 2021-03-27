@@ -66,6 +66,63 @@ h3 {
   font-size: 110%;
 }
 
+@-webkit-keyframes mouse-wheel {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(6px);
+    -ms-transform: translateY(6px);
+    transform: translateY(6px);
+  }
+}
+
+@keyframes mouse-wheel {
+  0% {
+    top: 1px;
+  }
+  25% {
+    top: 2px;
+  }
+  50% {
+    top: 3px;
+  }
+  75% {
+    top: 2px;
+  }
+  100% {
+    top: 1px;
+  }
+}
+
+@-webkit-keyframes mouse-scroll {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: .5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes mouse-scroll {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: .5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 nav svg.logo {
   height: 34px;
   fill: #6C63FF;
@@ -224,22 +281,115 @@ section#home .hero__right img {
   width: 100%;
 }
 
-section#events .header {
-  min-height: 300px;
-  background: url("../images/header_bg.jpg"), rgba(0, 0, 0, 0.7);
-  background-position: center center;
-  background-size: cover;
-  background-blend-mode: multiply;
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 55% 85%, 50% 100%, 45% 85%, 0 85%);
-          clip-path: polygon(0 0, 100% 0, 100% 85%, 55% 85%, 50% 100%, 45% 85%, 0 85%);
-}
+section#events {
+  /*.header {
+        min-height: 300px;
+        background: url('../images/header_bg.jpg'), rgba($color-black, .7);
+        background-position: center center;
+        background-size: cover;
+        background-blend-mode: multiply;
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 55% 85%, 50% 100%, 45% 85%, 0 85%);
 
-section#events .header h2, section#events .header p {
-  color: white;
+        h2, p {
+            color: white;
+        }
+    }*/
 }
 
 section#events .event_list .event_banner_wrapper {
   max-width: 800px;
+}
+
+section#events .header .header__right .mouse_scroll {
+  display: block;
+  margin: 0 auto;
+  width: 24px;
+  height: 100px;
+  /*position: absolute;
+            bottom: -10%;
+            left: 50%;
+            transform: translateX(-50%);*/
+}
+
+section#events .header .header__right .mouse_scroll .m_scroll_arrows {
+  display: block;
+  width: 5px;
+  height: 5px;
+  -ms-transform: rotate(45deg);
+  /* IE 9 */
+  -webkit-transform: rotate(45deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+  border-right: 2px solid #666666;
+  border-bottom: 2px solid #666666;
+  margin: 0 0 3px 4px;
+  width: 16px;
+  height: 16px;
+}
+
+section#events .header .header__right .mouse_scroll .unu {
+  margin-top: 1px;
+}
+
+section#events .header .header__right .mouse_scroll .unu, section#events .header .header__right .mouse_scroll .doi, section#events .header .header__right .mouse_scroll .trei {
+  -webkit-animation: mouse-scroll 1s infinite;
+  animation: mouse-scroll 1s infinite;
+}
+
+section#events .header .header__right .mouse_scroll .unu {
+  -webkit-animation-delay: .1s;
+  -moz-animation-delay: .1s;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+  -webkit-animation-delay: alternate;
+          animation-delay: alternate;
+}
+
+section#events .header .header__right .mouse_scroll .doi {
+  -webkit-animation-delay: .2s;
+  -moz-animation-delay: .2s;
+  -webkit-animation-direction: alternate;
+  animation-delay: .2s;
+  animation-direction: alternate;
+  margin-top: -6px;
+}
+
+section#events .header .header__right .mouse_scroll .trei {
+  -webkit-animation-delay: .3s;
+  -moz-animation-delay: .3s;
+  -webkit-animation-direction: alternate;
+  animation-delay: .3s;
+  animation-direction: alternate;
+  margin-top: -6px;
+}
+
+section#events .header .header__right .mouse_scroll .mouse {
+  height: 42px;
+  width: 24px;
+  border-radius: 14px;
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none;
+  border: 2px solid #666666;
+  top: 170px;
+}
+
+section#events .header .header__right .mouse_scroll .wheel {
+  height: 5px;
+  width: 2px;
+  display: block;
+  margin: 5px auto;
+  background: #666666;
+  position: relative;
+  height: 4px;
+  width: 4px;
+  border: 2px solid #666666;
+  border-radius: 8px;
+}
+
+section#events .header .header__right .mouse_scroll .wheel {
+  -webkit-animation: mouse-wheel 0.6s linear infinite;
+  animation: mouse-wheel 0.6s linear infinite;
 }
 
 section#contact .container {
