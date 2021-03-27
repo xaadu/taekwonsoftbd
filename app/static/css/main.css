@@ -19,7 +19,7 @@ body {
 }
 
 a {
-  color: #787FF6;
+  color: #6C63FF;
   text-decoration: none;
   -webkit-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
@@ -68,14 +68,14 @@ h3 {
 
 nav svg.logo {
   height: 34px;
-  fill: #1f2f98;
+  fill: #6C63FF;
   -webkit-transition: all .2s ease-in-out;
   -o-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
 
 nav svg.logo:hover {
-  fill: #7BD5F5;
+  fill: #1f2f98;
 }
 
 nav .nav-link {
@@ -89,10 +89,10 @@ nav .nav-link::after {
   position: absolute;
   left: 5%;
   bottom: 5%;
-  background: -webkit-gradient(linear, left top, right bottom, from(#1CA7EC), to(#1f2f98));
-  background: -webkit-linear-gradient(left top, #1CA7EC, #1f2f98);
-  background: -o-linear-gradient(left top, #1CA7EC, #1f2f98);
-  background: linear-gradient(to right bottom, #1CA7EC, #1f2f98);
+  background: -webkit-gradient(linear, left top, right bottom, from(#1f2f98), to(#6C63FF));
+  background: -webkit-linear-gradient(left top, #1f2f98, #6C63FF);
+  background: -o-linear-gradient(left top, #1f2f98, #6C63FF);
+  background: linear-gradient(to right bottom, #1f2f98, #6C63FF);
   -webkit-transition: all .3s ease-in-out;
   -o-transition: all .3s ease-in-out;
   transition: all .3s ease-in-out;
@@ -180,19 +180,8 @@ nav .navbar-toggler .navbar-toggler-icon::after {
 }
 
 footer a {
-  color: #1CA7EC;
-  text-decoration: none;
   cursor: pointer;
-  -webkit-transition: all .2s ease-out;
-  -o-transition: all .2s ease-out;
-  transition: all .2s ease-out;
-  font-size: 1.1rem;
-}
-
-footer a:hover {
-  -webkit-transform: translateY(-5%) scale(1.02);
-      -ms-transform: translateY(-5%) scale(1.02);
-          transform: translateY(-5%) scale(1.02);
+  font-size: 1.2rem;
 }
 
 .btn {
@@ -209,18 +198,18 @@ footer a:hover {
 }
 
 .btn.btn-primary {
-  background: -webkit-gradient(linear, left top, right bottom, from(#1CA7EC), to(#1f2f98));
-  background: -webkit-linear-gradient(left top, #1CA7EC, #1f2f98);
-  background: -o-linear-gradient(left top, #1CA7EC, #1f2f98);
-  background: linear-gradient(to right bottom, #1CA7EC, #1f2f98);
-  -webkit-box-shadow: 5px 5px 20px rgba(120, 127, 246, 0.3);
-          box-shadow: 5px 5px 20px rgba(120, 127, 246, 0.3);
+  background: -webkit-gradient(linear, left top, right bottom, from(#1f2f98), to(#6C63FF));
+  background: -webkit-linear-gradient(left top, #1f2f98, #6C63FF);
+  background: -o-linear-gradient(left top, #1f2f98, #6C63FF);
+  background: linear-gradient(to right bottom, #1f2f98, #6C63FF);
+  -webkit-box-shadow: 5px 5px 20px rgba(108, 99, 255, 0.3);
+          box-shadow: 5px 5px 20px rgba(108, 99, 255, 0.3);
   color: white;
 }
 
 .btn.btn-primary:hover {
-  -webkit-box-shadow: 5px 5px 20px rgba(120, 127, 246, 0.5);
-          box-shadow: 5px 5px 20px rgba(120, 127, 246, 0.5);
+  -webkit-box-shadow: 5px 5px 20px rgba(108, 99, 255, 0.5);
+          box-shadow: 5px 5px 20px rgba(108, 99, 255, 0.5);
 }
 
 section#home .hero__left {
@@ -291,7 +280,7 @@ section#about .social a i {
 
 section#about .developer .card {
   border: none;
-  -webkit-box-shadow: 0 0 30px rgba(120, 127, 246, 0.3);
-          box-shadow: 0 0 30px rgba(120, 127, 246, 0.3);
+  -webkit-box-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
+          box-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
 }
 /*# sourceMappingURL=main.css.map */

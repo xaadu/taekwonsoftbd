@@ -1,4 +1,4 @@
-$color-primary: #787FF6;
+$color-primary: #6C63FF;
 $color-secondary: #4ADEDE;
 $color-tertiary: #1CA7EC;
 $color-quaternary: #1f2f98;
@@ -12,4 +12,4 @@ $color-black: #000000;
 $color-white: #ffffff;
 
 $gradient-primary: linear-gradient(to right bottom, $color-quinary, $color-primary);
-$gradient-secondary: linear-gradient(to right bottom, $color-tertiary, $color-quaternary);
+$gradient-secondary: linear-gradient(to right bottom, $color-quaternary, $color-primary);
