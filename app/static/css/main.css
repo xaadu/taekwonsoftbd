@@ -260,4 +260,8 @@ section#contact .container form button {
   border-radius: 20px;
   font-weight: 600;
 }
+
+section#contact .container .info a {
+  text-decoration: none;
+}
 /*# sourceMappingURL=main.css.map */
