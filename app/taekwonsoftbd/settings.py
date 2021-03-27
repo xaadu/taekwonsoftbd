@@ -161,8 +161,8 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
-EAMIL_BACKEND = 'sendgrid.backend.SendgridBackend'
-SENDGRID_API_KEY = os.environ.get('SENDGRID_API')
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 SENDGRID_SANDBOX_MODE_IN_DEBUG=False
 
 # Static files (CSS, JavaScript, Images)
