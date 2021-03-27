@@ -27,8 +27,9 @@ def contact(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             subject = f'Message from {form.cleaned_data["name"]}'
-            sender = {form.cleaned_data["email"]}
-            message = {form.cleaned_data["message"]}
+            sender = os.environ.get('SENDER')
+            message = 'Sender: '+form.cleaned_data["email"] + '\n\n' \
+                        'Message: '+form.cleaned_data["message"]
             receipients = os.environ.get('CONTACT_RECIPIENTS').split(',')
             try:
                 send_mail(subject, message, sender, receipients, fail_silently=True)
