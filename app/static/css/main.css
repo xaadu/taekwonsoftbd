@@ -304,6 +304,12 @@ section#events .event_list .event_banner_wrapper {
   max-width: 800px;
 }
 
+section#events .event_list .event_banner_wrapper img {
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 30px rgba(108, 99, 255, 0.2);
+          box-shadow: 0 0 30px rgba(108, 99, 255, 0.2);
+}
+
 section#events .header .header__right .mouse_scroll {
   display: block;
   margin: 0 auto;
