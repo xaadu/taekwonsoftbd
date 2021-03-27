@@ -60,7 +60,6 @@ h2::after {
   display: block;
   height: 2px;
   width: 100px;
-  background-color: col(primary);
   margin: 0 auto;
   margin-top: 30px;
 }
@@ -150,10 +149,10 @@ nav .nav-link::after {
   position: absolute;
   left: 5%;
   bottom: 5%;
-  background: -webkit-gradient(linear, left top, right bottom, from(#1f2f98), to(#6C63FF));
-  background: -webkit-linear-gradient(left top, #1f2f98, #6C63FF);
-  background: -o-linear-gradient(left top, #1f2f98, #6C63FF);
-  background: linear-gradient(to right bottom, #1f2f98, #6C63FF);
+  background: -webkit-gradient(linear, left top, right bottom, from(#6C63FF), to(#1f2f98));
+  background: -webkit-linear-gradient(left top, #6C63FF, #1f2f98);
+  background: -o-linear-gradient(left top, #6C63FF, #1f2f98);
+  background: linear-gradient(to right bottom, #6C63FF, #1f2f98);
   -webkit-transition: all .3s ease-in-out;
   -o-transition: all .3s ease-in-out;
   transition: all .3s ease-in-out;
@@ -259,10 +258,10 @@ footer a {
 }
 
 .btn.btn-primary {
-  background: -webkit-gradient(linear, left top, right bottom, from(#1f2f98), to(#6C63FF));
-  background: -webkit-linear-gradient(left top, #1f2f98, #6C63FF);
-  background: -o-linear-gradient(left top, #1f2f98, #6C63FF);
-  background: linear-gradient(to right bottom, #1f2f98, #6C63FF);
+  background: -webkit-gradient(linear, left top, right bottom, from(#6C63FF), to(#1f2f98));
+  background: -webkit-linear-gradient(left top, #6C63FF, #1f2f98);
+  background: -o-linear-gradient(left top, #6C63FF, #1f2f98);
+  background: linear-gradient(to right bottom, #6C63FF, #1f2f98);
   -webkit-box-shadow: 5px 5px 20px rgba(108, 99, 255, 0.3);
           box-shadow: 5px 5px 20px rgba(108, 99, 255, 0.3);
   color: white;
@@ -442,5 +441,45 @@ section#about .developer .card {
   border: none;
   -webkit-box-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
           box-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
+}
+
+section#event .row .card {
+  border: none;
+  border-radius: 16px;
+  -webkit-box-shadow: 0 0 30px rgba(108, 99, 255, 0.2);
+          box-shadow: 0 0 30px rgba(108, 99, 255, 0.2);
+}
+
+section#event .row .card img {
+  border-radius: 16px;
+}
+
+section#event .row .card .display-6 {
+  font-size: 1.5rem;
+}
+
+section#event .row .card h5 {
+  color: #1f2f98;
+}
+
+section#event .row .card h5 i {
+  text-align: center;
+  width: 36px;
+  color: #F50057;
+  font-size: 1.4rem;
+}
+
+section#event .row .card h5 span {
+  color: #6C63FF;
+  opacity: 0.7;
+}
+
+section#event .row.options .card h5 {
+  color: #666666;
+}
+
+section#event .row.options .card h5 span {
+  color: #F50057;
+  opacity: 0.9;
 }
 /*# sourceMappingURL=main.css.map */

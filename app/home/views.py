@@ -68,6 +68,7 @@ def events(request):
 
 def event_details(request, pk):
     event = Event.objects.get(pk=pk)
+    tteams, tplayers = len(event.registeredteam_set.all()), len(event.registeredplayer_set.all())
     teamData = {}
     try:
         teams = event.registeredteam_set.all()
@@ -79,7 +80,9 @@ def event_details(request, pk):
 
     context = {
         'event': event,
-        'teamData': teamData
+        'teamData': teamData,
+        'tteams': tteams,
+        'tplayers': tplayers,
     }
 
     return render(request, 'home/event.html', context)
