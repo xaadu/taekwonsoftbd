@@ -2,5 +2,142 @@
 {% load static %}
 
 {% block main %}
-About
+<section id="about">
+    <div class="row header container mx-auto py-5">
+        <div class="col-md-6">
+            <img class="img-fluid" src="{% static 'images/about_us.svg' %}" alt="About Us Hero Image">
+        </div>
+        <div class="col-md-6 d-flex align-items-center justify-content-center text-center">
+            <h4 class="display-4">About US</h4>
+        </div>
+    </div>
+    <div class="container mx-auto details">
+        <h4 class="display-4 text-center pb-5">Bangladesh Taekwondo Federation</h4>
+        <div class="row py-5">
+            <div class="col-sm-5 text-center text-sm-end">
+                <img class="img-fluid" src="{% static 'images/president.jpg' %}" alt="President Image">
+            </div>
+            <div class="col-sm-7 d-flex flex-column justify-content-center text-center text-sm-start">
+                <h3 class="h3">Kazi Morshed Hossain Kamal</h3>
+                <h6 class="h6">President</h6>
+                <div class="social py-2">
+                    <a class="px-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="px-2" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="px-2" href="#"><i class="fal fa-phone"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="row py-5">
+            <div class="col-sm-7 d-flex flex-column justify-content-center text-center text-sm-end order-2 order-sm-1">
+                <h3 class="h3">Mahmudul Islam Rana</h3>
+                <h6 class="h6">General Secretary</h6>
+                <div class="social">
+                    <a class="px-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="px-2" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="px-2" href="#"><i class="fal fa-phone"></i></a>
+                </div>
+            </div>
+            <div class="col-sm-5 text-center text-sm-start order-1 order-sm-2">
+                <img class="img-fluid" src="{% static 'images/general_secretary.jpg' %}" alt="General Secretary Image">
+            </div>
+        </div>
+    </div>
+    <div class="container mx-auto developer py-5">
+        <h4 class="display-4 text-center pb-5">Developer Team</h4>
+        <div class="row">
+            <div class="col-6 col-md-3 p-sm-3 my-3">
+                <div class="card mx-auto">
+                    <img class="card-img-top img-fluid" src="{% static 'images/xayed.jpg' %}" alt="Developer Abdullah Zayed's Image">
+                    <div class="card-body text-center">
+                        <h4 class="h4 card-title">Abdullah Zayed</h4>
+                        <h6 class="card-title">Full-Stack Developer</h6>
+                        <p class="card-text social py-2">
+                            <a target="_blank" class="px-2" href="https://facebook.com/xayed42">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a target="_blank" class="px-2" href="https://wa.me/+8801625715742">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a target="_blank" class="px-2" href="mailto:abdullahzayed01@gmail.com">
+                                <i class="fal fa-envelope-open"></i>
+                            </a>
+                            <a class="px-2" href="tel:+880162571572">
+                                <i class="fal fa-phone"></i>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 p-sm-3 my-3">
+                <div class="card mx-auto">
+                    <img class="card-img-top img-fluid" src="{% static 'images/person.jpg' %}" alt="Designer 's Image">
+                    <div class="card-body text-center">
+                        <h4 class="h4 card-title">John Doe</h4>
+                        <h6 class="card-title">Graphic Designer</h6>
+                        <p class="card-text social py-2">
+                            <a target="_blank" class="px-2" href="https://facebook.com/xayed42">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a target="_blank" class="px-2" href="https://wa.me/+8801625715742">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a target="_blank" class="px-2" href="mailto:abdullahzayed01@gmail.com">
+                                <i class="fal fa-envelope-open"></i>
+                            </a>
+                            <a class="px-2" href="tel:+880162571572">
+                                <i class="fal fa-phone"></i>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 p-sm-3 my-3">
+                <div class="card mx-auto">
+                    <img class="card-img-top img-fluid" src="{% static 'images/person.jpg' %}" alt="Designer 's Image">
+                    <div class="card-body text-center">
+                        <h4 class="h4 card-title">John Doe</h4>
+                        <h6 class="card-title">Web Designer</h6>
+                        <p class="card-text social py-2">
+                            <a target="_blank" class="px-2" href="https://facebook.com/xayed42">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a target="_blank" class="px-2" href="https://wa.me/+8801625715742">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a target="_blank" class="px-2" href="mailto:abdullahzayed01@gmail.com">
+                                <i class="fal fa-envelope-open"></i>
+                            </a>
+                            <a class="px-2" href="tel:+880162571572">
+                                <i class="fal fa-phone"></i>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 p-sm-3 my-3">
+                <div class="card mx-auto">
+                    <img class="card-img-top img-fluid" src="{% static 'images/person.jpg' %}" alt="Designer 's Image">
+                    <div class="card-body text-center">
+                        <h4 class="h4 card-title">John Doe</h4>
+                        <h6 class="card-title">Web Developer</h6>
+                        <p class="card-text social py-2">
+                            <a target="_blank" class="px-2" href="https://facebook.com/xayed42">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a target="_blank" class="px-2" href="https://wa.me/+8801625715742">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a target="_blank" class="px-2" href="mailto:abdullahzayed01@gmail.com">
+                                <i class="fal fa-envelope-open"></i>
+                            </a>
+                            <a class="px-2" href="tel:+880162571572">
+                                <i class="fal fa-phone"></i>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

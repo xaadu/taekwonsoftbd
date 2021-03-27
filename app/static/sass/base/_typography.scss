@@ -4,6 +4,16 @@ body {
     color: $color-text-secondary;
     text-rendering: optimizeLegibility;
 }
+a {
+    color: $color-primary;
+    text-decoration: none;
+    transition: all 0.2s ease-out;
+
+    &:hover {
+        color: $color-quaternary;
+        transform: translateY(-3%) scale(1.04);
+    }
+}
 
 h1,
 h2,

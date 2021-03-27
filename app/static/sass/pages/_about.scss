@@ -1,0 +1,17 @@
+section#about {
+    .details{
+        .col-sm-5 img {
+            width: 200px;
+            height: 200px;
+        }
+    }
+    .social a i {
+        font-size: 1.2rem;
+    }
+    .developer {
+        .card {
+            border: none;
+            box-shadow: 0 0 30px rgba($color: $color-primary, $alpha: 0.3);
+        }
+    }
+}

@@ -18,6 +18,21 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+a {
+  color: #787FF6;
+  text-decoration: none;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+a:hover {
+  color: #1f2f98;
+  -webkit-transform: translateY(-3%) scale(1.04);
+      -ms-transform: translateY(-3%) scale(1.04);
+          transform: translateY(-3%) scale(1.04);
+}
+
 h1,
 h2,
 h3 {
@@ -263,5 +278,20 @@ section#contact .container form button {
 
 section#contact .container .info a {
   text-decoration: none;
+}
+
+section#about .details .col-sm-5 img {
+  width: 200px;
+  height: 200px;
+}
+
+section#about .social a i {
+  font-size: 1.2rem;
+}
+
+section#about .developer .card {
+  border: none;
+  -webkit-box-shadow: 0 0 30px rgba(120, 127, 246, 0.3);
+          box-shadow: 0 0 30px rgba(120, 127, 246, 0.3);
 }
 /*# sourceMappingURL=main.css.map */
