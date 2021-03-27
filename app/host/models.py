@@ -48,7 +48,8 @@ class RegisteredTeam(models.Model):
     team = models.ForeignKey(
         'team_leader.Team', on_delete=models.CASCADE, null=True, blank=True)
 
-    payment_done = models.BooleanField(default=False)
+    PAYMENT_CHOICES = ((True, 'Yes'), (False, 'No'))
+    payment_done = models.BooleanField(choices=PAYMENT_CHOICES, default=True)
 
     def __str__(self) -> str:
         return self.team.name
