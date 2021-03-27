@@ -31,7 +31,7 @@ def contact(request):
             message = {form.cleaned_data["message"]}
             receipients = os.environ.get('CONTACT_RECIPIENTS').split(',')
             try:
-                send_mail(subject, message, sender, receipients, fail_silently=False)
+                send_mail(subject, message, sender, receipients, fail_silently=True)
                 messages.success(request, 'Email sent successfully!')
             except BadHeaderError:
                 messages.error(request, 'Email Could not be send!')
