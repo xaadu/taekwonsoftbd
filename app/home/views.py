@@ -8,6 +8,7 @@ from django.contrib import messages
 # Create your views here.
 
 from host.models import Event, RegisteredTeam, RegisteredPlayer, Category
+from account.decorators import allowed_users
 
 from .forms import ContactForm, PlayerApplyForm, PlayerUpdateForm
 
@@ -29,10 +30,11 @@ def contact(request):
             subject = f'Message from {form.cleaned_data["name"]}'
             sender = os.environ.get('SENDER')
             message = 'Sender: '+form.cleaned_data["email"] + '\n\n' \
-                        'Message: '+form.cleaned_data["message"]
+                'Message: '+form.cleaned_data["message"]
             receipients = os.environ.get('CONTACT_RECIPIENTS').split(',')
             try:
-                send_mail(subject, message, sender, receipients, fail_silently=True)
+                send_mail(subject, message, sender,
+                          receipients, fail_silently=True)
                 messages.success(request, 'Email sent successfully!')
             except BadHeaderError:
                 messages.error(request, 'Email Could not be send!')
@@ -68,7 +70,8 @@ def events(request):
 
 def event_details(request, pk):
     event = Event.objects.get(pk=pk)
-    tteams, tplayers = len(event.registeredteam_set.all()), len(event.registeredplayer_set.all())
+    tteams, tplayers = len(event.registeredteam_set.all()), len(
+        event.registeredplayer_set.all())
     teamData = {}
     try:
         teams = event.registeredteam_set.all()
@@ -123,6 +126,7 @@ def event_players(request, pk):
     return render(request, 'home/players.html', context)
 
 
+@allowed_users(['tl'])
 def manage(request, pk):
     event = Event.objects.get(pk=pk)
     teamData = {}
@@ -152,6 +156,7 @@ def manage(request, pk):
     return render(request, 'home/manage.html', context)
 
 
+@allowed_users(['tl'])
 def event_team_update(request, event_id, reg_team_id):
     event = Event.objects.get(pk=event_id)
     team = event.registeredteam_set.get(pk=reg_team_id)
@@ -191,12 +196,14 @@ def event_team_update(request, event_id, reg_team_id):
     return render(request, 'home/update.html', context)
 
 
+@allowed_users(['tl'])
 def event_team_delete(request, event_id, reg_team_id):
     event = Event.objects.get(pk=event_id)
     event.registeredteam_set.get(pk=reg_team_id).delete()
     return redirect('home:manage', pk=event_id)
 
 
+@allowed_users(['tl'])
 def apply(request, pk):
     event = Event.objects.get(pk=pk)
     teams = request.user.teamleadermodel.team_set.all()
