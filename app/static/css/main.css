@@ -483,7 +483,8 @@ section#event .row.options .card h5 span {
   opacity: 0.9;
 }
 
-section#apply select {
+section#apply select,
+section#update select {
   display: block;
   border: none;
   border-bottom: 1px solid rgba(108, 99, 255, 0.6);
@@ -493,20 +494,24 @@ section#apply select {
   border-radius: 5px;
 }
 
-section#apply select:focus {
+section#apply select:focus,
+section#update select:focus {
   outline: none;
 }
 
-section#apply .teamSelect label {
+section#apply .teamSelect label,
+section#update .teamSelect label {
   font-size: 1.2rem;
 }
 
-section#apply .teamSelect select {
+section#apply .teamSelect select,
+section#update .teamSelect select {
   max-width: 350px;
   width: 100%;
 }
 
-section#apply .playerSelect .player {
+section#apply .playerSelect .player,
+section#update .playerSelect .player {
   border: 2px solid white;
   -webkit-transition: all .2s ease-out;
   -o-transition: all .2s ease-out;
@@ -516,11 +521,13 @@ section#apply .playerSelect .player {
   border-radius: 10px;
 }
 
-section#apply .playerSelect .player.checked {
+section#apply .playerSelect .player.checked,
+section#update .playerSelect .player.checked {
   border: 2px solid #6C63FF;
 }
 
-section#apply .playerSelect .player__info .checkbox_container {
+section#apply .playerSelect .player__info .checkbox_container,
+section#update .playerSelect .player__info .checkbox_container {
   display: block;
   position: relative;
   padding-left: 2.4rem;
@@ -531,7 +538,8 @@ section#apply .playerSelect .player__info .checkbox_container {
           user-select: none;
 }
 
-section#apply .playerSelect .player__info .checkbox_container input {
+section#apply .playerSelect .player__info .checkbox_container input,
+section#update .playerSelect .player__info .checkbox_container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -539,15 +547,18 @@ section#apply .playerSelect .player__info .checkbox_container input {
   width: 0;
 }
 
-section#apply .playerSelect .player__info .checkbox_container input:checked ~ .checkmark {
+section#apply .playerSelect .player__info .checkbox_container input:checked ~ .checkmark,
+section#update .playerSelect .player__info .checkbox_container input:checked ~ .checkmark {
   background-color: #6C63FF;
 }
 
-section#apply .playerSelect .player__info .checkbox_container input:checked ~ .checkmark::after {
+section#apply .playerSelect .player__info .checkbox_container input:checked ~ .checkmark::after,
+section#update .playerSelect .player__info .checkbox_container input:checked ~ .checkmark::after {
   display: block;
 }
 
-section#apply .playerSelect .player__info .checkbox_container .checkmark {
+section#apply .playerSelect .player__info .checkbox_container .checkmark,
+section#update .playerSelect .player__info .checkbox_container .checkmark {
   position: absolute;
   top: 8px;
   left: 0;
@@ -556,7 +567,8 @@ section#apply .playerSelect .player__info .checkbox_container .checkmark {
   background-color: #eee;
 }
 
-section#apply .playerSelect .player__info .checkbox_container .checkmark::after {
+section#apply .playerSelect .player__info .checkbox_container .checkmark::after,
+section#update .playerSelect .player__info .checkbox_container .checkmark::after {
   content: "";
   position: absolute;
   display: none;
@@ -571,11 +583,13 @@ section#apply .playerSelect .player__info .checkbox_container .checkmark::after 
   transform: rotate(45deg);
 }
 
-section#apply .playerSelect .player__pic {
+section#apply .playerSelect .player__pic,
+section#update .playerSelect .player__pic {
   position: relative;
 }
 
-section#apply .playerSelect .player__pic img {
+section#apply .playerSelect .player__pic img,
+section#update .playerSelect .player__pic img {
   position: absolute;
   top: 0;
   left: 50%;
@@ -584,7 +598,8 @@ section#apply .playerSelect .player__pic img {
           transform: translateX(-50%);
 }
 
-section#apply .playerSelect select {
+section#apply .playerSelect select,
+section#update .playerSelect select {
   width: 100%;
 }
 /*# sourceMappingURL=main.css.map */

@@ -187,8 +187,11 @@ def event_team_update(request, event_id, reg_team_id):
                 )
                 x.save()
                 # print(x)
+        messages.success(request, 'Updated Successfully')
+        return redirect('home:manage', pk=event.id)
 
     context = {
+        'event': event,
         'players': players,
         'categories': categories,
     }
@@ -240,7 +243,7 @@ def apply(request, pk):
                     )
                     x.save()
                     # print(x)
-            messages.success('Applied Successfully')
+            messages.success(request, 'Applied Successfully')
             return redirect('home:event_details', pk=event.id)
 
     context = {
