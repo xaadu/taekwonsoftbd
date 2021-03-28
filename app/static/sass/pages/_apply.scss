@@ -1,0 +1,97 @@
+section#apply {
+    select {
+        display: block;
+        border: none;
+        border-bottom: 1px solid rgba($color: $color-primary, $alpha: 0.6);
+        font-size: 0.9rem;
+        box-shadow: 0 0 20px rgba($color: $color-primary, $alpha: 0.16);
+        border-radius: 5px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+    .teamSelect {
+        label {
+            font-size: 1.2rem;
+        }
+        select {
+            max-width: 350px;
+            width: 100%;
+        }
+    }
+    .playerSelect {
+        .player {
+            border: 2px solid rgba($color: $color-white, $alpha: 1.0);
+            transition: all .2s ease-out;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+
+
+            &.checked {
+                border: 2px solid $color-primary;
+            }
+
+            &__info {
+                .checkbox_container {
+                    display: block;
+                    position: relative;
+                    padding-left: 2.4rem;
+                    cursor: pointer;
+                    user-select: none;
+
+                    input {
+                        position: absolute;
+                        opacity: 0;
+                        cursor: pointer;
+                        height: 0;
+                        width: 0;
+                        &:checked ~ .checkmark {
+                            background-color: $color-primary;
+
+                            &::after{
+                                display: block;
+                            }
+                        }
+                    }
+                    .checkmark {
+                        position: absolute;
+                        top: 8px;
+                        left: 0;
+                        height: 25px;
+                        width: 25px;
+                        background-color: #eee;
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            display: none;
+                            left: 9px;
+                            top: 5px;
+                            width: 5px;
+                            height: 10px;
+                            border: solid white;
+                            border-width: 0 3px 3px 0;
+                            -webkit-transform: rotate(45deg);
+                            -ms-transform: rotate(45deg);
+                            transform: rotate(45deg);
+                        }
+                    }
+                } 
+            }
+            &__pic {
+                position: relative;
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+        
+        select {
+            width: 100%;
+        }
+    }
+}

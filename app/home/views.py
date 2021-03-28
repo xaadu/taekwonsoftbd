@@ -240,8 +240,11 @@ def apply(request, pk):
                     )
                     x.save()
                     # print(x)
+            messages.success('Applied Successfully')
+            return redirect('home:event_details', pk=event.id)
 
     context = {
+        'event': event,
         'teams': teams,
         'players': players,
         'categories': categories,

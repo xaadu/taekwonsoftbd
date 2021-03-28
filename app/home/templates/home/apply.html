@@ -1,25 +1,82 @@
-{% extends "dashboard.html" %}
+{% extends "base.html" %}
 {% load static %}
 
-{% block main_content %}
-<div class="container p-5">
-    <form action="" method="post">
-        {% csrf_token %}
-        <select name="team" id="team">
-            {% for team in teams %}
-            <option value="{{ team.id }}">{{ team.name }}</option>
-            {% endfor %}
-        </select> <br> <br>
-        {% for player in players %}
-        <input type="checkbox" id="player{{ player.id }}" name="player{{ player.id }}" value="{{ player.id }}">
-        <label for="player{{ player.id }}">{{ player.name }}</label>
-        <select name="player_cat{{ player.id }}" id="player_cat{{ player.id }}">
-            {% for category in categories %}
-            <option value="{{ category.id }}">{{ category.name }}</option>
-            {% endfor %}
-        </select> <br><br>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
-</div>
+{% block main %}
+<section id="apply">
+    <div class="row header container mx-auto py-5">
+        <div class="col-md-6 header__left">
+            <img class="img-fluid" src="{% static 'images/apply.svg' %}" alt="Event List Hero Image">
+        </div>
+        <div class="col-md-6 d-flex flex-column align-items-center justify-content-center text-center header__right">
+            <h6 class="display-6 border-bottom pb-3">Apply For</h6>
+            <h2 class="display-4"> {{ event }} </h2>
+        </div>
+    </div>
+    <div class="container p-5">
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <!--TEAM SELECT -->
+            <div class="teamSelect pb-5">
+                <div class="row">
+                    <div class="col-sm-5 d-flex justify-content-start justify-content-sm-end">
+                        <label for="team">Choose Your Team: </label>
+                    </div>
+                    <div class="col-sm-7">
+                        <select class="px-2 py-1" name="team" id="team">
+                            {% for team in teams %}
+                            <option value="{{ team.id }}">{{ team.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- TEAM SELECT END -->
+
+            <!-- PLAYER SELECT -->
+            <div class="row playerSelect">
+                {% for player in players %}
+                <div class="col-md-6">
+                    <div class="row player m-2">
+                        <div class="col-8 player__info">
+                            <label for="player{{ player.id }}" class="checkbox_container pb-4 pt-2">
+                                <input type="checkbox" id="player{{ player.id }}" name="player{{ player.id }}"
+                                    value="{{ player.id }}">
+                                <span class="checkmark"></span>
+                                {{ player.name }}
+                            </label>
+
+                            <div class="player__district pb-3">
+                                District: {{ player.district }}
+                            </div>
+
+                            <select class="px-3 py-2 mb-1" name="player_cat{{ player.id }}"
+                                id="player_cat{{ player.id }}">
+                                {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-4 p-0 player__pic">
+                            <img src="{{ player.picture.url }}" alt="{{player.name}}'s Image" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- PLAYER SELECT END -->
+            <div class="submitBTN text-center mt-5">
+                <button type="submit" class="btn btn-primary px-5 mx-2">Apply</button>
+                <a href="{% url 'home:event_details' event.id %}" class="btn btn-danger px-5 mx-2">Cancel</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+    $(":checkbox").on('click', function () {
+        $(this).parent().parent().parent().toggleClass("checked");
+    });
+</script>
 {% endblock %}
