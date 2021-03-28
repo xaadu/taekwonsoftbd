@@ -40,14 +40,19 @@
                     <div class="players px-5">
                         <div class="player row border border-secondary border-start-0 border-end-0 bg-light">
                             <div class="player__id col-sm-2 py-3">Player ID</div>
-                            <div class="player__name col-sm-7 py-3">Player Name</div>
+                            <div class="player__name col-sm-5 py-3">Player Name</div>
                             <div class="player__district col-sm-3 py-3">Player District</div>
+                            <div class="player__idcard col-sm-2 py-3">ID Card</div>
                         </div>
                         {% for player in players %}
                         <div class="player row border-bottom border-secondary {% cycle 'bg-white' 'bg-light' %}">
                             <div class="player__id col-sm-2 py-3">{{ player.player.id }}</div>
-                            <div class="player__name col-sm-7 py-3">{{ player.player.name }}</div>
+                            <div class="player__name col-sm-5 py-3">{{ player.player.name }}</div>
                             <div class="player__district col-sm-3 py-3">{{ player.player.district }}</div>
+                            <div class="player__idcard col-sm-2 py-3">
+                                <a href="{% url 'home:downloadID' event.id team.id player.id %}" class="btn btn-primary"
+                                    download="id_card_{{ player.id|stringformat:'04d' }}">Download</a>
+                            </div>
                         </div>
                         {% endfor %}
                     </div>

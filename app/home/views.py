@@ -1,6 +1,7 @@
 import os
 
 from django.shortcuts import redirect, render
+from django.http import HttpResponse, FileResponse
 from django.core.paginator import Paginator
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages
@@ -9,8 +10,30 @@ from django.contrib import messages
 
 from host.models import Event, RegisteredTeam, RegisteredPlayer, Category
 from account.decorators import allowed_users
+from taekwonsoftbd.settings import DEBUG, STATIC_ROOT, MEDIA_ROOT
 
 from .forms import ContactForm, PlayerApplyForm, PlayerUpdateForm
+
+
+from PIL import Image, ImageDraw, ImageFont
+
+
+def helper_func_splitText(text):
+    text = text.split()
+    l = len(text)
+    if l > 3:
+        first_part = ' '.join(text[:(l//2)])
+        second_part = ' '.join(text[(l//2):])
+        text = '\n'.join([first_part, second_part])
+    elif l == 3:
+        first_part = ' '.join(text[:2])
+        second_part = ' '.join(text[2:])
+        text = '\n'.join([first_part, second_part])
+    elif l == 2:
+        first_part = ' '.join(text[0])
+        second_part = ' '.join(text[1])
+        text = '\n'.join([first_part, second_part])
+    return text
 
 
 def comingsoon(request):
@@ -157,6 +180,127 @@ def manage(request, pk):
 
 
 @allowed_users(['tl'])
+def downloadID(request, event_id, team_id, player_id):
+    event = Event.objects.get(pk=event_id)
+    team = RegisteredTeam.objects.get(pk=team_id)
+    player = RegisteredPlayer.objects.get(pk=player_id)
+
+    event_name = event.title
+    player_pic_url = player.player.picture.url
+    player_name = player.player.name
+    player_country = player.player.country
+    player_club = team.team.teamleader.club_name
+    category = player.category.name
+
+    if DEBUG:
+        static_dir = 'static'
+    else:
+        static_dir = STATIC_ROOT
+
+    bg_image = static_dir + '/images/id_card.jpg'
+    player_pic = MEDIA_ROOT + '/images/player/' + player_pic_url.split('/')[-1]
+
+    im = Image.open(player_pic)
+    img = Image.open(bg_image)
+
+    width, height = im.size
+
+    im = im.crop((0, 0, width, width))
+    im = im.resize((340, 340))
+
+    width, height = im.size
+
+    bigsize = (width * 3, height * 3)
+    mask = Image.new('L', bigsize, 0)
+    draw = ImageDraw.Draw(mask)
+    draw.ellipse((0, 0) + bigsize, fill=255)
+    mask = mask.resize(im.size, Image.ANTIALIAS)
+
+    # im.putalpha(mask)
+    img.paste(im, (386, 74), mask)
+
+    width, height = img.size
+
+    jersey = ImageFont.truetype(
+        static_dir+'/vendor/fonts/JerseyM54.ttf', 100
+    )
+    metrisch = ImageFont.truetype(
+        static_dir+'/vendor/fonts/Metrisch-Medium.otf', 44
+    )
+    metrisch2 = ImageFont.truetype(
+        static_dir+'/vendor/fonts/Metrisch-Medium.otf', 32
+    )
+
+    d = ImageDraw.Draw(img)
+
+    # player_name = 'One Two Three Four Five Six Seven Right Nine Ten Eleven'
+    # event_name = 'One Two Three Four Five Six Seven Right Nine Ten Eleven'
+    # category = 'One Two Three Four Five Six Seven Right Nine Ten Eleven'
+
+    # Player ID
+    font = jersey
+    player_id = str(player_id).zfill(4)
+    w, h = d.textsize(player_id, font=font)
+    d.text((60, 120), player_id,
+           fill=(255, 255, 255), font=font)
+
+    # Player Name
+    font = metrisch
+    w, h = d.textsize(player_name, font=font)
+    if width-w < 20:
+        player_name = helper_func_splitText(player_name)
+    w, h = d.textsize(player_name, font=font)
+    d.text(((width-w)/2, 500), player_name,
+           fill=(27, 26, 81), font=font)
+
+    # Player Category
+    font = metrisch2
+    w, h = d.textsize(category, font=font)
+    if width-w < 20:
+        category = helper_func_splitText(category)
+    w, h = d.textsize(category, font=font)
+    d.text(((width-w)/2, 600), category,
+           fill=(50, 50, 50), font=font)
+
+    # Player Club
+    font = metrisch2
+    w, h = d.textsize(player_club, font=font)
+    d.text(((width-w)/2, 700), player_club,
+           fill=(100, 100, 100), font=font)
+
+    # Player Country
+    font = metrisch2
+    w, h = d.textsize(player_country, font=font)
+    d.text(((width-w)/2, 750), player_country,
+           fill=(100, 100, 100), font=font)
+
+    # Event Name
+    font = metrisch
+    w, h = d.textsize(event_name, font=font)
+    if width-w < 20:
+        event_name = helper_func_splitText(event_name)
+    w, h = d.textsize(event_name, font=font)
+    d.text(((width-w)/2, 820), event_name,
+           fill=(50, 50, 50), font=font)
+
+    '''img_path = MEDIA_ROOT + f'/temp/{event_id}/id_cards'
+
+    if not os.path.isdir(img_path):
+        os.makedirs(img_path)
+
+    img_path = img_path + f'/id_card_{player_id}.jpg'
+
+    img.save(img_path, 'JPEG', quality=100, subsampling=0)'''
+
+    response = HttpResponse(content_type='image/jpeg')
+
+    img.save(response, 'JPEG', quality=100, subsampling=0)
+
+    # return FileResponse(open(img_path, 'rb'))
+    return response
+
+
+@allowed_users(['tl'])
 def event_team_update(request, event_id, reg_team_id):
     event = Event.objects.get(pk=event_id)
     team = event.registeredteam_set.get(pk=reg_team_id)
@@ -294,3 +438,7 @@ def results(request, event_id, category_id):
     }
 
     return render(request, 'home/results.html', context)
+
+
+def downloadCert(request, event_id, category_id):
+    return

@@ -25,8 +25,10 @@ class Event(models.Model):
     place = models.CharField(max_length=50)
 
     outline = models.FileField(upload_to='outlines/', null=True, blank=True)
-    REG_CHOICES = ((True, 'Yes'), (False, 'No'))
-    allow_reg = models.BooleanField(choices=REG_CHOICES, default=True)
+
+    BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
+    allow_reg = models.BooleanField(choices=BOOL_CHOICES, default=True)
+    completed = models.BooleanField(choices=BOOL_CHOICES, default=False)
 
     def __str__(self) -> str:
         return self.title

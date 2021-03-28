@@ -23,4 +23,6 @@ urlpatterns = [
          result_categories, name='result_categories'),
     path('events/<int:event_id>/results/<int:category_id>/',
          results, name='results'),
+    path('events/<int:event_id>/<int:team_id>/<int:player_id>/download-id/',
+         downloadID, name='downloadID'),
 ]
