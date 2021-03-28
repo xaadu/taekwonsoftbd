@@ -30,15 +30,15 @@ h1 {
 h2 {
     word-spacing: 2px;
 
-    &::after {
+    /*&::after {
         content: "";
         display: block;
         height: 2px;
         width: 100px;
-        //background-color: $color-primary;
+        background-color: $color-primary;
         margin: 0 auto;
         margin-top: 30px;
-    }
+    }*/
 }
 h3 {
     font-weight: 400;
