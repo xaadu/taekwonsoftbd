@@ -51,7 +51,7 @@
                             <div class="player__district col-sm-3 py-3">{{ player.player.district }}</div>
                             <div class="player__idcard col-sm-2 py-3">
                                 <a href="{% url 'home:downloadID' event.id team.id player.id %}" class="btn btn-primary"
-                                    download="id_card_{{ player.id|stringformat:'04d' }}">Download</a>
+                                    download="id_card_{{ player.id|stringformat:'04d' }}.jpg">Download</a>
                             </div>
                         </div>
                         {% endfor %}
