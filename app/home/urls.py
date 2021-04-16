@@ -25,4 +25,6 @@ urlpatterns = [
          results, name='results'),
     path('events/<int:event_id>/<int:team_id>/<int:player_id>/download-id/',
          downloadID, name='downloadID'),
+    path('events/<int:event_id>/<int:team_id>/<int:player_id>/download-cert/',
+         downloadCert, name='downloadCert'),
 ]

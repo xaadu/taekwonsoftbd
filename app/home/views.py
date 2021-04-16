@@ -440,5 +440,110 @@ def results(request, event_id, category_id):
     return render(request, 'home/results.html', context)
 
 
-def downloadCert(request, event_id, category_id):
-    return
+def downloadCert(request, event_id, team_id, player_id):
+    event = Event.objects.get(pk=event_id)
+    team = RegisteredTeam.objects.get(pk=team_id)
+    player = RegisteredPlayer.objects.get(pk=player_id)
+    category = player.category
+
+    event_name = event.title
+    player_name = player.player.name
+    player_country = player.player.country
+    player_club = team.team.teamleader.club_name
+    category = player.category.name
+
+    roundResults = player.playerresult_set.all()
+    finalPoint = 0
+    for res in roundResults:
+        finalPoint += res.accuracy+res.presentation
+    try:
+        finalPoint /= len(roundResults)
+    except ZeroDivisionError:
+        finalPoint = 0
+    finalPoint = '{:.2f}'.format(finalPoint)
+
+    if DEBUG:
+        static_dir = 'static'
+    else:
+        static_dir = STATIC_ROOT
+
+    bg_image = static_dir + '/images/cert.jpg'
+
+    img = Image.open(bg_image)
+
+    width, height = img.size
+
+    jersey = ImageFont.truetype(
+        static_dir+'/vendor/fonts/JerseyM54.ttf', 120
+    )
+    Poppins = ImageFont.truetype(
+        static_dir+'/vendor/fonts/Poppins-Regular.ttf', 60
+    )
+    Poppins_BIG = ImageFont.truetype(
+        static_dir+'/vendor/fonts/Poppins-Regular.ttf', 75
+    )
+    ArimaMadurai = ImageFont.truetype(
+        static_dir+'/vendor/fonts/ArimaMadurai-Bold.ttf', 180
+    )
+
+    d = ImageDraw.Draw(img)
+
+    # player_name = 'One Two Three Four Five Six Seven Right Nine Ten Eleven'
+    # event_name = 'One Two Three Four Five Six Seven Right Nine Ten Eleven'
+    # category = 'One Two Three Four Five Six Seven Right Nine Ten Eleven'
+
+    # Player ID
+    font = jersey
+    player_id = str(player_id).zfill(4)
+    w, h = d.textsize(player_id, font=font)
+    d.text(((width-w)/2, 1240), player_id,
+           fill=(200, 200, 200), font=font)
+
+    
+    # Player Name
+    font = ArimaMadurai
+    w, h = d.textsize(player_name, font=font)
+    if width-w < 20:
+        player_name = helper_func_splitText(player_name)
+    w, h = d.textsize(player_name, font=font)
+    d.text(((width-w)/2, 940), player_name,
+           fill=(131, 182, 39), font=font)
+    
+    # Player Category
+    font = Poppins
+    w, h = d.textsize(category, font=font)
+    if width-w < 20:
+        category = helper_func_splitText(category)
+    w, h = d.textsize(category, font=font)
+    d.text(((width-w)/2, 1400), category,
+           fill=(100, 100, 100), font=font)
+
+    
+    # Player Club
+    font = Poppins
+    w, h = d.textsize(player_club, font=font)
+    d.text(((width-w)/2, 1500), player_club,
+           fill=(100, 100, 100), font=font)
+    
+
+    # Player Country
+    font = Poppins
+    w, h = d.textsize(player_country, font=font)
+    d.text(((width-w)/2, 1600), player_country,
+           fill=(100, 100, 100), font=font)
+
+
+    # Event Name
+    font = Poppins_BIG
+    w, h = d.textsize(event_name, font=font)
+    if width-w < 20:
+        event_name = helper_func_splitText(event_name)
+    w, h = d.textsize(event_name, font=font)
+    d.text(((width-w)/2, 1710), event_name,
+           fill=(50, 50, 50), font=font)
+
+    response = HttpResponse(content_type='image/jpeg')
+
+    img.save(response, 'JPEG', quality=100, subsampling=0)
+
+    return response

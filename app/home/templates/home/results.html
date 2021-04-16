@@ -32,7 +32,10 @@
             </div>
             <div class="col-sm-1">
                 {% if event.completed %}
-                <a href="#"><i class="fal fa-download"></i></a>
+                <a href="{% url 'home:downloadCert' event.id player.team.id player.id  %}" 
+                    download="certificate_{{ player.id|stringformat:'04d' }}">
+                    <i class="fal fa-download"></i>
+                </a>
                 {% else %}
                 <a><i class="fal fa-download"></i></a>
                 {% endif %}
