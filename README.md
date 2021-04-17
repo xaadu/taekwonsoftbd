@@ -11,7 +11,7 @@ Here's the live version: [https://taekwonsoftbd.com/](https://taekwonsoftbd.com/
 
 This will be in .env file.
 
-```
+```env
 # DATBASE
 MYSQL_ROOT_PASSWORD=
 
@@ -45,6 +45,12 @@ docker-compose -f docker-compose-prod.yaml up --build
 ```
 
 Now the app is up and Running
+
+## Set Starting ID for Registered Player
+Postgres
+```sql
+ALTER SEQUENCE host_registeredplayer_id_seq RESTART WITH 1000;
+```
 
 # Licence
 
