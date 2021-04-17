@@ -7,15 +7,23 @@ from account.models import User
 
 class PlayerCreateForm(forms.ModelForm):
 
-    gMS_Licence_No = forms.CharField(max_length=30, required=False)
-    passport_or_ID_Card = forms.ImageField(required=False, label='Passport/NID/Birth Certificate')
-    dan_Certificate_No = forms.CharField(max_length=30, required=False)
-    dan_Certificate = forms.ImageField(required=False)
-
     class Meta:
         model = Player
         fields = '__all__'
         exclude = ['teamleader']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].label = 'Full Name'
+        self.fields['passport_or_ID_Card'].label = 'Passport/NID/Birth Certificate'
+        self.fields['date_Of_Birth'].widget = forms.DateInput(
+            format=('%m/%d/%Y'), attrs={'type': 'date'})
+
+        for key, value in self.fields.items():
+            label = value.label
+            if value.required:
+                label = label+'*'
+                self.fields[key].label = label
 
 
 class TeamCreateForm(forms.ModelForm):

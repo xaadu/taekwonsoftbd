@@ -43,22 +43,14 @@
             <div class="py-2 {% if field.label != 'Email' %} col-12 col-sm-6 {% else %} col-12 {% endif %}">
                 <label class="form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
                 {% if field.errors %}
-                {% if field.label == 'Date of birth' %}
-                {{ field|add_class:"form-control form-control-sm is-invalid"|attr:"type:date" }}
-                {% else %}
                 {{ field|add_class:"form-control form-control-sm is-invalid" }}
-                {% endif %}
                 {% for error in field.errors %}
                 <small class="text-danger">
                     {{ error }}
                 </small>
                 {% endfor %}
                 {% else %}
-                {% if field.label == 'Date of birth' %}
-                {{ field|add_class:"form-control form-control-sm"|attr:"type:date" }}
-                {% else %}
                 {{ field|add_class:"form-control form-control-sm" }}
-                {% endif %}
                 {% endif %}
 
             </div>
