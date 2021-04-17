@@ -47,9 +47,14 @@ docker-compose -f docker-compose-prod.yaml up --build
 Now the app is up and Running
 
 ## Set Starting ID for Registered Player
-Postgres
+Postgres:
 ```sql
 ALTER SEQUENCE host_registeredplayer_id_seq RESTART WITH 1000;
+```
+
+MySQL(Not Tested):
+```sql
+ALTER TABLE host_regusteredplayer AUTO_INCREMENT = 1000;
 ```
 
 # Licence
