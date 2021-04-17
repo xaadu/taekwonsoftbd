@@ -104,7 +104,7 @@ def add_player(request):
             return redirect('team_leader:players')
     context = {
         'form': form,
-        'type': 'Player',
+        'type': 'Member',
         'mode': 'Add',
         'pic_url': pic_url,
     }

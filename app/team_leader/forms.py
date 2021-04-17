@@ -6,6 +6,12 @@ from account.models import User
 
 
 class PlayerCreateForm(forms.ModelForm):
+
+    gMS_Licence_No = forms.CharField(max_length=30, required=False)
+    passport_or_ID_Card = forms.ImageField(required=False, label='Passport/NID/Birth Certificate')
+    dan_Certificate_No = forms.CharField(max_length=30, required=False)
+    dan_Certificate = forms.ImageField(required=False)
+
     class Meta:
         model = Player
         fields = '__all__'
