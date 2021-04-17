@@ -8,6 +8,13 @@
         width: 180px;
         border-radius: 50%;
     }
+    .team_logo {
+        height: 80px;
+    }
+
+    .team_logo img {
+        height: 100%;
+    }
 
     .team_list>.row:nth-child(odd) {
         background: rgba(0, 0, 0, .04);
@@ -24,14 +31,18 @@
     <div class="teams py-5">
         <div class="team_list">
             <div class="row py-2 h5 list_heading">
-                <div class="col-md-5">Name</div>
-                <div class="col-md-4">District</div>
+                <div class="col-md-2">Team Logo</div>
+                <div class="col-md-7">Name</div>
                 <div class="col-md-3 text-center">Modify/Delete</div>
             </div>
             {% for team in teams %}
             <div class="row py-2 team_details">
-                <div class="col-md-5">{{ team.name }}</div>
-                <div class="col-md-4">{{ team.district }}</div>
+                <div class="col-md-2">
+                    <div class="team_logo">
+                        <img class="img-fluid" src="{{ team.team_logo.url }}" alt="{{ team.name }}logo">
+                    </div>
+                </div>
+                <div class="col-md-7">{{ team.name }}</div>
                 <div class="col-md-3 text-center">
                     <a class="btn btn-primary d-inline-block my-1"
                         href="{% url 'team_leader:update_team' team.id %}">Modify</a>
