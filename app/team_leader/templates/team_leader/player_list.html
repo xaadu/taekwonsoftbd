@@ -34,21 +34,23 @@
         <div class="player_list">
             <div class="row py-2 h5 list_heading">
                 <div class="col-md-1">ID</div>
-                <div class="col-md-3">Picture</div>
-                <div class="col-md-5">Name</div>
+                <div class="col-md-2">Picture</div>
+                <div class="col-md-4">Name</div>
+                <div class="col-md-2">Member Type</div>
                 <div class="col-md-3 text-center">Modify/Delete</div>
             </div>
             {% for player in players %}
             <div class="row py-2 player_details">
                 <div class="col-md-1">{{ player.id }}</div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="player_pic">
                         {% if player.picture %}
                         <img class="img-fluid" src="{{ player.picture.url }}" alt="">
                         {% endif %}
                     </div>
                 </div>
-                <div class="col-md-5">{{ player.name }}</div>
+                <div class="col-md-4">{{ player.name }}</div>
+                <div class="col-md-2">{{ player.member_Type }}</div>
                 <div class="col-md-3 text-center">
                     <a class="btn btn-primary d-inline-block my-1"
                         href="{% url 'team_leader:update_player' player.id %}">Modify</a>

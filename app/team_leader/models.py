@@ -22,7 +22,7 @@ class Player(models.Model):
         ('instructor', 'Instructor'),
         ('team_official', 'Team Official'),
         ('media', 'Media'),
-        ('volunteer', 'Vaulenteer'),
+        ('volunteer', 'Volunteer'),
         ('referee', 'Referee'),
     )
 
@@ -35,7 +35,7 @@ class Player(models.Model):
     #club = models.CharField(max_length=50)
     picture = models.ImageField(upload_to='images/player')
     member_Type = models.CharField(
-        max_length=20, choices=TYPE_CHOICES, default='male')
+        max_length=20, choices=TYPE_CHOICES, default='player')
     gMS_Licence_No = models.CharField(max_length=30, null=True, blank=True)
     passport_or_ID_Card = models.ImageField(upload_to='images/passport_or_nid', null=True, blank=True)
     dan_Certificate_No = models.CharField(max_length=30, null=True, blank=True)
