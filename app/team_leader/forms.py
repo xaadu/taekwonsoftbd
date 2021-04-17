@@ -31,6 +31,17 @@ class TeamCreateForm(forms.ModelForm):
         model = Team
         fields = '__all__'
         exclude = ['teamleader']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['name'].label = 'Team Name'
+
+        for key, value in self.fields.items():
+            label = value.label
+            if value.required:
+                label = label+'*'
+                self.fields[key].label = label
 
 
 class TLUpdateForm(UserChangeForm):

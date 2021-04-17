@@ -117,7 +117,7 @@ def add_team(request):
     form = TeamCreateForm()
 
     if request.POST:
-        form = TeamCreateForm(request.POST)
+        form = TeamCreateForm(request.POST, request.FILES)
 
         if form.is_valid():
             team = form.save(commit=False)

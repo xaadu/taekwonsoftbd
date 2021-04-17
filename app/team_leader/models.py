@@ -1,3 +1,4 @@
+from collections import defaultdict
 from account.models import TeamLeaderModel
 from django.db import models
 
@@ -52,8 +53,9 @@ class Player(models.Model):
 class Team(models.Model):
     teamleader = models.ForeignKey(TeamLeaderModel, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
+    club_Name = models.CharField(max_length=50, null=True, blank=True)
+    team_logo = models.ImageField(upload_to='images/team_logo')
     country = models.CharField(max_length=50)
-    district = models.CharField(max_length=50)
 
     def save(self, *args, **kwargs):
         self.country = re.sub("[\(\[].*?[\)\]]", "", self.country)
