@@ -58,7 +58,7 @@ def registration_view(request):
         'ipinfo_token': envs.get('IPLOOKUP_TOKEN'),
         'recaptcha_token': envs.get('CLIENT_KEY'),
         'errors': errors,
-        'type': 'Team Leader'
+        'type': 'Team Admin'
     }
 
     return render(request, 'account/register.html', context)
