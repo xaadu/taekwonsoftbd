@@ -9,7 +9,7 @@ import re
 
 def validate_player_image(image):
 
-    min_height = 600
+    min_height = 300
 
     min_width = min_height
 
