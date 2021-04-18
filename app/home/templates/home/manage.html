@@ -9,7 +9,7 @@
         <div class="col-sm-1">Team ID</div>
         <div class="col-sm-8">Team Name</div>
         <div class="col-sm-1 text-center">View</div>
-        <div class="col-sm-1 text-center">Update</div>
+        <div class="col-sm-1 text-center">Edit</div>
         <div class="col-sm-1 text-center">Delete</div>
     </div>
     <div class="accordion accordion-flush" id="team_list">
@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-sm-1 text-center">
                         <a href="{% url 'home:update_team' event_id=event.id reg_team_id=team.id %}"
-                            class="btn btn-outline-primary update_link">Update</a>
+                            class="btn btn-outline-primary update_link">Edit</a>
                     </div>
                     <div class="col-sm-1 text-center">
                         <a href="{% url 'home:delete_team' event_id=event.id reg_team_id=team.id %}"
