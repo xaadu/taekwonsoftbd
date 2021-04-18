@@ -17,15 +17,15 @@
 <div class="dashboard_nav row mb-5 mx-unset text-center">
     {% if request.user.is_tl %}
     {% url 'team_leader:dashboard' as url %}
-    <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %}"
+    <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %} border-bottom border-secondary"
         href="{{ url }}">Dashboard</a>
     {% url 'team_leader:profile' as url %}
-    <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Profile</a>
+    <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %} border-bottom border-secondary" href="{{ url }}">Profile</a>
     {% url 'team_leader:players' as url %}
-    <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Member
+    <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %} border-bottom border-secondary" href="{{ url }}">Member
         List</a>
     {% url 'team_leader:teams' as url %}
-    <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Team
+    <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %} border-bottom border-secondary" href="{{ url }}">Team
         List</a>
     {% url 'team_leader:add_player' as url %}
     <a class="col-sm-6 d-block py-3 {% if request.path == url %}active{% endif %}" href="{{ url }}">Add Member</a>
