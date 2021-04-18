@@ -1,4 +1,3 @@
-from collections import defaultdict
 from account.models import TeamLeaderModel
 from django.db import models
 
