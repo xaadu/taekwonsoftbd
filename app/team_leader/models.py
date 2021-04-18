@@ -1,9 +1,24 @@
 from account.models import TeamLeaderModel
 from django.db import models
+from django.core.exceptions import ValidationError
 
 import re
 
 # Create your models here.
+
+
+def validate_player_image(image):
+
+    min_height = 600
+
+    min_width = min_height
+
+    height = image.height
+
+    width = image.width
+
+    if width < min_width or height < min_height:
+        raise ValidationError(f"Please upload a Better Quality Image. Minimum resoulation is {min_width} x {min_height}")
 
 
 class Player(models.Model):
@@ -32,7 +47,7 @@ class Player(models.Model):
     date_Of_Birth = models.DateField()
     country = models.CharField(max_length=50)
     #club = models.CharField(max_length=50)
-    picture = models.ImageField(upload_to='images/player')
+    picture = models.ImageField(upload_to='images/player', validators=[validate_player_image])
     member_Type = models.CharField(
         max_length=20, choices=TYPE_CHOICES, default='player')
     gMS_Licence_No = models.CharField(max_length=30, null=True, blank=True)
