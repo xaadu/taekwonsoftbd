@@ -10,15 +10,12 @@ import re
 def validate_player_image(image):
 
     min_height = 300
-
     min_width = min_height
 
-    height = image.height
-
-    width = image.width
+    height, width = image.height, image.width
 
     if width < min_width or height < min_height:
-        raise ValidationError(f"Please upload a Better Quality Image. Minimum resoulation is {min_width} x {min_height}")
+        raise ValidationError(f"Upload a Better Quality Image. Minimum resoulation is {min_width} x {min_height}")
 
 
 class Player(models.Model):
