@@ -314,6 +314,18 @@ section#home .hero__right img {
   width: 100%;
 }
 
+@media screen and (max-width: 768px) {
+  section#home .apply img {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  section#home .apply img {
+    width: 75%;
+  }
+}
+
 section#events {
   /*.header {
         min-height: 300px;
