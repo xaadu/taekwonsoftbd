@@ -34,4 +34,26 @@ section#home {
             }
         }
     }
+    .social {
+        .slick-track {
+            display: flex !important;
+
+            .slick-slide {
+                height: auto;
+
+                .social__link {
+                    height: 120px;
+                    display: block;
+                    box-shadow: 5px 5px 20px rgba($color: $color-primary, $alpha: .3);
+                    border-radius: 5px;
+                    overflow: hidden;
+        
+                    img {
+                       height: 100%;
+                       width: 100%;
+                    }
+                }
+            }
+        }
+    }
 }

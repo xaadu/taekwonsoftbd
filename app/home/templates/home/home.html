@@ -24,7 +24,12 @@
         </div>
         <div class="col-md-8 p-4 d-flex flex-column justify-content-center align-items-start">
             <h2 class="display-5">Join Now</h2>
-            <p class="pt-3 pb-5 pe-0 pe-md-5 me-0 me-md-5">Want to participate in a tournament? Choice upcoming event and apply! You're a player? Contact your team admin. Just Apply in this interactive game, download your ID Card and Particiape!</p>
+            <p class="pt-3 pb-5 pe-0 pe-md-5 me-0 me-md-5">
+                Want to participate in a tournament?
+                Choice upcoming event and apply!
+                You're a player? Contact your team admin.
+                Just Apply in this interactive game, download your ID Card and Particiape!
+            </p>
             <a href="{% url 'home:events' %}" class="btn btn-primary px-4">Apply &#8594;</a>
         </div>
     </div>
@@ -48,6 +53,60 @@
             <a href="{% url 'home:events' %}" class="btn btn-outline-primary px-4 my-3">Show All Events</a>
         </div>
     </div>
+    <div class="container mx-auto py-5 social">
+        <div class="heading mb-5 text-center">
+            <h2 class="display-4">
+                Social
+            </h2>
+        </div>
+
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
+        <!-- SLIDER START -->
+        <div class="socialSlider">
+
+            <!-- SLIDE -->
+            <div class="slide py-3 px-4">
+                <a href="#" class="social__link">
+                    <img src="{% static 'images/header_bg.jpg' %}" class="" alt="Facebook">
+                </a>
+            </div>
+
+            <!-- SLIDE -->
+            <div class="slide py-3 px-4">
+                <a href="#" class="social__link">
+                    <img src="{% static 'images/header_bg.jpg' %}" class="" alt="Facebook">
+                </a>
+            </div>
+
+            <!-- SLIDE -->
+            <div class="slide py-3 px-4">
+                <a href="#" class="social__link">
+                    <img src="{% static 'images/header_bg.jpg' %}" class="" alt="Facebook">
+                </a>
+            </div>
+
+            <!-- SLIDE -->
+            <div class="slide py-3 px-4">
+                <a href="#" class="social__link">
+                    <img src="{% static 'images/header_bg.jpg' %}" class="" alt="Facebook">
+                </a>
+            </div>
+
+            <!-- SLIDE -->
+            <div class="slide py-3 px-4">
+                <a href="#" class="social__link">
+                    <img src="{% static 'images/header_bg.jpg' %}" class="" alt="Facebook">
+                </a>
+            </div>
+        </div>
+        <!-- SLIDER END -->
+    </div>
 </section>
 
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 {% endblock %}

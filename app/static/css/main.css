@@ -347,6 +347,30 @@ section#home .event_list .event_banner_wrapper img:hover {
           box-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
 }
 
+section#home .social .slick-track {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+section#home .social .slick-track .slick-slide {
+  height: auto;
+}
+
+section#home .social .slick-track .slick-slide .social__link {
+  height: 120px;
+  display: block;
+  -webkit-box-shadow: 5px 5px 20px rgba(108, 99, 255, 0.3);
+          box-shadow: 5px 5px 20px rgba(108, 99, 255, 0.3);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+section#home .social .slick-track .slick-slide .social__link img {
+  height: 100%;
+  width: 100%;
+}
+
 section#events {
   /*.header {
         min-height: 300px;
