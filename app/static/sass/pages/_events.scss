@@ -18,6 +18,12 @@ section#events {
         img {
             border-radius: 10px;
             box-shadow: 0 0 30px rgba($color: $color-primary, $alpha: 0.2);
+            transition: all .2s ease-in-out;
+
+            &:hover {
+                transform: translateY(-1.5%);
+                box-shadow: 0 0 30px rgba($color: $color-primary, $alpha: 0.3);
+            }
         }
     }
 

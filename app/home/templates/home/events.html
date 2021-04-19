@@ -24,7 +24,7 @@
     </div>
     <div class="container event_list">
         {% for event in events %}
-        <div class="event_banner_wrapper text-center p-2 p-sm-5 mx-auto">
+        <div class="event_banner_wrapper text-center p-2 px-sm-5 py-sm-4 mx-auto">
             <a class="event_banner_link" href="{% url 'home:event_details' pk=event.id %}">
                 <img class="event_banner_img img-fluid" src="{{ event.event_banner.url }}" alt="{{ event }}">
             </a>
