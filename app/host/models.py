@@ -22,7 +22,7 @@ class Event(models.Model):
         'account.JudgeModel', on_delete=models.SET_NULL, null=True, related_name='Judge3')
 
     contact = models.CharField(max_length=50)
-    place = models.CharField(max_length=50)
+    venue = models.CharField(max_length=50)
 
     outline = models.FileField(upload_to='outlines/', null=True, blank=True)
 
