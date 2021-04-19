@@ -499,6 +499,13 @@ section#update select:focus {
   outline: none;
 }
 
+section#apply .teamSelect,
+section#update .teamSelect {
+  -webkit-box-shadow: 5px 5px 20px rgba(31, 47, 152, 0.2);
+          box-shadow: 5px 5px 20px rgba(31, 47, 152, 0.2);
+  border-radius: 10px;
+}
+
 section#apply .teamSelect label,
 section#update .teamSelect label {
   font-size: 1.2rem;
@@ -519,11 +526,15 @@ section#update .playerSelect .player {
   overflow: hidden;
   position: relative;
   border-radius: 10px;
+  -webkit-box-shadow: 5px 5px 20px rgba(31, 47, 152, 0.2);
+          box-shadow: 5px 5px 20px rgba(31, 47, 152, 0.2);
 }
 
 section#apply .playerSelect .player.checked,
 section#update .playerSelect .player.checked {
   border: 2px solid #6C63FF;
+  -webkit-box-shadow: 5px 5px 20px rgba(31, 47, 152, 0.4);
+          box-shadow: 5px 5px 20px rgba(31, 47, 152, 0.4);
 }
 
 section#apply .playerSelect .player__info .checkbox_container,

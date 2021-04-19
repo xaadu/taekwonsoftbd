@@ -13,6 +13,9 @@ section#update {
         }
     }
     .teamSelect {
+        box-shadow: 5px 5px 20px rgba($color: $color-quaternary, $alpha: 0.2);
+        border-radius: 10px;
+
         label {
             font-size: 1.2rem;
         }
@@ -28,10 +31,12 @@ section#update {
             overflow: hidden;
             position: relative;
             border-radius: 10px;
+            box-shadow: 5px 5px 20px rgba($color: $color-quaternary, $alpha: 0.2);
 
 
             &.checked {
                 border: 2px solid $color-primary;
+                box-shadow: 5px 5px 20px rgba($color: $color-quaternary, $alpha: 0.4);
             }
 
             &__info {
