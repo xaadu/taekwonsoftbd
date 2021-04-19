@@ -1,5 +1,4 @@
 .btn{
-    border: none;
     transition: all 0.2s ease-out;
 
     &:hover {
@@ -7,6 +6,7 @@
     }
 
     &.btn-primary {
+        border: none;
         background: $gradient-secondary;          
         box-shadow: 5px 5px 20px rgba($color-primary, 0.3);
         color: white;
@@ -14,5 +14,24 @@
         &:hover {
             box-shadow: 5px 5px 20px rgba($color-primary, 0.5);
         }
+    }
+    &.btn-danger:hover {
+        box-shadow: 5px 5px 20px rgba($color: $color-danger, $alpha: 0.5);
+    }
+    &.btn-outline-primary {
+        border: 1px solid $color-primary;
+        color: $color-primary;
+
+        &:hover {
+            box-shadow: 5px 5px 20px rgba($color-primary, 0.5);
+            background: $gradient-secondary;
+            color: white;
+        }
+    }
+    &.btn-outline-danger:hover {
+        box-shadow: 5px 5px 20px rgba($color: $color-danger, $alpha: 0.5);
+    }
+    &.btn-outline-success:hover {
+        box-shadow: 5px 5px 20px rgba($color: $color-success, $alpha: 0.5);
     }
 }

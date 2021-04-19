@@ -245,7 +245,6 @@ footer a {
 }
 
 .btn {
-  border: none;
   -webkit-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
@@ -258,6 +257,7 @@ footer a {
 }
 
 .btn.btn-primary {
+  border: none;
   background: -webkit-gradient(linear, left top, right bottom, from(#6C63FF), to(#1f2f98));
   background: -webkit-linear-gradient(left top, #6C63FF, #1f2f98);
   background: -o-linear-gradient(left top, #6C63FF, #1f2f98);
@@ -270,6 +270,36 @@ footer a {
 .btn.btn-primary:hover {
   -webkit-box-shadow: 5px 5px 20px rgba(108, 99, 255, 0.5);
           box-shadow: 5px 5px 20px rgba(108, 99, 255, 0.5);
+}
+
+.btn.btn-danger:hover {
+  -webkit-box-shadow: 5px 5px 20px rgba(220, 53, 69, 0.5);
+          box-shadow: 5px 5px 20px rgba(220, 53, 69, 0.5);
+}
+
+.btn.btn-outline-primary {
+  border: 1px solid #6C63FF;
+  color: #6C63FF;
+}
+
+.btn.btn-outline-primary:hover {
+  -webkit-box-shadow: 5px 5px 20px rgba(108, 99, 255, 0.5);
+          box-shadow: 5px 5px 20px rgba(108, 99, 255, 0.5);
+  background: -webkit-gradient(linear, left top, right bottom, from(#6C63FF), to(#1f2f98));
+  background: -webkit-linear-gradient(left top, #6C63FF, #1f2f98);
+  background: -o-linear-gradient(left top, #6C63FF, #1f2f98);
+  background: linear-gradient(to right bottom, #6C63FF, #1f2f98);
+  color: white;
+}
+
+.btn.btn-outline-danger:hover {
+  -webkit-box-shadow: 5px 5px 20px rgba(220, 53, 69, 0.5);
+          box-shadow: 5px 5px 20px rgba(220, 53, 69, 0.5);
+}
+
+.btn.btn-outline-success:hover {
+  -webkit-box-shadow: 5px 5px 20px rgba(25, 135, 84, 0.5);
+          box-shadow: 5px 5px 20px rgba(25, 135, 84, 0.5);
 }
 
 section#home .hero__left {
