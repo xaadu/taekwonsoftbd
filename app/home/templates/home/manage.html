@@ -7,10 +7,8 @@
     <h1 class="display-3 text-center py-5">Manage Applied Teams</h1>
     <div class="row p-3">
         <div class="col-sm-1">Team ID</div>
-        <div class="col-sm-8">Team Name</div>
-        <div class="col-sm-1 text-center">View</div>
-        <div class="col-sm-1 text-center">Edit</div>
-        <div class="col-sm-1 text-center">Delete</div>
+        <div class="col-sm-7">Team Name</div>
+        <div class="col-sm-4 text-center">Action</div>
     </div>
     <div class="accordion accordion-flush" id="team_list">
         {% for team, players in teamData.items %}
@@ -18,19 +16,23 @@
             <div class="accordion-header bg-light" id="flush-heading{{ team.team.id }}">
                 <div class="row p-3">
                     <div class="col-sm-1">{{ team.team.id }}</div>
-                    <div class="col-sm-8">{{ team.team.name }}</div>
-                    <div class="col-sm-1 text-center">
+                    <div class="col-sm-7">{{ team.team.name }}</div>
+                    <div class="col-sm-4 btn-group text-center" role="action" aria-label="Action Buttons">
                         <a href="#" class="btn btn-outline-success view_link" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapse{{ team.team.id }}" aria-expanded="false"
-                            aria-controls="flush-collapse{{ team.team.id }}">Details</a>
-                    </div>
-                    <div class="col-sm-1 text-center">
+                        data-bs-target="#flush-collapse{{ team.team.id }}" aria-expanded="false"
+                        aria-controls="flush-collapse{{ team.team.id }}">Details</a>
+
                         <a href="{% url 'home:update_team' event_id=event.id reg_team_id=team.id %}"
                             class="btn btn-outline-primary update_link">Edit</a>
-                    </div>
-                    <div class="col-sm-1 text-center">
+
                         <a href="{% url 'home:delete_team' event_id=event.id reg_team_id=team.id %}"
                             class="btn btn-outline-danger delete_link">Delete</a>
+                    </div>
+                    <div class="col-sm-1 text-center">
+                        
+                    </div>
+                    <div class="col-sm-1 text-center">
+                        
                     </div>
                 </div>
             </div>
