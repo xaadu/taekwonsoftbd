@@ -512,7 +512,7 @@ section#update .teamSelect select {
 
 section#apply .playerSelect .player,
 section#update .playerSelect .player {
-  border: 2px solid white;
+  border: 2px solid rgba(187, 187, 187, 0.4);
   -webkit-transition: all .2s ease-out;
   -o-transition: all .2s ease-out;
   transition: all .2s ease-out;

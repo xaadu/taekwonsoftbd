@@ -50,7 +50,7 @@
                                 District: {{ player.district }}
                             </div>
 
-                            <select class="px-3 py-2 mb-1" name="player_cat{{ player.id }}"
+                            <select class="px-3 py-2 mb-2" name="player_cat{{ player.id }}"
                                 id="player_cat{{ player.id }}">
                                 {% for category in categories %}
                                 <option value="{{ category.id }}">{{ category.name }}</option>
