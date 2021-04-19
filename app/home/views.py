@@ -41,7 +41,15 @@ def comingsoon(request):
 
 
 def home(request):
-    return render(request, 'home/home.html')
+    events = Event.objects.all()
+
+    if len(events)>2:
+        events = events[:2]
+    
+    context = {
+        'events': events
+    }
+    return render(request, 'home/home.html', context=context)
 
 
 def contact(request):

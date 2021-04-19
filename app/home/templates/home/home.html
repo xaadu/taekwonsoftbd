@@ -8,8 +8,9 @@
         <div class="col-md-5 order-2 order-md-1 hero__left d-flex align-items-center">
             <div class="content">
                 <h2 class="display-1">Bangladesh Taekwondo</h2>
-                <p class="ps-2 pt-2 pb-3">A Place of Tournaments. Here you can register as a team leader and join your team to
-                    compete on National and International Level.</p>
+                <p class="ps-2 pt-2 pb-3">
+                    A Place of Tournaments. Here you can register as a team leader and
+                    join your team to compete on National and International Level.</p>
                 <a href="{% url 'home:events' %}" class="btn btn-primary m-2 px-4">See All Events &#8594;</a>
             </div>
         </div>
@@ -25,6 +26,26 @@
             <h2 class="display-5">Join Now</h2>
             <p class="pt-3 pb-5 pe-0 pe-md-5 me-0 me-md-5">Want to participate in a tournament? Choice upcoming event and apply! You're a player? Contact your team admin. Just Apply in this interactive game, download your ID Card and Particiape!</p>
             <a href="{% url 'home:events' %}" class="btn btn-primary px-4">Apply &#8594;</a>
+        </div>
+    </div>
+    <div class="container mx-auto py-5">
+        <div class="heading mb-5 text-center">
+            <h2 class="display-4">
+                Events
+            </h2>
+            <p>Choose Your Favourite</p>
+        </div>
+        <div class="event_list row">
+            {% for event in events %}
+            <div class="event_banner_wrapper text-center p-2 px-sm-5 py-sm-4 mx-auto">
+                <a class="event_banner_link" href="{% url 'home:event_details' pk=event.id %}">
+                    <img class="event_banner_img img-fluid" src="{{ event.event_banner.url }}" alt="{{ event }}">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <a href="{% url 'home:events' %}" class="btn btn-outline-primary px-4 my-3">Show All Events</a>
         </div>
     </div>
 </section>

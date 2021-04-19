@@ -326,6 +326,27 @@ section#home .hero__right img {
   }
 }
 
+section#home .event_list .event_banner_wrapper {
+  max-width: 800px;
+}
+
+section#home .event_list .event_banner_wrapper img {
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 30px rgba(108, 99, 255, 0.2);
+          box-shadow: 0 0 30px rgba(108, 99, 255, 0.2);
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+section#home .event_list .event_banner_wrapper img:hover {
+  -webkit-transform: translateY(-1.5%);
+      -ms-transform: translateY(-1.5%);
+          transform: translateY(-1.5%);
+  -webkit-box-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
+          box-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
+}
+
 section#events {
   /*.header {
         min-height: 300px;
