@@ -1,4 +1,4 @@
-text = $(certbot renew --post-hook "nginx -s reload")
+text=$(certbot renew --post-hook "nginx -s reload")
 
 /home/backup.sh
 
