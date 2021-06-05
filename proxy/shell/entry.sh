@@ -5,8 +5,8 @@ else
     /home/get_cert.sh
 fi
 
-echo "crond starting"
+echo "== crond starting..."
 crond
-echo "crond started"
+echo "== crond started =="
 
 nginx -g "daemon off;"
