@@ -1,6 +1,6 @@
 echo "== Backing Up..."
 
-if [ -f "/sslfiles/default.conf" ]
+if [ -f "/sslfiles/bak_default.conf" ]
 then
     rm -r /sslfiles/*
 fi

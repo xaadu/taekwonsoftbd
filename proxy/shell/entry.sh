@@ -1,4 +1,4 @@
-if [ -f "/sslfiles/default.conf" ]
+if [ -f "/sslfiles/bak_default.conf" ]
 then
     /home/restore.sh
 else
