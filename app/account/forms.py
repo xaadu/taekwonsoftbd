@@ -9,8 +9,9 @@ class TLRegistrationForm(UserCreationForm):
 
     phone = forms.CharField(max_length=20, widget=forms.TextInput(
         attrs={'type': 'tel', 'id': 'id_telephone'}))
-
     profile_picture = forms.ImageField(required=False)
+    first_name = forms.CharField(max_length=60, required=True)
+    last_name = forms.CharField(max_length=60, required=True)
 
     club_name = forms.CharField(max_length=100)
 
@@ -62,6 +63,8 @@ class JudgeRegistrationForm(UserCreationForm):
     phone = forms.CharField(max_length=20, widget=forms.TextInput(
         attrs={'type': 'tel', 'id': 'id_telephone'}))
     profile_picture = forms.ImageField(required=True)
+    first_name = forms.CharField(max_length=60, required=True)
+    last_name = forms.CharField(max_length=60, required=True)
 
     class Meta(UserCreationForm.Meta):
         model = User
