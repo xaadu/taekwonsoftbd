@@ -172,6 +172,6 @@ def update_category(request, event_id, category_id):
 
 
 def delete_category(request, event_id, category_id):
-    event = Event.objects.get(pk=event_id).delete()
+    event = Event.objects.get(pk=event_id)
     event.category_set.get(pk=category_id).delete()
     return redirect('host:categories', event_id=event_id)
