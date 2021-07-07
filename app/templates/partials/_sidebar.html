@@ -22,7 +22,7 @@
     {% url 'team_leader:profile' as url %}
     <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %} border-bottom border-secondary" href="{{ url }}">Profile</a>
     {% url 'team_leader:players' as url %}
-    <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %} border-bottom border-secondary" href="{{ url }}">Member
+    <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %} border-bottom border-secondary" href="{{ url }}">Player
         List</a>
     {% url 'team_leader:teams' as url %}
     <a class="col-sm-6 col-md-3 d-block py-3 {% if request.path == url %}active{% endif %} border-bottom border-secondary" href="{{ url }}">Team

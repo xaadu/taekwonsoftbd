@@ -40,7 +40,7 @@
 
         <div class="fields row">
             {% for field in form.visible_fields %}
-            <div class="py-2 {% if field.label != 'Email' %} col-12 col-sm-6 {% else %} col-12 {% endif %}">
+            <div class="py-2 {% if field.label != 'Email' and field.label != 'Dan Certificate' %} col-12 col-sm-6 {% else %} col-12 {% endif %}">
                 <label class="form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
                 {% if field.errors %}
                 {{ field|add_class:"form-control form-control-sm is-invalid" }}
