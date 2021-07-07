@@ -33,7 +33,7 @@
             {% for field in form.visible_fields %}
             <!---->
             <div
-                class="py-2 {% if field.label != 'Email' and field.label != 'Club name' and field.label != 'Profile picture' %} col-12 col-sm-6 {% else %} col-12 {% endif %}">
+                class="py-2 {% if field.label != 'Email Address*' and field.label != 'Club Name*' and field.label != 'Profile Picture' and field.label != 'Profile Picture*' %} col-12 col-sm-6 {% else %} col-12 {% endif %}">
                 <label class="form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
                 {% if field.errors %}
                 {{ field|add_class:"form-control form-control-sm is-invalid" }}

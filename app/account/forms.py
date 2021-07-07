@@ -35,6 +35,27 @@ class TLRegistrationForm(UserCreationForm):
 
         return user
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['email'].label = 'Email Address'
+        self.fields['password1'].label = 'Password'
+        self.fields['password2'].label = 'Confirm Password'
+        
+        self.fields['first_name'].label = 'First Name'
+        self.fields['last_name'].label = 'Last Name'
+        self.fields['phone'].label = 'Phone Number'
+        self.fields['club_name'].label = 'Club Name'
+        self.fields['profile_picture'].label = 'Profile Picture'
+
+        # self.fields[''].label = ''
+
+        for key, value in self.fields.items():
+            label = value.label
+            if value.required and label:
+                label = label+'*'
+                self.fields[key].label = label
+
 
 class JudgeRegistrationForm(UserCreationForm):
 
@@ -61,3 +82,23 @@ class JudgeRegistrationForm(UserCreationForm):
         JudgeModel.objects.create(user=user)
 
         return user
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['email'].label = 'Email Address'
+        self.fields['password1'].label = 'Password'
+        self.fields['password2'].label = 'Confirm Password'
+        
+        self.fields['first_name'].label = 'First Name'
+        self.fields['last_name'].label = 'Last Name'
+        self.fields['phone'].label = 'Phone Number'
+        self.fields['profile_picture'].label = 'Profile Picture'
+
+        # self.fields[''].label = ''
+
+        for key, value in self.fields.items():
+            label = value.label
+            if value.required and label:
+                label = label+'*'
+                self.fields[key].label = label
