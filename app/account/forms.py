@@ -40,6 +40,7 @@ class JudgeRegistrationForm(UserCreationForm):
 
     phone = forms.CharField(max_length=20, widget=forms.TextInput(
         attrs={'type': 'tel', 'id': 'id_telephone'}))
+    profile_picture = forms.ImageField(required=True)
 
     class Meta(UserCreationForm.Meta):
         model = User
