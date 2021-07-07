@@ -205,7 +205,7 @@ def downloadID(request, event_id, team_id, player_id):
     else:
         static_dir = STATIC_ROOT
 
-    bg_image = static_dir + '/images/id_card.jpg'
+    bg_image = (static_dir + '/images/id_card.jpg' if not event.id_bg else MEDIA_ROOT + '/images/id_bg/'+event.id_bg.url.split('/')[-1])
     player_pic = MEDIA_ROOT + '/images/player/' + player_pic_url.split('/')[-1]
 
     im = Image.open(player_pic)
@@ -475,7 +475,7 @@ def downloadCert(request, event_id, team_id, player_id):
     else:
         static_dir = STATIC_ROOT
 
-    bg_image = static_dir + '/images/cert.jpg'
+    bg_image = (static_dir + '/images/cert.jpg' if not event.cert_bg else MEDIA_ROOT + '/images/cert_bg/'+event.cert_bg.url.split('/')[-1])
 
     img = Image.open(bg_image)
 

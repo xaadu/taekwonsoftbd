@@ -26,6 +26,9 @@ class Event(models.Model):
 
     outline = models.FileField(upload_to='outlines/', null=True, blank=True)
 
+    id_bg = models.ImageField(upload_to='images/id_bg', blank=True, null=True)
+    cert_bg = models.ImageField(upload_to='images/cert_bg', blank=True, null=True)
+
     BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
     allow_reg = models.BooleanField(choices=BOOL_CHOICES, default=True)
     completed = models.BooleanField(choices=BOOL_CHOICES, default=False)

@@ -39,6 +39,9 @@ class EventCreateForm(forms.ModelForm):
         self.fields['judge_2'].label = 'First Judge'
         self.fields['judge_3'].label = 'Second Judge'
 
+        self.fields['id_bg'].label = 'ID Card background'
+        self.fields['cert_bg'].label = 'Certificate Background'
+
         self.fields['allow_reg'].label = 'Allow Registration'
         self.fields['completed'].label = 'Event Completed'
 
