@@ -17,12 +17,26 @@ class TLRegistrationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('email',
-                  'password1', 'password2',
-                  'first_name', 'last_name',
-                  'country', 'phone',
-                  'gender', 'rank',
-                  'club_name', 'profile_picture')
+        fields = (
+            'email',
+            'password1', 'password2',
+            'first_name', 'last_name',
+            'country', 'phone',
+            'gender', 'rank',
+            'club_name', 'profile_picture',
+        )
+
+        # Doesn't work for some reason
+        # labels = {
+        #     'email': 'Email Address',
+        #     'password1': 'Password',
+        #     'password2': 'Confirm Password',
+        #     'first_name': 'First Name',
+        #     'last_name': 'Last Name',
+        #     'phone': 'Phone Number',
+        #     'club_name': 'Club Name',
+        #     'profile_picture': 'Profile Picture',
+        # }
 
     @transaction.atomic
     def save(self):
