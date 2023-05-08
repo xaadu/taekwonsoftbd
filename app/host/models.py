@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator, MinValueValidator 
 from django.db import models
 
 from datetime import date
@@ -37,10 +38,14 @@ class Event(models.Model):
         return self.title
 
 
+
 class Category(models.Model):
+ 
     event = models.ForeignKey(
         Event, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=100)
+    price = models.FloatField(default=0.0)
+    num_of_player = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(5)])
     round = models.IntegerField(default=1)
 
     def __str__(self) -> str:

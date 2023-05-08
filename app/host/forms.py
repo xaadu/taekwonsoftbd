@@ -57,4 +57,18 @@ class EventCreateForm(forms.ModelForm):
 class CategoryCreateForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ['name', 'round']
+        fields = ['name', 'price', 'num_of_player', 'round']
+        labels = {
+            'price': 'USD Per Player',
+            'num_of_player': 'Number of Player (1 - 5)',
+        }
+    
+    def __init__(self,*args,**kwargs):
+        super(CategoryCreateForm,self).__init__(*args,**kwargs)
+        self.fields['num_of_player'].widget = forms.NumberInput(attrs={'min':'1', 'max': '5'})
+
+        for key, value in self.fields.items():
+            label = value.label
+            if value.required:
+                label = label+'*'
+                self.fields[key].label = label
