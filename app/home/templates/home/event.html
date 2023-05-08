@@ -31,7 +31,7 @@
                             <span>Registration Deadline: </span> {{ event.reg_deadline }}
                         </h5>
                         <h5 class="h5 py-1">
-                            <i class="fal fa-calendar-times"></i>
+                            <i class="fa-light fa-location-dot"></i>
                             <span>Venue: </span> {{ event.venue }}
                         </h5>
                         <h5 class="h5 py-1">
@@ -40,96 +40,61 @@
                         </h5>
                         <h5 class="h5 py-1">
                             <i class="fal fa-user"></i>
-                            <span>Registered Players: </span> {{ tplayers }}
+                            <span>Registered Players: </span> {{ total_players }}
                         </h5>
                         <h5 class="h5 py-1">
-                            <i class="fal fa-user-friends"></i>
-                            <span>Registered Teams: </span> {{ tteams }}
+                            <i class="fa-light fa-address-card"></i>
+                            <span>Registration: </span> {% if event.allow_reg %} Open {% else %} Closed {% endif %}
                         </h5>
+
+                        <div class="btn_wrapper mt-auto">
+                            <a 
+                                class="btn btn-outline-primary {% if not event.allow_reg %} disabled {% endif %}" 
+                                
+                                {% if event.allow_reg %}
+                                href="{% url 'home:apply' pk=event.id %}"
+                                {% else %}
+                                tabindex="-1"
+                                role="button"
+                                aria-disabled="true"
+                                {% endif %}
+                            >
+                                Apply Here Now
+                            </a>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row options">
-
-            <!-- APPLY -->
-            <div class="col-12 col-sm-6 col-lg-4 p-3">
-                <div class="card p-3 h-100">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <h5 class="card-title"><span>Apply Now</span> if you wish your players to perticiapte in this
-                            event</h5>
-                        <div class="row">
-                            <div class="col-6 d-flex">
-                                <div class="btn_wrapper mt-auto">
-                                    <a class="btn btn-primary" href="{% url 'home:apply' pk=event.id %}">Apply Here
-                                        Now</a>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <img class="img-fluid" src="{% static 'images/apply.svg' %}" alt="Social Share">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- APPLY END -->
-
-
-            <!-- FACEBOOK SHARE -->
-            <div class="col-12 col-sm-6 col-lg-4 p-3">
-                <div class="card p-3 h-100">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <h5 class="card-title">Share this Event with your <span>Facebook</span> Friends</h5>
-                        <div class="row">
-                            <div class="col-6 d-flex">
-                                <div class="btn_wrapper mt-auto">
-                                    <a class="btn btn-primary"
-                                        href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}{{ object.get_absolute_url }}"
-                                        target="_blank">Share on Facebook</a>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <img class="img-fluid" src="{% static 'images/social.svg' %}" alt="Social Share">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- FACEBOOK SHARE END -->
-
-
-            <!-- TWITTER SHARE -->
-            <div class="col-12 col-sm-6 col-lg-4 p-3">
-                <div class="card p-3 h-100">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <h5 class="card-title">Share this Event with your <span>Twitter</span> Friends</h5>
-                        <div class="row">
-                            <div class="col-6 d-flex">
-                                <div class="btn_wrapper mt-auto">
-                                    <a class="btn btn-primary"
-                                        href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}{{ object.get_absolute_url }}"
-                                        target="_blank">Share on Twitter</a>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <img class="img-fluid" src="{% static 'images/social.svg' %}" alt="Social Share">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- TWITTER SHARE END -->
-
 
             <!-- MANAGE TEAM -->
             <div class="col-12 col-sm-6 col-lg-4 p-3">
                 <div class="card p-3 h-100">
                     <div class="card-body d-flex flex-column justify-content-between">
-                        <h5 class="card-title">Already Applied? <span>Manage</span> here</h5>
+                        <h5 class="card-title">
+                            Already Applied? 
+                            <span>Apply</span> / <span>Manage</span> 
+                            your team here
+                        </h5>
                         <div class="row">
                             <div class="col-6 d-flex">
                                 <div class="btn_wrapper mt-auto">
-                                    <a class="btn btn-primary" href="{% url 'home:manage' pk=event.id %}">Manage</a>
+                                    <a 
+                                        class="btn btn-primary {% if not event.allow_reg %} disabled {% endif %}" 
+                                        
+                                        {% if event.allow_reg %}
+                                        href="{% url 'home:manage' pk=event.id %}"
+                                        {% else %}
+                                        tabindex="-1"
+                                        role="button"
+                                        aria-disabled="true"
+                                        {% endif %}
+                                    >
+                                        Apply / Manage
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -142,82 +107,27 @@
             <!-- MANAGE TEAM END -->
 
 
-            <!-- PARTICIPATED TEAMS -->
-            <div class="col-12 col-sm-6 col-lg-4 p-3">
-                <div class="card p-3 h-100">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <h5 class="card-title">Participated <span>Teams List</span> here</h5>
-                        <div class="row">
-                            <div class="col-6 d-flex">
-                                <div class="btn_wrapper mt-auto">
-                                    <a class="btn btn-primary" href="{% url 'home:teams' pk=event.id %}">All Teams</a>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <img class="img-fluid" src="{% static 'images/teams.svg' %}" alt="Social Share">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- PARTICIPATED TEAMS END -->
-
-
-            <!-- PARTICIPATED PLAYERS -->
-            <div class="col-12 col-sm-6 col-lg-4 p-3">
-                <div class="card p-3 h-100">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <h5 class="card-title">Participated <span>Player List</span> here</h5>
-                        <div class="row">
-                            <div class="col-6 d-flex">
-                                <div class="btn_wrapper mt-auto">
-                                    <a class="btn btn-primary" href="{% url 'home:players' pk=event.id %}">All
-                                        Players</a>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <img class="img-fluid" src="{% static 'images/players.svg' %}" alt="Social Share">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- PARTICIPATED PLAYERS END -->
-
-
-            <!-- ID DOWNLOAD -->
-            <div class="col-12 col-sm-6 col-lg-4 p-3">
-                <div class="card p-3 h-100">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <h5 class="card-title">Applied? Collect your <span>ID Card</span> now</h5>
-                        <div class="row">
-                            <div class="col-6 d-flex">
-                                <div class="btn_wrapper mt-auto">
-                                    <a href="#" class="btn btn-primary">Get ID</a>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <img class="img-fluid" src="{% static 'images/id_card.svg' %}" alt="Social Share">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ID DOWNLOAD END -->
-
-
             <!-- OUTLINE DOWNLOAD -->
             <div class="col-12 col-sm-6 col-lg-4 p-3">
                 <div class="card p-3 h-100">
                     <div class="card-body d-flex flex-column justify-content-between">
-                        <h5 class="card-title">Full Game's <span>Outline</span> can be collected from here</h5>
+                        <h5 class="card-title">
+                            Full Game's <span>Outline</span> can be collected from here
+                        </h5>
                         <div class="row">
                             <div class="col-6 d-flex">
                                 <div class="btn_wrapper mt-auto">
                                     {% if event.outline %}
                                     <a href="{{ event.outline.url }}" class="btn btn-primary" download>Get Outline</a>
                                     {% else %}
-                                    <a class="btn btn-primary">Not Available</a>
+                                    <a
+                                        class="btn btn-primary disabled"
+                                        tabindex="-1"
+                                        role="button"
+                                        aria-disabled="true"
+                                    >
+                                        Not Available
+                                    </a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -231,6 +141,58 @@
             <!-- OUTLINE DOWNLOAD END -->
 
 
+            <!-- PARTICIPATED PLAYERS -->
+            <div class="col-12 col-sm-6 col-lg-4 p-3">
+                <div class="card p-3 h-100">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title">Participated <span>Player List</span> can be found here</h5>
+                        <div class="row">
+                            <div class="col-6 d-flex">
+                                <div class="btn_wrapper mt-auto">
+                                    <a class="btn btn-primary" href="{% url 'home:teams' pk=event.id %}">
+                                        Player List
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <img class="img-fluid" src="{% static 'images/teams.svg' %}" alt="Social Share">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- PARTICIPATED PLAYERS END -->
+
+
+            <!-- PARTICIPATED PLAYERS BY CATEGORY -->
+            <div class="col-12 col-sm-6 col-lg-4 p-3">
+                <div class="card p-3 h-100">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title">
+                            Participated 
+                            <span>Players</span>
+                            by 
+                            <span>Category</span>
+                            can be found here
+                        </h5>
+                        <div class="row">
+                            <div class="col-6 d-flex">
+                                <div class="btn_wrapper mt-auto">
+                                    <a class="btn btn-primary" href="{% url 'home:players' pk=event.id %}">
+                                        Player by Category
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <img class="img-fluid" src="{% static 'images/players.svg' %}" alt="Social Share">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- PARTICIPATED PLAYERS BY CATEGORY END -->
+
+
             <!-- RESULTS -->
             <div class="col-12 col-sm-6 col-lg-4 p-3">
                 <div class="card p-3 h-100">
@@ -239,8 +201,23 @@
                         <div class="row">
                             <div class="col-6 d-flex">
                                 <div class="btn_wrapper mt-auto">
-                                    <a class="btn btn-primary"
-                                        href="{% url 'home:result_categories' event_id=event.id %}">See Results</a>
+                                    {% if event.completed %}
+                                    <a
+                                        class="btn btn-primary"
+                                        href="{% url 'home:result_categories' event_id=event.id %}"
+                                    >
+                                        See Results
+                                    </a>
+                                    {% else %}
+                                    <a 
+                                        class="btn btn-primary disabled"
+                                        tabindex="-1" 
+                                        role="button" 
+                                        aria-disabled="true"
+                                    >
+                                        Not Available
+                                    </a>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="col-6">
@@ -251,6 +228,50 @@
                 </div>
             </div>
             <!-- RESULTS END -->
+
+
+            <!-- SOCIAL SHARE -->
+            <div class="col-12 col-sm-6 col-lg-4 p-3">
+                <div class="card p-3 h-100">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title">Share this Event with your <span>Social</span> Friends</h5>
+                        <div class="row">
+                            <div class="col-6 d-flex flex-wrap align-items-end justify-content-between px-0">
+                                
+                                <div class="btn_wrapper text-center">
+                                    <a class="btn btn-outline-primary"
+                                        href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}{{ object.get_absolute_url }}"
+                                        target="_blank">
+                                        <i class="fa-brands fa-facebook-f"></i>
+                                    </a>
+                                </div>
+                            
+                                <div class="btn_wrapper text-center">
+                                    <a class="btn btn-outline-primary"
+                                        href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}{{ object.get_absolute_url }}"
+                                        target="_blank">
+                                        <i class="fa-brands fa-twitter"></i>
+                                    </a>
+                                </div>
+                            
+                                <div class="btn_wrapper text-center">
+                                    <a class="btn btn-outline-primary"
+                                        href="https://wa.me/+880?text={{ request.build_absolute_uri }}{{ object.get_absolute_url }}"
+                                        target="_blank">
+                                        <i class="fa-brands fa-whatsapp"></i>
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div class="col-6">
+                                <img class="img-fluid" src="{% static 'images/social.svg' %}" alt="Social Share">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- SOCIAL SHARE END -->
+
         </div>
     </div>
 </section>
