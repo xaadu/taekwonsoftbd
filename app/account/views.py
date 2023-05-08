@@ -111,17 +111,26 @@ def login_view(request):
         password = request.POST.get('password')
         user = authenticate(request, email=email, password=password)
         if user is not None:
-            login(request, user)
-            messages.success(request, 'Successfully Logged In.')
-            next = request.GET.get('next')
-            if next:
-                return redirect(next)
-            elif user.is_tl:
-                return redirect('team_leader:dashboard')
-            elif user.is_judge:
-                return redirect('judge:dashboard')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            data = {
+                'secret': envs.get('OWNER_KEY'),
+                'response': request.POST.get('g-recaptcha-response')
+            }
+            data = requests.post(url, data=data).json()
+            if data.get('success'):
+                login(request, user)
+                messages.success(request, 'Successfully Logged In.')
+                next = request.GET.get('next')
+                if next:
+                    return redirect(next)
+                elif user.is_tl:
+                    return redirect('team_leader:dashboard')
+                elif user.is_judge:
+                    return redirect('judge:dashboard')
+                else:
+                    return redirect('home:home')
             else:
-                return redirect('account:sample')
+                errors.append('Captcha Not Provided')
         else:
             errors.append('Check E-mail/Password and try again.')
 
