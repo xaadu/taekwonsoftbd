@@ -79,16 +79,16 @@ def judge_registration_view(request):
             }
             data = requests.post(url, data=data).json()
             if data.get('success'):
-                print('Succeed!!')
+                # print('Succeed!!')
                 form.save()
                 email = form.cleaned_data.get('email')
                 raw_password = form.cleaned_data.get('password1')
                 account = authenticate(email=email, password=raw_password)
                 login(request, account)
                 messages.success(request, 'Successfully Registered.')
-                return redirect('account:sample')
+                return redirect('home:home')
             else:
-                print('Not Succeed!!')
+                # print('Not Succeed!!')
                 errors.append('Captcha Not Provided')
 
     context = {
@@ -135,4 +135,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('account:sample')
+    return redirect('home:home')

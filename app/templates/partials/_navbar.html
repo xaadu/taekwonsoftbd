@@ -74,7 +74,7 @@ c19 -8 55 -28 79 -44 l44 -30 31 55 c16 30 43 78 60 107 l30 54 -88 45 c-48
                     {% elif user.is_admin %}
                     <a class="btn btn-primary" href="{% url 'host:dashboard' %}">Dashboard</a>
                     {% else %}
-                    <a class="btn btn-primary" href="{% url 'account:sample' %}">Dashboard</a>
+                    <a class="btn btn-primary" href="{% url 'home:home' %}">Dashboard</a>
                     {% endif %}
                 </li>
                 <li class="nav-item mx-2 my-2">

@@ -8,7 +8,7 @@ def unauthenticated_user(view_func):
     def wrapper_func(request, *args, **kwargs):
         if request.user.is_authenticated:
             messages.info(request, 'You\'re already logged in.')
-            return redirect('account:sample')
+            return redirect('home:home')
         else:
             return view_func(request, *args, **kwargs)
     return wrapper_func
@@ -27,7 +27,7 @@ def allowed_users(allowed_roles=[]):
                 else:
                     messages.error(
                         request, 'You are not authorized to view the page. Please login with a permitted account.')
-                    return redirect('account:sample')
+                    return redirect('home:home')
             else:
                 messages.error(request, 'Login first to view the page.')
                 return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
