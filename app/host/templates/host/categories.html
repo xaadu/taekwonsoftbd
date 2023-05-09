@@ -36,7 +36,7 @@
                     <td>{{ category.num_of_player }}</td>
                     {% comment %} <td>{{ category.round }}</td> {% endcomment %}
                     <td class="text-center">
-                        <a class="btn btn-outline-primary" href="#">
+                        <a class="btn btn-outline-primary" href="{% url 'host:sub_categories' event.id category.id %}">
                             <i class="fa-light fa-diagram-subtask"></i>
                         </a>
                         <a class="btn btn-outline-primary" href="{% url 'host:update_category' event.id category.id %}">

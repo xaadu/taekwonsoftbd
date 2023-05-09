@@ -5,8 +5,8 @@ from django.contrib import messages
 
 from account.decorators import allowed_users
 
-from .forms import HostUpdateForm, EventCreateForm, CategoryCreateForm
-from .models import Event, Category
+from .forms import HostUpdateForm, EventCreateForm, CategoryCreateForm, SubCategoryCreateForm
+from .models import Event, Category, SubCategory
 
 # Create your views here.
 
@@ -175,3 +175,79 @@ def delete_category(request, event_id, category_id):
     event = Event.objects.get(pk=event_id)
     event.category_set.get(pk=category_id).delete()
     return redirect('host:categories', event_id=event_id)
+
+
+
+
+# Sub Category Section
+
+def sub_categories(request, event_id, category_id):
+    event = Event.objects.get(pk=event_id)
+    category = Category.objects.get(pk=category_id)
+
+    all_subcategories = category.subcategory_set.all()
+
+    context = {
+        'sub_categories': all_subcategories,
+        'category': category,
+        'event': event,
+    }
+
+    return render(request, 'host/sub_categories.html', context=context)
+
+
+def create_subcategory(request, event_id, category_id):
+    event = Event.objects.get(pk=event_id)
+    catetgory = Category.objects.get(pk=category_id)
+    form = SubCategoryCreateForm()
+
+    if request.POST:
+        form = SubCategoryCreateForm(request.POST)
+        if form.is_valid():
+            c = form.save(commit=False)
+            c.category = catetgory
+            c.save()
+            return redirect('host:sub_categories', event_id=event_id, category_id=category_id)
+        else:
+            print(form.errors)
+
+    context = {
+        'form': form,
+        'event': event,
+        'category': catetgory,
+        'mode': 'Create'
+    }
+
+    return render(request, 'host/create_subcategory.html', context=context)
+
+
+def update_subcategory(request, event_id, category_id, subcategory_id):
+    event = Event.objects.get(pk=event_id)
+    category = Category.objects.get(pk=category_id, event=event)
+    subcategory = SubCategory.objects.get(pk=subcategory_id, category=category)
+    form = SubCategoryCreateForm(instance=subcategory)
+
+    if request.POST:
+        form = SubCategoryCreateForm(request.POST, instance=subcategory)
+        if form.is_valid():
+            form.save()
+            return redirect('host:sub_categories', event_id=event_id, category_id=category_id)
+        else:
+            print(form.errors)
+
+    context = {
+        'form': form,
+        'event': event,
+        'category': category,
+        'mode': 'Update'
+    }
+
+    return render(request, 'host/create_subcategory.html', context=context)
+
+
+def delete_subcategory(request, event_id, category_id, subcategory_id):
+    event = Event.objects.get(pk=event_id)
+    category = event.category_set.get(pk=category_id)
+    category.subcategory_set.get(pk=subcategory_id).delete()
+    return redirect('host:sub_categories', event_id=event_id, category_id=category_id)
+

@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserChangeForm
 
 from account.models import User
 
-from .models import Event, Category
+from .models import Event, Category, SubCategory
 
 
 class HostUpdateForm(UserChangeForm):
@@ -72,3 +72,26 @@ class CategoryCreateForm(forms.ModelForm):
             if value.required:
                 label = label+'*'
                 self.fields[key].label = label
+
+
+class SubCategoryCreateForm(forms.ModelForm):
+    class Meta:
+        model = SubCategory
+        fields = ['title', 'min_age', 'max_age', 'gender']
+        labels = {
+            'min_age': 'Minimum Age',
+            'max_age': 'Maximum Age',
+        }
+    
+    def __init__(self,*args,**kwargs):
+        super(SubCategoryCreateForm,self).__init__(*args,**kwargs)
+
+        self.fields['min_age'].widget = forms.NumberInput(attrs={'min':'2', 'max': '100'})
+        self.fields['max_age'].widget = forms.NumberInput(attrs={'min':'2', 'max': '100'})
+
+        for key, value in self.fields.items():
+            label = value.label
+            if value.required:
+                label = label+'*'
+                self.fields[key].label = label
+

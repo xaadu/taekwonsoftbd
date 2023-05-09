@@ -46,10 +46,38 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField(default=0.0)
     num_of_player = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(5)])
+
+    # TODO: round should be in subcategory
     round = models.IntegerField(default=1)
 
     def __str__(self) -> str:
         return self.name
+
+
+class SubCategory(models.Model):
+
+    MALE = 'male'
+    FEMALE = 'female'
+
+    CHOICES__GENDER = (
+        (MALE, 'Male'),
+        (FEMALE, 'Female')
+    )
+    
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+    )
+
+    title = models.CharField(max_length=100)
+    
+    min_age = models.PositiveSmallIntegerField(validators=[MinValueValidator(2), MaxValueValidator(100)])
+    max_age = models.PositiveSmallIntegerField(validators=[MinValueValidator(2), MaxValueValidator(100)])
+    gender = models.CharField(max_length=6, choices=CHOICES__GENDER)
+
+    def __str__(self) -> str:
+        return self.title
+
 
 
 class RegisteredTeam(models.Model):
