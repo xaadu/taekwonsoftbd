@@ -98,6 +98,7 @@ def update_event(request, event_id):
         form = EventCreateForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
             form.save()
+            return redirect('host:events')
         else:
             print(form.errors)
 
