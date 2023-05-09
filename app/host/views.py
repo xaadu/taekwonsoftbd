@@ -42,6 +42,7 @@ def profile(request):
     return render(request, 'prof_update.html', context)
 
 
+@allowed_users(['admin'])
 def events(request):
     objects = Event.objects.all()
 
@@ -52,6 +53,7 @@ def events(request):
     return render(request, 'host/events.html', context)
 
 
+@allowed_users(['admin'])
 def event_details(request, pk):
     event = Event.objects.get(pk=pk)
     teamData = {}
@@ -71,6 +73,7 @@ def event_details(request, pk):
     return render(request, 'host/event.html', context)
 
 
+@allowed_users(['admin'])
 def create_event(request):
     form = EventCreateForm()
 
@@ -90,6 +93,7 @@ def create_event(request):
     return render(request, 'host/create_event.html', context=context)
 
 
+@allowed_users(['admin'])
 def update_event(request, event_id):
     event = Event.objects.get(pk=event_id)
     form = EventCreateForm(instance=event)
@@ -110,11 +114,13 @@ def update_event(request, event_id):
     return render(request, 'host/create_event.html', context=context)
 
 
+@allowed_users(['admin'])
 def delete_event(request, event_id):
     Event.objects.get(pk=event_id).delete()
     return redirect('host:events')
 
 
+@allowed_users(['admin'])
 def categories(request, event_id):
     event = Event.objects.get(pk=event_id)
     all_categories = event.category_set.all()
@@ -127,6 +133,7 @@ def categories(request, event_id):
     return render(request, 'host/categories.html', context=context)
 
 
+@allowed_users(['admin'])
 def create_category(request, event_id):
     event = Event.objects.get(pk=event_id)
     form = CategoryCreateForm()
@@ -150,6 +157,7 @@ def create_category(request, event_id):
     return render(request, 'host/create_category.html', context=context)
 
 
+@allowed_users(['admin'])
 def update_category(request, event_id, category_id):
     event = Event.objects.get(pk=event_id)
     category = Category.objects.get(pk=category_id)
@@ -172,6 +180,7 @@ def update_category(request, event_id, category_id):
     return render(request, 'host/create_category.html', context=context)
 
 
+@allowed_users(['admin'])
 def delete_category(request, event_id, category_id):
     event = Event.objects.get(pk=event_id)
     event.category_set.get(pk=category_id).delete()
@@ -182,6 +191,7 @@ def delete_category(request, event_id, category_id):
 
 # Sub Category Section
 
+@allowed_users(['admin'])
 def sub_categories(request, event_id, category_id):
     event = Event.objects.get(pk=event_id)
     category = Category.objects.get(pk=category_id)
@@ -197,6 +207,7 @@ def sub_categories(request, event_id, category_id):
     return render(request, 'host/sub_categories.html', context=context)
 
 
+@allowed_users(['admin'])
 def create_subcategory(request, event_id, category_id):
     event = Event.objects.get(pk=event_id)
     catetgory = Category.objects.get(pk=category_id)
@@ -222,6 +233,7 @@ def create_subcategory(request, event_id, category_id):
     return render(request, 'host/create_subcategory.html', context=context)
 
 
+@allowed_users(['admin'])
 def update_subcategory(request, event_id, category_id, subcategory_id):
     event = Event.objects.get(pk=event_id)
     category = Category.objects.get(pk=category_id, event=event)
@@ -246,6 +258,7 @@ def update_subcategory(request, event_id, category_id, subcategory_id):
     return render(request, 'host/create_subcategory.html', context=context)
 
 
+@allowed_users(['admin'])
 def delete_subcategory(request, event_id, category_id, subcategory_id):
     event = Event.objects.get(pk=event_id)
     category = event.category_set.get(pk=category_id)
