@@ -5,14 +5,18 @@ from django.http import HttpResponse, FileResponse
 from django.core.paginator import Paginator
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages
+from django.db.models import Prefetch, F, Func, Value, IntegerField
+from django.utils import timezone
 
 # Create your views here.
 
 from host.models import Event, RegisteredTeam, RegisteredPlayer, Category
+from team_leader.models import Player
+
 from account.decorators import allowed_users
 from taekwonsoftbd.settings import DEBUG, STATIC_ROOT, MEDIA_ROOT
 
-from .forms import ContactForm, PlayerApplyForm, PlayerUpdateForm
+from .forms import ContactForm, MemberApplyForm, SubMemberApplyForm, SubMemberApplyForm2
 
 
 from PIL import Image, ImageDraw, ImageFont
@@ -356,54 +360,189 @@ def event_team_delete(request, event_id, reg_team_id):
     return redirect('home:manage', pk=event_id)
 
 
+# @allowed_users(['tl'])
+# def apply(request, pk):
+#     event = Event.objects.get(pk=pk)
+#     teams = request.user.teamleadermodel.team_set.all()
+#     team_ids = [team.id for team in teams]
+#     players = request.user.teamleadermodel.player_set.all()
+#     player_ids = [player.id for player in players]
+#     categories = event.category_set.all()
+#     category_ids = [category.id for category in categories]
+
+#     if request.POST:
+#         # print(request.POST)
+#         post_data = dict(request.POST)
+#         data = dict()
+#         for key in post_data.keys():
+#             if key.startswith('player') and not key.startswith('player_'):
+#                 data[int(key[6:])] = int(post_data['player_cat'+key[6:]][0])
+#         team_id = post_data.get('team', None)
+#         if team_id != None and int(team_id[0]) in team_ids:
+#             team_id = int(team_id[0])
+#             rt = RegisteredTeam(
+#                 event=event,
+#                 team_id=team_id
+#             )
+#             rt.save()
+#             team_id = rt.id
+#             for player_id, category_id in data.items():
+#                 #print(player_id, category_id)
+#                 if player_id in player_ids and category_id in category_ids:
+#                     x = RegisteredPlayer.objects.create(
+#                         event=event,
+#                         team_id=team_id,
+#                         player_id=player_id,
+#                         category_id=category_id
+#                     )
+#                     x.save()
+#                     # print(x)
+#             messages.success(request, 'Applied Successfully')
+#             return redirect('home:event_details', pk=event.id)
+
+#     context = {
+#         'event': event,
+#         'teams': teams,
+#         'players': players,
+#         'categories': categories,
+#     }
+
+#     return render(request, 'home/apply.html', context)
+
+
+
+
 @allowed_users(['tl'])
 def apply(request, pk):
     event = Event.objects.get(pk=pk)
-    teams = request.user.teamleadermodel.team_set.all()
-    team_ids = [team.id for team in teams]
-    players = request.user.teamleadermodel.player_set.all()
-    player_ids = [player.id for player in players]
-    categories = event.category_set.all()
-    category_ids = [category.id for category in categories]
 
-    if request.POST:
-        # print(request.POST)
-        post_data = dict(request.POST)
-        data = dict()
-        for key in post_data.keys():
-            if key.startswith('player') and not key.startswith('player_'):
-                data[int(key[6:])] = int(post_data['player_cat'+key[6:]][0])
-        team_id = post_data.get('team', None)
-        if team_id != None and int(team_id[0]) in team_ids:
-            team_id = int(team_id[0])
-            rt = RegisteredTeam(
-                event=event,
-                team_id=team_id
-            )
-            rt.save()
-            team_id = rt.id
-            for player_id, category_id in data.items():
-                #print(player_id, category_id)
-                if player_id in player_ids and category_id in category_ids:
-                    x = RegisteredPlayer.objects.create(
-                        event=event,
-                        team_id=team_id,
-                        player_id=player_id,
-                        category_id=category_id
-                    )
-                    x.save()
-                    # print(x)
-            messages.success(request, 'Applied Successfully')
-            return redirect('home:event_details', pk=event.id)
+    teamleader = request.user.teamleadermodel
+
+    # Need to filter for non applied team members
+    # Need pagination
+    players = teamleader.player_set.filter(
+
+    )
 
     context = {
         'event': event,
-        'teams': teams,
         'players': players,
-        'categories': categories,
     }
 
     return render(request, 'home/apply.html', context)
+
+
+@allowed_users(['tl'])
+def apply_2(request, event_id, member_id):
+
+    event = Event.objects.prefetch_related('category_set').get(pk=event_id)
+    member = request.user.teamleadermodel.player_set.get(pk=member_id)
+
+    categories = event.category_set.all()
+
+    context = {
+        'event': event,
+        'member': member,
+        'categories': categories,
+    }
+
+    return render(request, 'home/apply_2.html', context)
+
+
+@allowed_users(['tl'])
+def apply_3(request, event_id, member_id, category_id):
+
+    event = Event.objects.prefetch_related(
+        Prefetch(
+            'category_set', 
+            queryset=Category.objects.prefetch_related('subcategory_set')
+        )
+    ).get(pk=event_id)
+    member = request.user.teamleadermodel.player_set.get(pk=member_id)
+    category = event.category_set.get(pk=category_id)
+
+    subcategories = category.subcategory_set.filter(gender=member.gender)
+
+    member_age = member.calculated_age
+
+    # TODO: check if same player in same category exists and redirect to previous step
+
+    temp = []
+    for subcategory in subcategories:
+        if member_age <= subcategory.max_age and member_age >= subcategory.min_age:
+            temp.append(subcategory.id)
+
+    subcategories = subcategories.filter(id__in=temp) # filter with age range
+
+
+    context = {
+        'event': event,
+        'member': member,
+        'category': category,
+        'subcategories': subcategories,
+    }
+
+    return render(request, 'home/apply_3.html', context)
+
+
+
+
+@allowed_users(['tl'])
+def apply_4(request, event_id, member_id, category_id, subcategory_id):
+
+    event = Event.objects.prefetch_related(
+        Prefetch(
+            'category_set', 
+            queryset=Category.objects.prefetch_related('subcategory_set')
+        )
+    ).get(pk=event_id)
+    member = request.user.teamleadermodel.player_set.get(pk=member_id)
+    category = event.category_set.get(pk=category_id)
+    subcategory = category.subcategory_set.get(pk=subcategory_id)
+
+    # TODO: check for previous apply same
+
+    today = timezone.now().date()
+    submembers = request.user.teamleadermodel.player_set.annotate(
+        age=Func(
+            Value("year"),
+            Func(Value(today), F("date_Of_Birth"), function="age"),
+            function="date_part",
+            output_field=IntegerField(),
+        )
+    ).filter(
+        age__gte=subcategory.min_age,
+        age__lte=subcategory.max_age,
+        gender=subcategory.gender,
+    ).exclude(
+        id=member.id
+    )
+
+    form = SubMemberApplyForm2(
+        data=request.POST or None, 
+        submembers=submembers, 
+        num_of_player=category.extra_players
+    )
+
+    if request.method == 'POST':
+        if form.is_valid:
+            print("Done")
+
+    context = {
+        'event': event,
+        'member': member,
+        'category': category,
+        'subcategory': subcategory,
+        'submembers': submembers,
+        'num_of_player': category.extra_players,
+        'form': form,
+    }
+
+    return render(request, 'home/apply_4.html', context)
+
+
+
+
 
 
 def result_categories(request, event_id):

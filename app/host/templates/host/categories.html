@@ -23,7 +23,7 @@
                 <th>ID</th>
                 <th>Price</th>
                 <th>Category</th>
-                <th>Total Player</th>
+                <th>Extra Player Number</th>
                 {% comment %} <th>Round</th> {% endcomment %}
                 <th class="text-center">Action</th>
             </thead>
@@ -33,7 +33,7 @@
                     <td>{{ category.id }}</td>
                     <td>${{ category.price }}</td>
                     <td>{{ category.name }}</td>
-                    <td>{{ category.num_of_player }}</td>
+                    <td>{{ category.extra_players }}</td>
                     {% comment %} <td>{{ category.round }}</td> {% endcomment %}
                     <td class="text-center">
                         <a class="btn btn-outline-primary" href="{% url 'host:sub_categories' event.id category.id %}">

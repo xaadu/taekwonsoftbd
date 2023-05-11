@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 from account.models import TeamLeaderModel
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -51,10 +53,16 @@ class Player(models.Model):
     dan_Certificate_No = models.CharField(max_length=30, null=True, blank=True)
     dan_Certificate = models.ImageField(upload_to='images/dan_certificates', null=True, blank=True)
 
-
     def save(self, *args, **kwargs):
         self.country = re.sub("[\(\[].*?[\)\]]", "", self.country)
         super(Player, self).save(*args, **kwargs)
+    
+    @property
+    def calculated_age(self):
+        today = timezone.now().date()
+        return today.year - self.date_Of_Birth.year - \
+            ((today.month, today.day) < (self.date_Of_Birth.month, self.date_Of_Birth.day))
+        
 
     def __str__(self) -> str:
         return self.name

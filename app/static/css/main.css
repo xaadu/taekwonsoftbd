@@ -512,118 +512,45 @@ section#event .row.options .card h5 span {
   opacity: 0.9;
 }
 
-section#apply select,
-section#update select {
-  display: block;
-  border: none;
-  border-bottom: 1px solid rgba(108, 99, 255, 0.6);
-  font-size: 0.9rem;
-  -webkit-box-shadow: 0 0 20px rgba(108, 99, 255, 0.16);
-          box-shadow: 0 0 20px rgba(108, 99, 255, 0.16);
-  border-radius: 5px;
+section#apply .playerSelect .player .player__pic img,
+section#update .playerSelect .player .player__pic img {
+  max-height: 6rem;
+  border-radius: 50%;
 }
-section#apply select:focus,
-section#update select:focus {
-  outline: none;
+section#apply .playerSelect .player td:nth-child(1),
+section#update .playerSelect .player td:nth-child(1) {
+  width: 5%;
 }
-section#apply .teamSelect,
-section#update .teamSelect {
-  -webkit-box-shadow: 5px 5px 20px rgba(31, 47, 152, 0.2);
-          box-shadow: 5px 5px 20px rgba(31, 47, 152, 0.2);
-  border-radius: 10px;
+section#apply .playerSelect .player td:nth-child(2),
+section#update .playerSelect .player td:nth-child(2) {
+  width: 15%;
 }
-section#apply .teamSelect label,
-section#update .teamSelect label {
-  font-size: 1.2rem;
+section#apply .playerSelect .player td:nth-child(3),
+section#update .playerSelect .player td:nth-child(3) {
+  width: 50%;
 }
-section#apply .teamSelect select,
-section#update .teamSelect select {
-  max-width: 350px;
-  width: 100%;
+section#apply .playerSelect .player td:nth-child(4),
+section#update .playerSelect .player td:nth-child(4) {
+  width: 15%;
 }
-section#apply .playerSelect .player,
-section#update .playerSelect .player {
-  border: 2px solid rgba(187, 187, 187, 0.4);
-  -webkit-transition: all 0.2s ease-out;
-  -o-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-  overflow: hidden;
-  position: relative;
-  border-radius: 10px;
-  -webkit-box-shadow: 5px 5px 20px rgba(31, 47, 152, 0.2);
-          box-shadow: 5px 5px 20px rgba(31, 47, 152, 0.2);
+section#apply .playerSelect .player td:nth-child(5),
+section#update .playerSelect .player td:nth-child(5) {
+  width: 15%;
 }
-section#apply .playerSelect .player.checked,
-section#update .playerSelect .player.checked {
-  border: 2px solid #6C63FF;
-  -webkit-box-shadow: 5px 5px 20px rgba(31, 47, 152, 0.4);
-          box-shadow: 5px 5px 20px rgba(31, 47, 152, 0.4);
+section#apply .categorySelect .category .player__pic img,
+section#update .categorySelect .category .player__pic img {
+  max-height: 6rem;
+  border-radius: 50%;
 }
-section#apply .playerSelect .player__info .checkbox_container,
-section#update .playerSelect .player__info .checkbox_container {
-  display: block;
-  position: relative;
-  padding-left: 2.4rem;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+section#apply .categorySelect .category td:nth-child(1),
+section#update .categorySelect .category td:nth-child(1) {
+  width: 70%;
 }
-section#apply .playerSelect .player__info .checkbox_container input,
-section#update .playerSelect .player__info .checkbox_container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
+section#apply .categorySelect .category td:nth-child(2),
+section#update .categorySelect .category td:nth-child(2) {
+  width: 15%;
 }
-section#apply .playerSelect .player__info .checkbox_container input:checked ~ .checkmark,
-section#update .playerSelect .player__info .checkbox_container input:checked ~ .checkmark {
-  background-color: #6C63FF;
-}
-section#apply .playerSelect .player__info .checkbox_container input:checked ~ .checkmark::after,
-section#update .playerSelect .player__info .checkbox_container input:checked ~ .checkmark::after {
-  display: block;
-}
-section#apply .playerSelect .player__info .checkbox_container .checkmark,
-section#update .playerSelect .player__info .checkbox_container .checkmark {
-  position: absolute;
-  top: 8px;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-}
-section#apply .playerSelect .player__info .checkbox_container .checkmark::after,
-section#update .playerSelect .player__info .checkbox_container .checkmark::after {
-  content: "";
-  position: absolute;
-  display: none;
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-section#apply .playerSelect .player__pic,
-section#update .playerSelect .player__pic {
-  position: relative;
-}
-section#apply .playerSelect .player__pic img,
-section#update .playerSelect .player__pic img {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-          transform: translateX(-50%);
-}
-section#apply .playerSelect select,
-section#update .playerSelect select {
-  width: 100%;
+section#apply .categorySelect .category td:nth-child(3),
+section#update .categorySelect .category td:nth-child(3) {
+  width: 15%;
 }/*# sourceMappingURL=main.css.map */

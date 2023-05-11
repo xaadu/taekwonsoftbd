@@ -1,30 +1,54 @@
 from django.urls import path
 from .views import *
 
-app_name = 'home'
+app_name = "home"
 urlpatterns = [
-    #path('', comingsoon, name='comingsoon'),
-    path('', home, name='home'),
-    path('contact/', contact, name='contact'),
-    path('about/', about, name='about'),
-    path('events/', events, name='events'),
-    path('events/<str:pk>/', event_details, name='event_details'),
-    path('events/<str:pk>/teams/', event_teams, name='teams'),
-    path('events/<str:event_id>/teams/<str:reg_team_id>/',
-         event_team_details, name='team_details'),
-    path('events/<str:pk>/players/', event_players, name='players'),
-    path('events/<str:pk>/manage/', manage, name='manage'),
-    path('events/<str:event_id>/manage/<str:reg_team_id>/',
-         event_team_update, name='update_team'),
-    path('events/<str:event_id>/delete/<str:reg_team_id>/',
-         event_team_delete, name='delete_team'),
-    path('events/<str:pk>/apply/', apply, name='apply'),
-    path('events/<int:event_id>/results/',
-         result_categories, name='result_categories'),
-    path('events/<int:event_id>/results/<int:category_id>/',
-         results, name='results'),
-    path('events/<int:event_id>/<int:team_id>/<int:player_id>/download-id/',
-         downloadID, name='downloadID'),
-    path('events/<int:event_id>/<int:team_id>/<int:player_id>/download-cert/',
-         downloadCert, name='downloadCert'),
+    # path('', comingsoon, name='comingsoon'),
+    path("", home, name="home"),
+    path("contact/", contact, name="contact"),
+    path("about/", about, name="about"),
+    path("events/", events, name="events"),
+    path("events/<str:pk>/", event_details, name="event_details"),
+
+    # Apply
+    path("events/<str:pk>/apply/", apply, name="apply"),
+    path("events/<str:event_id>/apply/<str:member_id>/", apply_2, name="apply_2"),
+    path("events/<str:event_id>/apply/<str:member_id>/<str:category_id>/", apply_3, name="apply_3"),
+    path(
+        "events/<str:event_id>/apply/<str:member_id>/<str:category_id>/<str:subcategory_id>/",
+        apply_4,
+        name="apply_4",
+    ),
+
+
+    path("events/<str:pk>/teams/", event_teams, name="teams"),
+    path(
+        "events/<str:event_id>/teams/<str:reg_team_id>/",
+        event_team_details,
+        name="team_details",
+    ),
+    path("events/<str:pk>/players/", event_players, name="players"),
+    path("events/<str:pk>/manage/", manage, name="manage"),
+    path(
+        "events/<str:event_id>/manage/<str:reg_team_id>/",
+        event_team_update,
+        name="update_team",
+    ),
+    path(
+        "events/<str:event_id>/delete/<str:reg_team_id>/",
+        event_team_delete,
+        name="delete_team",
+    ),
+    path("events/<int:event_id>/results/", result_categories, name="result_categories"),
+    path("events/<int:event_id>/results/<int:category_id>/", results, name="results"),
+    path(
+        "events/<int:event_id>/<int:team_id>/<int:player_id>/download-id/",
+        downloadID,
+        name="downloadID",
+    ),
+    path(
+        "events/<int:event_id>/<int:team_id>/<int:player_id>/download-cert/",
+        downloadCert,
+        name="downloadCert",
+    ),
 ]

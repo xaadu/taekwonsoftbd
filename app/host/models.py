@@ -45,7 +45,7 @@ class Category(models.Model):
         Event, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=100)
     price = models.FloatField(default=0.0)
-    num_of_player = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(5)])
+    extra_players = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
 
     # TODO: round should be in subcategory
     round = models.IntegerField(default=1)
@@ -77,6 +77,23 @@ class SubCategory(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+
+
+class RegisteredMember(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+
+    member = models.ForeignKey('team_leader.Player', on_delete=models.CASCADE)
+
+    PAYMENT_CHOICES = ((True, 'Yes'), (False, 'No'))
+    payment_done = models.BooleanField(choices=PAYMENT_CHOICES, default=False)
+
+    def __str__(self) -> str:
+        return self.member.name
+
 
 
 

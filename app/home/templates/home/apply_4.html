@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<section id="apply">
+    <div class="row header container mx-auto py-5">
+        <div class="col-md-6 header__left">
+            <img class="img-fluid" src="{% static 'images/apply.svg' %}" alt="Event List Hero Image">
+        </div>
+        <div class="col-md-6 d-flex flex-column align-items-center justify-content-center text-center header__right">
+            <h6 class="display-6 border-bottom pb-3">Apply For</h6>
+            <h2 class="display-5"> {{ event }} </h2>
+        </div>
+    </div>
+    <div class="container p-5 pt-3">
+        
+        <h2 class="h2 text-center">Select Related Members <span class="h6">({{num_of_player}} Member)</span></h2>
+        <p class="">Player: {{ member.name }}</p>
+        <p class="">Category: {{ category.name }}</p>
+        <p class="">Subcategory: {{ subcategory.title }}</p>
+
+        {% comment %} <p>{{ form }}</p>  {% endcomment %}
+
+        <form action="" method="post">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            <table class="table table-hover playerSelect">
+                <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Picture</th>
+                        <th class="">Name</th>
+                        <th class="">Gender</th>
+                        <th class="text-center">Select</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for submember in submembers %}
+                        <tr class="player">
+                            <td class="align-middle text-center">{{ submember.id }}</td>
+                            <td class="player__pic text-center">
+                                <img 
+                                    src="{{ submember.picture.url }}" 
+                                    alt="{{ submember.name|title }} Picture" 
+                                    class="img-fluid"
+                                >
+                            </td>
+                            <td class="align-middle">
+                                <label for="id_members_{{ submember.id }}" style="display:block;height:100%;">
+                                    {{ submember.name }}
+                                </label>
+                            </td>
+                            <td class="align-middle">{{ submember.gender.title }}</td>
+                            <td class="align-middle text-center">
+                                <input 
+                                    type="checkbox" 
+                                    name="members" 
+                                    value="{{ submember.id }}" 
+                                    id="id_members_{{ submember.id }}"
+                                >
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <button type="submit">Submit</button>
+
+        </form>
+
+        
+
+    </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+    $(":checkbox").on('click', function () {
+        $(this).parent().parent().parent().toggleClass("checked");
+    });
+
+    $(".player").on("click", function () {
+        var checkBox = $(this).find("input")
+
+        checkBox.prop( "checked", !checkBox.prop("checked") );
+    });
+</script>
+{% endblock %}

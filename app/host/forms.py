@@ -57,15 +57,15 @@ class EventCreateForm(forms.ModelForm):
 class CategoryCreateForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ['name', 'price', 'num_of_player', 'round']
+        fields = ['name', 'price', 'extra_players', 'round']
         labels = {
             'price': 'USD Per Player',
-            'num_of_player': 'Number of Player (1 - 5)',
+            'extra_players': 'Number of Extra Player (0 - 5)',
         }
     
     def __init__(self,*args,**kwargs):
         super(CategoryCreateForm,self).__init__(*args,**kwargs)
-        self.fields['num_of_player'].widget = forms.NumberInput(attrs={'min':'1', 'max': '5'})
+        self.fields['extra_players'].widget = forms.NumberInput(attrs={'min':'0', 'max': '5'})
 
         for key, value in self.fields.items():
             label = value.label
