@@ -88,6 +88,15 @@ class RegisteredMember(models.Model):
 
     member = models.ForeignKey('team_leader.Player', on_delete=models.CASCADE)
 
+    has_parent = models.BooleanField(default=False)
+    parent_member = models.ForeignKey(
+        to='self',
+        limit_choices_to={'has_parent': False},
+        on_delete=models.CASCADE,
+        null=True, blank=True,
+        related_name='submembers'
+    )
+
     PAYMENT_CHOICES = ((True, 'Yes'), (False, 'No'))
     payment_done = models.BooleanField(choices=PAYMENT_CHOICES, default=False)
 

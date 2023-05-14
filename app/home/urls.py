@@ -20,6 +20,9 @@ urlpatterns = [
         name="apply_4",
     ),
 
+    # Manage
+    path("events/<str:pk>/manage/", manage, name="manage"),
+
 
     path("events/<str:pk>/teams/", event_teams, name="teams"),
     path(
@@ -28,7 +31,7 @@ urlpatterns = [
         name="team_details",
     ),
     path("events/<str:pk>/players/", event_players, name="players"),
-    path("events/<str:pk>/manage/", manage, name="manage"),
+    
     path(
         "events/<str:event_id>/manage/<str:reg_team_id>/",
         event_team_update,

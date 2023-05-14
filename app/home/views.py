@@ -1,6 +1,6 @@
 import os
 
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse, FileResponse
 from django.core.paginator import Paginator
 from django.core.mail import send_mail, BadHeaderError
@@ -10,7 +10,7 @@ from django.utils import timezone
 
 # Create your views here.
 
-from host.models import Event, RegisteredTeam, RegisteredPlayer, Category
+from host.models import Event, RegisteredTeam, RegisteredPlayer, RegisteredMember, Category
 from team_leader.models import Player
 
 from account.decorators import allowed_users
@@ -500,6 +500,20 @@ def apply_4(request, event_id, member_id, category_id, subcategory_id):
     category = event.category_set.get(pk=category_id)
     subcategory = category.subcategory_set.get(pk=subcategory_id)
 
+
+    # Complete registration if no extra member is present
+    if category.extra_players == 0:
+        RegisteredMember.objects.create(
+            event=event,
+            category=category,
+            sub_category=subcategory,
+            member=member,
+        )
+
+        messages.success(request, 'Successfully Applied')
+        return redirect('home:manage', pk=event_id)
+
+
     # TODO: check for previous apply same
 
     today = timezone.now().date()
@@ -525,8 +539,29 @@ def apply_4(request, event_id, member_id, category_id, subcategory_id):
     )
 
     if request.method == 'POST':
-        if form.is_valid:
-            print("Done")
+        if form.is_valid():
+            # Register Main Member
+            registered_member = RegisteredMember.objects.create(
+                event=event,
+                category=category,
+                sub_category=subcategory,
+                member=member,
+            )
+
+            # Register Sub-member
+            form_data = form.cleaned_data
+            for sub_member in form_data.get('members'):
+                RegisteredMember.objects.create(
+                    event=event,
+                    category=category,
+                    sub_category=subcategory,
+                    member=sub_member,
+                    has_parent=True,
+                    parent_member=registered_member,
+                )
+            
+            messages.success(request, 'Successfully Applied')
+            return redirect('home:manage', pk=event_id)
 
     context = {
         'event': event,
