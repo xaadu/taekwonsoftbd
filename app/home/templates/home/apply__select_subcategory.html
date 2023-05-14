@@ -34,7 +34,7 @@
                     <td class="align-middle">${{ subcategory.price }}</td>
                     <td class="align-middle text-center">
                         <a 
-                            href="{% url 'home:apply_4' event.id member.id category.id subcategory.id %}"
+                            href="{% url 'home:apply__select_submember' event.id member.id team.id category.id subcategory.id %}"
                             class="btn btn-outline-primary"
                         >
                             <i class="fa-light fa-check"></i> Select

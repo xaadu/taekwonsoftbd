@@ -426,12 +426,7 @@ def apply__select_member(request, pk):
     event = Event.objects.get(pk=pk)
 
     teamleader = request.user.teamleadermodel
-
-    # Need to filter for non applied team members
-    # Need pagination
-    players = teamleader.player_set.filter(
-
-    )
+    players = teamleader.player_set.all()
 
     context = {
         'event': event,
@@ -442,24 +437,46 @@ def apply__select_member(request, pk):
 
 
 @allowed_users(['tl'])
-def apply__select_category(request, event_id, member_id):
+def apply__select_team(request, event_id, member_id):
+    event = Event.objects.get(pk=event_id)
+
+    teamleader = request.user.teamleadermodel
+    player = teamleader.player_set.get(pk=member_id)
+    teams = teamleader.team_set.all()
+
+    context = {
+        'event': event,
+        'player': player,
+        'teams': teams,
+    }
+
+    return render(request, 'home/apply__select_team.html', context)
+
+
+
+@allowed_users(['tl'])
+def apply__select_category(request, event_id, member_id, team_id):
 
     event = Event.objects.prefetch_related('category_set').get(pk=event_id)
-    member = request.user.teamleadermodel.player_set.get(pk=member_id)
+
+    teamleader = request.user.teamleadermodel
+    member = teamleader.player_set.get(pk=member_id)
+    team = teamleader.team_set.get(pk=team_id)
 
     categories = event.category_set.all()
 
     context = {
         'event': event,
         'member': member,
+        'team': team,
         'categories': categories,
     }
 
-    return render(request, 'home/apply_2.html', context)
+    return render(request, 'home/apply__select_category.html', context)
 
 
 @allowed_users(['tl'])
-def apply__select_subcategory(request, event_id, member_id, category_id):
+def apply__select_subcategory(request, event_id, member_id, team_id, category_id):
 
     event = Event.objects.prefetch_related(
         Prefetch(
@@ -467,8 +484,11 @@ def apply__select_subcategory(request, event_id, member_id, category_id):
             queryset=Category.objects.prefetch_related('subcategory_set')
         )
     ).get(pk=event_id)
-    member = request.user.teamleadermodel.player_set.get(pk=member_id)
     category = event.category_set.get(pk=category_id)
+
+    teamleader = request.user.teamleadermodel
+    member = teamleader.player_set.get(pk=member_id)
+    team = teamleader.team_set.get(pk=team_id)
 
     subcategories = category.subcategory_set.filter(gender=member.gender)
 
@@ -483,21 +503,21 @@ def apply__select_subcategory(request, event_id, member_id, category_id):
 
     subcategories = subcategories.filter(id__in=temp) # filter with age range
 
-
     context = {
         'event': event,
         'member': member,
+        'team': team,
         'category': category,
         'subcategories': subcategories,
     }
 
-    return render(request, 'home/apply_3.html', context)
+    return render(request, 'home/apply__select_subcategory.html', context)
 
 
 
 
 @allowed_users(['tl'])
-def apply__select_submember(request, event_id, member_id, category_id, subcategory_id):
+def apply__select_submember(request, event_id, member_id, team_id, category_id, subcategory_id):
 
     event = Event.objects.prefetch_related(
         Prefetch(
@@ -505,7 +525,11 @@ def apply__select_submember(request, event_id, member_id, category_id, subcatego
             queryset=Category.objects.prefetch_related('subcategory_set')
         )
     ).get(pk=event_id)
-    member = request.user.teamleadermodel.player_set.get(pk=member_id)
+
+    teamleader = request.user.teamleadermodel
+    member = teamleader.player_set.get(pk=member_id)
+    team = teamleader.team_set.get(pk=team_id)
+
     category = event.category_set.get(pk=category_id)
     subcategory = category.subcategory_set.get(pk=subcategory_id)
 
@@ -517,6 +541,7 @@ def apply__select_submember(request, event_id, member_id, category_id, subcatego
             category=category,
             sub_category=subcategory,
             member=member,
+            team=team,
         )
 
         messages.success(request, 'Successfully Applied')
@@ -555,6 +580,7 @@ def apply__select_submember(request, event_id, member_id, category_id, subcatego
                 category=category,
                 sub_category=subcategory,
                 member=member,
+                team=team,
             )
 
             # Register Sub-member
@@ -565,6 +591,7 @@ def apply__select_submember(request, event_id, member_id, category_id, subcatego
                     category=category,
                     sub_category=subcategory,
                     member=sub_member,
+                    team=team,
                     has_parent=True,
                     parent_member=registered_member,
                 )
@@ -575,6 +602,7 @@ def apply__select_submember(request, event_id, member_id, category_id, subcatego
     context = {
         'event': event,
         'member': member,
+        'team': team,
         'category': category,
         'subcategory': subcategory,
         'submembers': submembers,
@@ -582,7 +610,7 @@ def apply__select_submember(request, event_id, member_id, category_id, subcatego
         'form': form,
     }
 
-    return render(request, 'home/apply_4.html', context)
+    return render(request, 'home/apply__select_submember.html', context)
 
 
 

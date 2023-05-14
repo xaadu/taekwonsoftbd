@@ -534,7 +534,6 @@ section#event .row.options .card h5 span {
 section#apply .playerSelect .player .player__pic img,
 section#update .playerSelect .player .player__pic img {
   max-height: 6rem;
-  border-radius: 50%;
 }
 section#apply .playerSelect .player td:nth-child(1),
 section#update .playerSelect .player td:nth-child(1) {

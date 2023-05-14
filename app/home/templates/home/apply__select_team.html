@@ -14,32 +14,36 @@
     </div>
     <div class="container p-5 pt-3">
         
-        <h2 class="h2 text-center">Select Member</h2>
-
-        <!-- PLAYER SELECT -->
+        <h2 class="h2 text-center">Select Team</h2>
 
         <table class="table table-hover playerSelect">
             <thead>
                 <tr>
                     <th class="text-center">ID</th>
-                    <th class="text-center">Picture</th>
-                    <th class="">Name</th>
-                    <th class="">Gender</th>
+                    <th class="text-center">Logo</th>
+                    <th class="">Team Name</th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
-                {% for player in players %}
+                {% for team in teams %}
                 <tr class="player">
-                    <td class="align-middle text-center">{{ player.id }}</td>
+                    <td class="align-middle text-center">{{ team.id }}</td>
                     <td class="player__pic text-center">
-                        <img src="{{ player.picture.url }}" alt="{{ player.name|title }} Picture" class="img-fluid">
+                        {% if team.team_logo %}
+                            <img src="{{ team.team_logo.url }}" alt="{{ team.name|title }} Logo" class="img-fluid">
+                        {% else %}
+                        {% endif %}
                     </td>
-                    <td class="align-middle">{{ player.name }}</td>
-                    <td class="align-middle">{{ player.gender.title }}</td>
+                    <td class="align-middle">
+                        <p>{{ team.name }}</p>
+                        {% if team.club_name %}
+                            <p>Club: {{ team.club_name }}</p>
+                        {% endif %}
+                    </td>
                     <td class="align-middle text-center">
                         <a 
-                            href="{% url 'home:apply__select_team' event.id player.id %}"
+                            href="{% url 'home:apply__select_category' event.id player.id team.id %}"
                             class="btn btn-outline-primary"
                         >
                             <i class="fa-light fa-check"></i> Select

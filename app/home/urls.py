@@ -18,18 +18,23 @@ urlpatterns = [
     ),
     path(
         "events/<str:event_id>/apply/<str:member_id>/", 
+        apply__select_team, 
+        name="apply__select_team",
+    ),
+    path(
+        "events/<str:event_id>/apply/<str:member_id>/<str:team_id>/", 
         apply__select_category, 
-        name="apply_2"
+        name="apply__select_category"
     ),
     path(
-        "events/<str:event_id>/apply/<str:member_id>/<str:category_id>/", 
+        "events/<str:event_id>/apply/<str:member_id>/<str:team_id>/<str:category_id>/", 
         apply__select_subcategory, 
-        name="apply_3"
+        name="apply__select_subcategory"
     ),
     path(
-        "events/<str:event_id>/apply/<str:member_id>/<str:category_id>/<str:subcategory_id>/",
+        "events/<str:event_id>/apply/<str:member_id>/<str:team_id>/<str:category_id>/<str:subcategory_id>/",
         apply__select_submember,
-        name="apply_4",
+        name="apply__select_submember",
     ),
 
     # Manage

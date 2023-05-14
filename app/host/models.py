@@ -86,7 +86,8 @@ class RegisteredMember(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
 
-    member = models.ForeignKey('team_leader.Player', on_delete=models.CASCADE)
+    member = models.ForeignKey('team_leader.Player', on_delete=models.CASCADE, null=True)
+    team = models.ForeignKey('team_leader.Team', on_delete=models.CASCADE, null=True)
 
     has_parent = models.BooleanField(default=False)
     parent_member = models.ForeignKey(
