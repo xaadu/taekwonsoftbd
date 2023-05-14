@@ -17,7 +17,7 @@
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="accordion" id="member_list">
                     {% for reg_member in reg_members %}
                     <tr class="player">
                         <td class="align-middle text-center">{{ reg_member.id }}</td>
@@ -29,21 +29,34 @@
                             >
                         </td>
                         <td class="align-middle">
-                            {{ reg_member.member.name }}
+                            <p>
+                                {{ reg_member.member.name|title }}
+                            </p>
+                            <p>
+                                {{ reg_member.team.name|title }}
+                            </p>
+                            <p>
+                                <span class="badge rounded-pill  bg-light text-dark px-3 py-2">
+                                    {{ reg_member.category.name }}
+                                </span>
+
+                                <span class="badge rounded-pill  bg-light text-dark px-3 py-2">
+                                    {{ reg_member.sub_category.title }}
+                                </span>
+                            </p>
                         </td>
                         <td class="text-center align-middle">
                             <div class="btn-group">
-                                {% comment %} <a 
+                                <a 
                                     href="#" 
                                     class="btn btn-outline-success view_link" 
                                     data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapse{{ team.team.id }}" 
+                                    data-bs-target="#flush-collapse{{ reg_member.id }}" 
                                     aria-expanded="false"
-                                    aria-controls="flush-collapse{{ team.team.id }}"
+                                    aria-controls="flush-collapse{{ reg_member.id }}"
                                 >
-                                    Details
-                                </a> {% endcomment %}
-                                {% comment %} <i class="fa-light fa-diagram-subtask"></i> {% endcomment %}
+                                    <i class="fa-light fa-diagram-subtask"></i> Details
+                                </a>
                                 <a 
                                     href="{% url 'home:downloadID' event.id reg_member.id %}"
                                     class="btn btn-outline-primary"
@@ -58,6 +71,13 @@
                                     <i class="fa-light fa-trash"></i>
                                 </a>
                             </div>
+                        </td>
+                    </tr>
+                    <tr
+                        {% comment %} class="accordion-collapse collapse" {% endcomment %}
+                    >
+                        <td colspan="4">
+                            {% include 'home/partials/_submembers.html' %}
                         </td>
                     </tr>
                     {% endfor %}

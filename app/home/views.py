@@ -5,7 +5,7 @@ from django.http import HttpResponse, FileResponse
 from django.core.paginator import Paginator
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages
-from django.db.models import Prefetch, F, Func, Value, IntegerField
+from django.db.models import Prefetch, F, Func, Value, IntegerField, Count
 from django.utils import timezone
 
 # Create your views here.
@@ -165,7 +165,13 @@ def manage(request, pk):
     reg_members = RegisteredMember.objects.filter(
         event=event,
         has_parent=False,
-    ).select_related('member')
+    ).select_related(
+        'member', 'category', 'sub_category',
+    ).prefetch_related(
+        'submembers',
+    ).annotate(
+        submembers_count=Count('submembers')
+    )
 
     teamData = {}
     try:
