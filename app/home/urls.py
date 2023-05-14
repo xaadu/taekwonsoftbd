@@ -11,37 +11,58 @@ urlpatterns = [
     path("events/<str:pk>/", event_details, name="event_details"),
 
     # Apply
-    path("events/<str:pk>/apply/", apply, name="apply"),
-    path("events/<str:event_id>/apply/<str:member_id>/", apply_2, name="apply_2"),
-    path("events/<str:event_id>/apply/<str:member_id>/<str:category_id>/", apply_3, name="apply_3"),
+    path(
+        "events/<str:pk>/apply/", 
+        apply__select_member, 
+        name="apply"
+    ),
+    path(
+        "events/<str:event_id>/apply/<str:member_id>/", 
+        apply__select_category, 
+        name="apply_2"
+    ),
+    path(
+        "events/<str:event_id>/apply/<str:member_id>/<str:category_id>/", 
+        apply__select_subcategory, 
+        name="apply_3"
+    ),
     path(
         "events/<str:event_id>/apply/<str:member_id>/<str:category_id>/<str:subcategory_id>/",
-        apply_4,
+        apply__select_submember,
         name="apply_4",
     ),
 
     # Manage
     path("events/<str:pk>/manage/", manage, name="manage"),
+    path(
+        "events/<int:event_id>/manage/download_id/<int:reg_member_id>/",
+        downloadID,
+        name="downloadID",
+    ),
+    path(
+        "events/<str:event_id>/manage/delete/<str:reg_member_id>/",
+        event_member_delete,
+        name="delete_member",
+    ),
 
 
-    path("events/<str:pk>/teams/", event_teams, name="teams"),
+    # Members
+    path("events/<str:pk>/members/", event_teams, name="teams"),
+    
+
     path(
         "events/<str:event_id>/teams/<str:reg_team_id>/",
         event_team_details,
         name="team_details",
     ),
-    path("events/<str:pk>/players/", event_players, name="players"),
-    
     path(
         "events/<str:event_id>/manage/<str:reg_team_id>/",
         event_team_update,
         name="update_team",
     ),
-    path(
-        "events/<str:event_id>/delete/<str:reg_team_id>/",
-        event_team_delete,
-        name="delete_team",
-    ),
+
+    path("events/<str:pk>/players/", event_players, name="players"),
+
     path("events/<int:event_id>/results/", result_categories, name="result_categories"),
     path("events/<int:event_id>/results/<int:category_id>/", results, name="results"),
     path(

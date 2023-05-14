@@ -1,0 +1,23 @@
+section#manage {
+    table {
+        .member__pic img {
+            max-height: 6rem;
+            // border-radius: 50%;
+        }
+        td:nth-child(1) {
+            width: 5%;
+        }
+        td:nth-child(2) {
+            width: 15%;
+        }
+        td:nth-child(3) {
+            width: 50%;
+        }
+        td:nth-child(4) {
+            width: 15%;
+        }
+        td:nth-child(5) {
+            width: 15%;
+        }
+    }
+}

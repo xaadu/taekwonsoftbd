@@ -443,6 +443,25 @@ section#events .header .header__right .mouse_scroll .wheel {
   animation: mouse-wheel 0.6s linear infinite;
 }
 
+section#manage table .member__pic img {
+  max-height: 6rem;
+}
+section#manage table td:nth-child(1) {
+  width: 5%;
+}
+section#manage table td:nth-child(2) {
+  width: 15%;
+}
+section#manage table td:nth-child(3) {
+  width: 50%;
+}
+section#manage table td:nth-child(4) {
+  width: 15%;
+}
+section#manage table td:nth-child(5) {
+  width: 15%;
+}
+
 section#contact .container {
   -webkit-box-shadow: 0 0 20px rgba(31, 47, 152, 0.16);
           box-shadow: 0 0 20px rgba(31, 47, 152, 0.16);

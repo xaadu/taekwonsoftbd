@@ -3,66 +3,128 @@
 
 {% block main_content %}
 
-<div class="container">
-    <h1 class="display-3 text-center py-5">Manage Applied Teams</h1>
-    <div class="row p-3">
-        <div class="col-sm-1">Team ID</div>
-        <div class="col-sm-7">Team Name</div>
-        <div class="col-sm-4 text-center">Action</div>
-    </div>
-    <div class="accordion accordion-flush" id="team_list">
-        {% for team, players in teamData.items %}
-        <div class="accordion-item">
-            <div class="accordion-header bg-light" id="flush-heading{{ team.team.id }}">
-                <div class="row p-3">
-                    <div class="col-sm-1">{{ team.team.id }}</div>
-                    <div class="col-sm-7">{{ team.team.name }}</div>
-                    <div class="col-sm-4 btn-group text-center" role="action" aria-label="Action Buttons">
-                        <a href="#" class="btn btn-outline-success view_link" data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapse{{ team.team.id }}" aria-expanded="false"
-                        aria-controls="flush-collapse{{ team.team.id }}">Details</a>
-
-                        <a href="{% url 'home:update_team' event_id=event.id reg_team_id=team.id %}"
-                            class="btn btn-outline-primary update_link">Edit</a>
-
-                        <a href="{% url 'home:delete_team' event_id=event.id reg_team_id=team.id %}"
-                            class="btn btn-outline-danger delete_link">Delete</a>
-                    </div>
-                    <div class="col-sm-1 text-center">
-                        
-                    </div>
-                    <div class="col-sm-1 text-center">
-                        
-                    </div>
-                </div>
-            </div>
-            <div id="flush-collapse{{ team.team.id }}" class="accordion-collapse collapse"
-                aria-labelledby="flush-heading{{ team.team.id }}" data-bs-parent="#team_list">
-                <div class="accordion-body">
-                    <div class="players px-5">
-                        <div class="player row border border-secondary border-start-0 border-end-0 bg-light">
-                            <div class="player__id col-sm-2 py-3">Player ID</div>
-                            <div class="player__name col-sm-5 py-3">Player Name</div>
-                            <div class="player__district col-sm-3 py-3">Player District</div>
-                            <div class="player__idcard col-sm-2 py-3">ID Card</div>
-                        </div>
-                        {% for player in players %}
-                        <div class="player row border-bottom border-secondary {% cycle 'bg-white' 'bg-light' %}">
-                            <div class="player__id col-sm-2 py-3">{{ player.player.id }}</div>
-                            <div class="player__name col-sm-5 py-3">{{ player.player.name }}</div>
-                            <div class="player__district col-sm-3 py-3">{{ player.player.district }}</div>
-                            <div class="player__idcard col-sm-2 py-3">
-                                <a href="{% url 'home:downloadID' event.id team.id player.id %}" class="btn btn-primary"
-                                    download="id_card_{{ player.id|stringformat:'04d' }}.jpg">Download</a>
+<section id="manage">
+    <div class="container">
+        <h1 class="display-3 text-center py-5">Manage Members</h1>
+    
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">ID No</th>
+                        <th class="text-center">Image</th>
+                        <th>Details</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reg_member in reg_members %}
+                    <tr class="player">
+                        <td class="align-middle text-center">{{ reg_member.id }}</td>
+                        <td class="member__pic text-center">
+                            <img 
+                                src="{{ reg_member.member.picture.url }}" 
+                                alt="{{ reg_member.member.name|title }} Picture" 
+                                class="img-fluid"
+                            >
+                        </td>
+                        <td class="align-middle">
+                            {{ reg_member.member.name }}
+                        </td>
+                        <td class="text-center align-middle">
+                            <div class="btn-group">
+                                {% comment %} <a 
+                                    href="#" 
+                                    class="btn btn-outline-success view_link" 
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapse{{ team.team.id }}" 
+                                    aria-expanded="false"
+                                    aria-controls="flush-collapse{{ team.team.id }}"
+                                >
+                                    Details
+                                </a> {% endcomment %}
+                                {% comment %} <i class="fa-light fa-diagram-subtask"></i> {% endcomment %}
+                                <a 
+                                    href="{% url 'home:downloadID' event.id reg_member.id %}"
+                                    class="btn btn-outline-primary"
+                                    download="id__{{ player.id|stringformat:'04d' }}.jpg"
+                                >
+                                    <i class="fa-light fa-download"></i>
+                                </a>
+                                <a 
+                                    href="{% url 'home:delete_member' event_id=event.id reg_member_id=reg_member.id %}"
+                                    class="btn btn-outline-danger delete_link"
+                                >
+                                    <i class="fa-light fa-trash"></i>
+                                </a>
                             </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
+    
+        {% comment %} <div class="row p-3">
+            <div class="col-sm-1">Team ID</div>
+            <div class="col-sm-7">Team Name</div>
+            <div class="col-sm-4 text-center">Action</div>
+        </div>
+        <div class="accordion accordion-flush" id="team_list">
+            {% for team, players in teamData.items %}
+            <div class="accordion-item">
+                <div class="accordion-header bg-light" id="flush-heading{{ team.team.id }}">
+                    <div class="row p-3">
+                        <div class="col-sm-1">{{ team.team.id }}</div>
+                        <div class="col-sm-7">{{ team.team.name }}</div>
+                        <div class="col-sm-4 btn-group text-center" role="action" aria-label="Action Buttons">
+                            <a href="#" class="btn btn-outline-success view_link" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapse{{ team.team.id }}" aria-expanded="false"
+                            aria-controls="flush-collapse{{ team.team.id }}">Details</a>
+    
+                            <a href="{% url 'home:update_team' event_id=event.id reg_team_id=team.id %}"
+                                class="btn btn-outline-primary update_link">Edit</a>
+    
+                            <a href="{% url 'home:delete_team' event_id=event.id reg_team_id=team.id %}"
+                                class="btn btn-outline-danger delete_link">Delete</a>
                         </div>
-                        {% endfor %}
+                        <div class="col-sm-1 text-center">
+                            
+                        </div>
+                        <div class="col-sm-1 text-center">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div id="flush-collapse{{ team.team.id }}" class="accordion-collapse collapse"
+                    aria-labelledby="flush-heading{{ team.team.id }}" data-bs-parent="#team_list">
+                    <div class="accordion-body">
+                        <div class="players px-5">
+                            <div class="player row border border-secondary border-start-0 border-end-0 bg-light">
+                                <div class="player__id col-sm-2 py-3">Player ID</div>
+                                <div class="player__name col-sm-5 py-3">Player Name</div>
+                                <div class="player__district col-sm-3 py-3">Player District</div>
+                                <div class="player__idcard col-sm-2 py-3">ID Card</div>
+                            </div>
+                            {% for player in players %}
+                            <div class="player row border-bottom border-secondary {% cycle 'bg-white' 'bg-light' %}">
+                                <div class="player__id col-sm-2 py-3">{{ player.player.id }}</div>
+                                <div class="player__name col-sm-5 py-3">{{ player.player.name }}</div>
+                                <div class="player__district col-sm-3 py-3">{{ player.player.district }}</div>
+                                <div class="player__idcard col-sm-2 py-3">
+                                    <a href="{% url 'home:downloadID' event.id team.id player.id %}" class="btn btn-primary"
+                                        download="id_card_{{ player.id|stringformat:'04d' }}.jpg">Download</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
+        </div> {% endcomment %}
     </div>
-</div>
+</section>
 
 {% endblock %}
