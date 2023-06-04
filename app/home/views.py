@@ -164,29 +164,9 @@ def manage(request, pk):
         submembers_count=Count('submembers')
     )
 
-    teamData = {}
-    try:
-        teams = list(event.registeredteam_set.all())
-
-        # Doesn't support in mysql
-        # userTeams = request.user.teamleadermodel.registeredteam_set.filter(
-        #    event_id=pk)
-        #teams = teams.intersection(userTeams)
-
-        userTeams = list(request.user.teamleadermodel.team_set.all())
-        userTeamIDs = [user.id for user in userTeams]
-        teams = [team for team in teams if team.team_id in userTeamIDs]
-
-        for team in teams:
-            teamData[team] = team.registeredplayer_set.all()
-
-    except Exception as e:
-        print(e)
-
     context = {
         'event': event,
         'reg_members': reg_members,
-        'teamData': teamData,
     }
 
     return render(request, 'home/manage.html', context)
