@@ -31,7 +31,9 @@ class Event(models.Model):
     cert_bg = models.ImageField(upload_to='images/cert_bg', blank=True, null=True)
 
     BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
-    allow_reg = models.BooleanField(choices=BOOL_CHOICES, default=True)
+    allow_reg = models.BooleanField(choices=BOOL_CHOICES, default=False)
+    allow_manage = models.BooleanField(choices=BOOL_CHOICES, default=True)
+    allow_payment = models.BooleanField(choices=BOOL_CHOICES, default=False)
     completed = models.BooleanField(choices=BOOL_CHOICES, default=False)
 
     def __str__(self) -> str:

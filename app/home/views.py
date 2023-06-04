@@ -161,7 +161,7 @@ def event_players(request, pk):
 
 @allowed_users(['tl'])
 def manage(request, pk):
-    event = Event.objects.get(pk=pk)
+    event = Event.objects.get(pk=pk,allow_manage=True)
     reg_members = RegisteredMember.objects.filter(
         event=event,
         has_parent=False,
@@ -429,7 +429,7 @@ def event_member_delete(request, event_id, reg_member_id):
 
 @allowed_users(['tl'])
 def apply__select_member(request, pk):
-    event = Event.objects.get(pk=pk)
+    event = Event.objects.get(pk=pk, allow_reg=True)
 
     teamleader = request.user.teamleadermodel
     players = teamleader.player_set.all()
@@ -444,7 +444,7 @@ def apply__select_member(request, pk):
 
 @allowed_users(['tl'])
 def apply__select_team(request, event_id, member_id):
-    event = Event.objects.get(pk=event_id)
+    event = Event.objects.get(pk=event_id, allow_reg=True)
 
     teamleader = request.user.teamleadermodel
     player = teamleader.player_set.get(pk=member_id)
@@ -463,7 +463,7 @@ def apply__select_team(request, event_id, member_id):
 @allowed_users(['tl'])
 def apply__select_category(request, event_id, member_id, team_id):
 
-    event = Event.objects.prefetch_related('category_set').get(pk=event_id)
+    event = Event.objects.prefetch_related('category_set').get(pk=event_id, allow_reg=True)
 
     teamleader = request.user.teamleadermodel
     member = teamleader.player_set.get(pk=member_id)
@@ -489,7 +489,7 @@ def apply__select_subcategory(request, event_id, member_id, team_id, category_id
             'category_set', 
             queryset=Category.objects.prefetch_related('subcategory_set')
         )
-    ).get(pk=event_id)
+    ).get(pk=event_id, allow_reg=True)
     category = event.category_set.get(pk=category_id)
 
     teamleader = request.user.teamleadermodel

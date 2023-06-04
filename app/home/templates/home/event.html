@@ -83,9 +83,9 @@
                             <div class="col-6 d-flex">
                                 <div class="btn_wrapper mt-auto">
                                     <a 
-                                        class="btn btn-primary {% if not event.allow_reg %} disabled {% endif %}" 
+                                        class="btn btn-primary {% if not event.allow_manage %} disabled {% endif %}" 
                                         
-                                        {% if event.allow_reg %}
+                                        {% if event.allow_manage %}
                                         href="{% url 'home:manage' pk=event.id %}"
                                         {% else %}
                                         tabindex="-1"
