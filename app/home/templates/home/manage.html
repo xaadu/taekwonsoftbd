@@ -54,6 +54,7 @@
                                     data-bs-target="#flush-collapse{{ reg_member.id }}" 
                                     aria-expanded="false"
                                     aria-controls="flush-collapse{{ reg_member.id }}"
+                                    {% if reg_member.submembers_count %}disabled{% endif %}
                                 >
                                     <i class="fa-light fa-diagram-subtask"></i> Details
                                 </a>
@@ -73,13 +74,15 @@
                             </div>
                         </td>
                     </tr>
-                    <tr
-                        {% comment %} class="accordion-collapse collapse" {% endcomment %}
-                    >
-                        <td colspan="4">
-                            {% include 'home/partials/_submembers.html' %}
-                        </td>
-                    </tr>
+
+                    {% if reg_member.submembers_count %}
+                        <tr>
+                            <td colspan="4">
+                                {% include 'home/partials/_submembers.html' %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    
                     {% endfor %}
                 </tbody>
             </table>
