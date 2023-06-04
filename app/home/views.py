@@ -105,19 +105,10 @@ def events(request):
 
 def event_details(request, pk):
     event = Event.objects.get(pk=pk)
-    total_players = event.registeredteam_set.count()
-    teamData = {}
-    try:
-        teams = event.registeredteam_set.all()
-
-        for team in teams:
-            teamData[team] = team.registeredplayer_set.all()
-    except Exception as e:
-        print(e)
+    total_players = event.registeredmember_set.count()
 
     context = {
         'event': event,
-        'teamData': teamData,
         'total_players': total_players,
     }
 

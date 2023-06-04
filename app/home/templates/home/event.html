@@ -149,7 +149,15 @@
                         <div class="row">
                             <div class="col-6 d-flex">
                                 <div class="btn_wrapper mt-auto">
-                                    <a class="btn btn-primary" href="{% url 'home:teams' pk=event.id %}">
+                                    <a 
+                                        class="btn btn-primary disabled" 
+                                        {% comment %} href="{% url 'home:teams' pk=event.id %}" {% endcomment %}
+                                        href="#"
+
+                                        tabindex="-1"
+                                        role="button"
+                                        aria-disabled="true"
+                                    >
                                         Player List
                                     </a>
                                 </div>
@@ -178,7 +186,15 @@
                         <div class="row">
                             <div class="col-6 d-flex">
                                 <div class="btn_wrapper mt-auto">
-                                    <a class="btn btn-primary" href="{% url 'home:players' pk=event.id %}">
+                                    <a 
+                                        class="btn btn-primary disabled" 
+                                        {% comment %} href="{% url 'home:players' pk=event.id %}" {% endcomment %}
+                                        href="#"
+
+                                        tabindex="-1"
+                                        role="button"
+                                        aria-disabled="true"
+                                    >
                                         Player by Category
                                     </a>
                                 </div>
