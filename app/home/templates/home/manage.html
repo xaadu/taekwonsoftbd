@@ -65,7 +65,7 @@
                                 <a 
                                     href="{% url 'home:downloadID' event.id reg_member.id %}"
                                     class="btn btn-outline-primary"
-                                    download="id__{{ player.id|stringformat:'04d' }}.jpg"
+                                    download="id__{{ reg_member.id|stringformat:'04d' }}.jpg"
                                 >
                                     <i class="fa-light fa-download"></i>
                                 </a>
