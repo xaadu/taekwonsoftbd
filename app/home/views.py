@@ -176,17 +176,23 @@ def manage(request, pk):
 def downloadID(request, event_id, reg_member_id):
     event = Event.objects.get(pk=event_id)
     reg_member = RegisteredMember.objects.select_related(
-        'member'
-    ).get(pk=reg_member_id)
-
-    return HttpResponse('Under Development!')
+        'member',
+        'team',
+        'category',
+        'sub_category',
+    ).get(
+        pk=reg_member_id,
+        # TODO: Implement can downloadable only for paid members
+    )
 
     event_name = event.title
+    player_id = reg_member_id
     player_pic_url = reg_member.member.picture.url
     player_name = reg_member.member.name
     player_country = reg_member.member.country
-    player_club = team.team.teamleader.club_name
-    category = player.category.name
+    player_club = reg_member.team.name
+    category = reg_member.category.name
+    subcategory = reg_member.sub_category.title
 
     if DEBUG:
         static_dir = 'static'
