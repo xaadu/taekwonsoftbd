@@ -23,7 +23,6 @@
             <thead>
                 <tr>
                     <th class="">Title</th>
-                    <th class="">Price</th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
@@ -31,7 +30,6 @@
                 {% for subcategory in subcategories %}
                 <tr class="subcategory">
                     <td class="align-middle">{{ subcategory.title }}</td>
-                    <td class="align-middle">${{ subcategory.price }}</td>
                     <td class="align-middle text-center">
                         <a 
                             href="{% url 'home:apply__select_submember' event.id member.id team.id category.id subcategory.id %}"
