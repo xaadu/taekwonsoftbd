@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages
 from django.db.models import Prefetch, F, Func, Value, IntegerField, Count, Sum
+from django.db.models.functions import Coalesce
 from django.utils import timezone
 
 # Create your views here.
@@ -153,12 +154,7 @@ def event_players(request, pk):
 @allowed_users(['tl'])
 def manage(request, pk):
     teamleader_id = request.user.teamleadermodel.id
-    event = Event.objects.annotate(
-        total_payment=Sum('category__price')
-    ).get(
-        pk=pk,
-        allow_manage=True,
-    )
+    event = Event.objects.get(pk=pk, allow_manage=True)
     reg_members = RegisteredMember.objects.filter(
         event=event,
         member__teamleader_id=teamleader_id,
@@ -170,15 +166,21 @@ def manage(request, pk):
     ).annotate(
         submembers_count=Count('submembers'),
     )
-    payment_info = EventPayment.objects.get_or_create(
+    total_payment = reg_members.aggregate(
+        amount_total=Coalesce(Sum("category__price"), 0)
+    )["amount_total"]
+
+    # TODO: Make this section get only instead of get_or_create
+    payment_info, _ = EventPayment.objects.get_or_create(
         event_id=event.id,
         teamleader_id=teamleader_id,
-        defaults={"amount_total": event.total_payment},
+        defaults={"amount_total": total_payment},
     )
 
     context = {
         'event': event,
         'reg_members': reg_members,
+        'payment_info': payment_info,
     }
 
     return render(request, 'home/manage.html', context)
@@ -361,6 +363,20 @@ def event_team_update(request, event_id, reg_team_id):
 def event_member_delete(request, event_id, reg_member_id):
     event = Event.objects.get(pk=event_id)
     event.registeredmember_set.get(pk=reg_member_id).delete()
+
+    teamleader_id = request.user.teamleadermodel.id
+
+    amount_total = RegisteredMember.objects.filter(
+        event_id=event.id,
+        member__teamleader_id=teamleader_id,
+    ).aggregate(amount_total=Coalesce(Sum("category__price"), 0))["amount_total"]
+
+    event_payment, _ = EventPayment.objects.update_or_create(
+        event_id=event.id,
+        teamleader_id=teamleader_id,
+        defaults={"amount_total": amount_total},
+    )
+
     return redirect('home:manage', pk=event_id)
 
 

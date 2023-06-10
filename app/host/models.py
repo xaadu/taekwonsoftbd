@@ -2,6 +2,10 @@ from typing import Iterable, Optional
 from django.core.validators import MaxValueValidator, MinValueValidator 
 from django.db import models
 
+from django.db.models.functions import Coalesce
+from django.db.models import Sum
+from django.db.models.signals import post_save, pre_delete
+
 from datetime import date
 
 # Create your models here.
@@ -119,7 +123,26 @@ class EventPayment(models.Model):
     PAYMENT_CHOICES = ((True, 'Yes'), (False, 'No'))
     is_paid = models.BooleanField(choices=PAYMENT_CHOICES, default=False)
 
+    def __str__(self) -> str:
+        return f"{self.teamleader.user.email}__{self.event.title[:20]}"
 
+
+def registered_member_handler(sender, instance, **kwargs):
+    event_id = instance.event_id
+    teamleader_id = instance.member.teamleader_id
+
+    amount_total = sender.objects.filter(
+        event_id=event_id,
+        member__teamleader_id=teamleader_id,
+    ).aggregate(amount_total=Coalesce(Sum("category__price"), 0))["amount_total"]
+
+    event_payment, _ = EventPayment.objects.update_or_create(
+        event_id=event_id,
+        teamleader_id=teamleader_id,
+        defaults={"amount_total": amount_total},
+    )
+
+post_save.connect(registered_member_handler, sender=RegisteredMember)
 
 
 
