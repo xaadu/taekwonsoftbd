@@ -1,3 +1,4 @@
+from typing import Iterable, Optional
 from django.core.validators import MaxValueValidator, MinValueValidator 
 from django.db import models
 
@@ -105,6 +106,19 @@ class RegisteredMember(models.Model):
 
     def __str__(self) -> str:
         return self.member.name
+
+
+
+class EventPayment(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    teamleader = models.ForeignKey("account.TeamLeaderModel", on_delete=models.CASCADE)
+    
+    amount_total = models.FloatField(default=0.0)
+    amount_paid = models.FloatField(default=0.0)
+    
+    PAYMENT_CHOICES = ((True, 'Yes'), (False, 'No'))
+    is_paid = models.BooleanField(choices=PAYMENT_CHOICES, default=False)
+
 
 
 

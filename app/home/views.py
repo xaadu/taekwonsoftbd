@@ -5,12 +5,12 @@ from django.http import HttpResponse, FileResponse
 from django.core.paginator import Paginator
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages
-from django.db.models import Prefetch, F, Func, Value, IntegerField, Count
+from django.db.models import Prefetch, F, Func, Value, IntegerField, Count, Sum
 from django.utils import timezone
 
 # Create your views here.
 
-from host.models import Event, RegisteredTeam, RegisteredPlayer, RegisteredMember, Category
+from host.models import Event, RegisteredTeam, RegisteredPlayer, RegisteredMember, Category, EventPayment
 from team_leader.models import Player
 
 from account.decorators import allowed_users
@@ -152,16 +152,28 @@ def event_players(request, pk):
 
 @allowed_users(['tl'])
 def manage(request, pk):
-    event = Event.objects.get(pk=pk,allow_manage=True)
+    teamleader_id = request.user.teamleadermodel.id
+    event = Event.objects.annotate(
+        total_payment=Sum('category__price')
+    ).get(
+        pk=pk,
+        allow_manage=True,
+    )
     reg_members = RegisteredMember.objects.filter(
         event=event,
+        member__teamleader_id=teamleader_id,
         has_parent=False,
     ).select_related(
         'member', 'category', 'sub_category',
     ).prefetch_related(
         'submembers',
     ).annotate(
-        submembers_count=Count('submembers')
+        submembers_count=Count('submembers'),
+    )
+    payment_info = EventPayment.objects.get_or_create(
+        event_id=event.id,
+        teamleader_id=teamleader_id,
+        defaults={"amount_total": event.total_payment},
     )
 
     context = {
