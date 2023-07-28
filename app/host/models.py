@@ -65,10 +65,12 @@ class SubCategory(models.Model):
 
     MALE = 'male'
     FEMALE = 'female'
+    ANY = 'any'
 
     CHOICES__GENDER = (
         (MALE, 'Male'),
-        (FEMALE, 'Female')
+        (FEMALE, 'Female'),
+        (ANY, 'Any'),
     )
     
     category = models.ForeignKey(

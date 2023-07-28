@@ -5,7 +5,7 @@ from django.http import HttpResponse, FileResponse
 from django.core.paginator import Paginator
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages
-from django.db.models import Prefetch, F, Func, Value, IntegerField, Count, Sum
+from django.db.models import Prefetch, F, Func, Value, IntegerField, Count, Sum, Q
 from django.db.models.functions import Coalesce
 from django.utils import timezone
 
@@ -501,7 +501,7 @@ def apply__select_subcategory(request, event_id, member_id, team_id, category_id
     member = teamleader.player_set.get(pk=member_id)
     team = teamleader.team_set.get(pk=team_id)
 
-    subcategories = category.subcategory_set.filter(gender=member.gender)
+    subcategories = category.subcategory_set.filter(Q(gender=member.gender) | Q(gender="any"))
 
     member_age = member.calculated_age
 
@@ -572,10 +572,12 @@ def apply__select_submember(request, event_id, member_id, team_id, category_id, 
     ).filter(
         age__gte=subcategory.min_age,
         age__lte=subcategory.max_age,
-        gender=subcategory.gender,
     ).exclude(
         id=member.id
     )
+
+    if subcategory.gender != "any":
+        submembers = submembers.filter(gender=subcategory.gender)
 
     form = SubMemberApplyForm2(
         data=request.POST or None, 
