@@ -30,8 +30,8 @@
                     placeholder="mysecretpassword">
             </div>
 
-            <script src='https://www.google.com/recaptcha/api.js'></script>
-            <div class="g-recaptcha py-3" data-sitekey="{% if recaptcha_token %}{{ recaptcha_token }}{% endif %}"></div>
+            {% comment %} <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div class="g-recaptcha py-3" data-sitekey="{% if recaptcha_token %}{{ recaptcha_token }}{% endif %}"></div> {% endcomment %}
 
             {% for e in errors %}
             <small class="text-danger">

@@ -34,24 +34,24 @@ def registration_view(request):
     if request.POST:
         form = TLRegistrationForm(request.POST, request.FILES)
         if form.is_valid():
-            url = 'https://www.google.com/recaptcha/api/siteverify'
-            data = {
-                'secret': envs.get('OWNER_KEY'),
-                'response': request.POST.get('g-recaptcha-response')
-            }
-            data = requests.post(url, data=data).json()
-            if data.get('success'):
-                print('Succeed!!')
-                form.save()
-                email = form.cleaned_data.get('email')
-                raw_password = form.cleaned_data.get('password1')
-                account = authenticate(email=email, password=raw_password)
-                login(request, account)
-                messages.success(request, 'Successfully Registered.')
-                return redirect('team_leader:dashboard')
-            else:
-                print('Not Succeed!!')
-                errors.append('Captcha Not Provided')
+            # url = 'https://www.google.com/recaptcha/api/siteverify'
+            # data = {
+            #     'secret': envs.get('OWNER_KEY'),
+            #     'response': request.POST.get('g-recaptcha-response')
+            # }
+            # data = requests.post(url, data=data).json()
+            # if data.get('success'):
+            #     print('Succeed!!')
+            form.save()
+            email = form.cleaned_data.get('email')
+            raw_password = form.cleaned_data.get('password1')
+            account = authenticate(email=email, password=raw_password)
+            login(request, account)
+            messages.success(request, 'Successfully Registered.')
+            return redirect('team_leader:dashboard')
+            # else:
+            #     print('Not Succeed!!')
+            #     errors.append('Captcha Not Provided')
 
     context = {
         'form': form,
@@ -111,26 +111,26 @@ def login_view(request):
         password = request.POST.get('password')
         user = authenticate(request, email=email, password=password)
         if user is not None:
-            url = 'https://www.google.com/recaptcha/api/siteverify'
-            data = {
-                'secret': envs.get('OWNER_KEY'),
-                'response': request.POST.get('g-recaptcha-response')
-            }
-            data = requests.post(url, data=data).json()
-            if data.get('success'):
-                login(request, user)
-                messages.success(request, 'Successfully Logged In.')
-                next = request.GET.get('next')
-                if next:
-                    return redirect(next)
-                elif user.is_tl:
-                    return redirect('team_leader:dashboard')
-                elif user.is_judge:
-                    return redirect('judge:dashboard')
-                else:
-                    return redirect('home:home')
+            # url = 'https://www.google.com/recaptcha/api/siteverify'
+            # data = {
+            #     'secret': envs.get('OWNER_KEY'),
+            #     'response': request.POST.get('g-recaptcha-response')
+            # }
+            # data = requests.post(url, data=data).json()
+            # if data.get('success'):
+            login(request, user)
+            messages.success(request, 'Successfully Logged In.')
+            next = request.GET.get('next')
+            if next:
+                return redirect(next)
+            elif user.is_tl:
+                return redirect('team_leader:dashboard')
+            elif user.is_judge:
+                return redirect('judge:dashboard')
             else:
-                errors.append('Captcha Not Provided')
+                return redirect('home:home')
+            # else:
+            #     errors.append('Captcha Not Provided')
         else:
             errors.append('Check E-mail/Password and try again.')
 
