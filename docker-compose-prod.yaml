@@ -7,6 +7,8 @@ services:
       - .env
     volumes:
       - dbdata:/var/lib/postgresql/data
+    networks:
+      - taekwonsoftbd_network
   taekwonsoftbd_app:
     container_name: app_container
     restart: unless-stopped
@@ -19,6 +21,8 @@ services:
       - assets:/assets
     depends_on:
       - taekwonsoftbd_db
+    networks:
+      - taekwonsoftbd_network
   taekwonsoftbd_proxy:
     container_name: proxy_container
     restart: unless-stopped
@@ -35,6 +39,8 @@ services:
       - 443:443
     depends_on:
       - taekwonsoftbd_app
+    networks:
+      - taekwonsoftbd_network
 
 volumes:
   dbdata:
