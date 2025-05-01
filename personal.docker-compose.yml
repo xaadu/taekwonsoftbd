@@ -1,8 +1,8 @@
 services:
     taekwonsoftbd_proxy:
         image: nginx:1.27.5-alpine
-        build: !reset ""
-        volumes: !reset
+        build: !reset null
+        volumes: !override
             - ./proxy/templates:/etc/nginx/templates
             - assets:/assets
         ports: !reset []
