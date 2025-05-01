@@ -4,8 +4,7 @@ services:
         volumes:
             - ./proxy/templates:/etc/nginx/templates
             - assets:/assets
-        ports:
-            - 80
+        ports: !reset []
         networks:
             - taekwonsoftbd_network
             - pm_public
