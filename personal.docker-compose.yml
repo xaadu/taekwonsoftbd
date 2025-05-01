@@ -1,6 +1,7 @@
 services:
     taekwonsoftbd_proxy:
         image: nginx:1.27.5-alpine
+        command: "nginx -g 'daemon off;'"
         build: !reset null
         volumes: !override
             - ./proxy/templates:/etc/nginx/templates
