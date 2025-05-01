@@ -1,44 +1,47 @@
-version: "3.7"
-
-services: 
-  db:
+services:
+  taekwonsoftbd_db:
     container_name: db_container
     image: postgres:13.2-alpine
     restart: unless-stopped
-    env_file: 
+    env_file:
       - .env
-    volumes: 
+    volumes:
       - dbdata:/var/lib/postgresql/data
-  app:
+  taekwonsoftbd_app:
     container_name: app_container
     restart: unless-stopped
-    env_file: 
+    env_file:
       - .env
     build:
       context: ./app
       dockerfile: Dockerfile_PROD
-    volumes: 
+    volumes:
       - assets:/assets
-    depends_on: 
-      - db
-  proxy:
+    depends_on:
+      - taekwonsoftbd_db
+  taekwonsoftbd_proxy:
     container_name: proxy_container
     restart: unless-stopped
-    env_file: 
+    env_file:
       - .env
     build:
       context: ./proxy
       dockerfile: Dockerfile_PROD
-    volumes: 
+    volumes:
       - assets:/assets
       - sslfiles:/etc/letsencrypt
     ports:
       - 80:80
       - 443:443
-    depends_on: 
-      - app
+    depends_on:
+      - taekwonsoftbd_app
 
-volumes: 
+volumes:
   dbdata:
   assets:
   sslfiles:
+
+
+networks:
+  taekwonsoftbd_network:
+    driver: bridge

@@ -1,0 +1,15 @@
+services:
+    taekwonsoftbd_proxy:
+        image: nginx:1.27.5-alpine
+        volumes:
+            - ./proxy/templates:/etc/nginx/templates
+            - assets:/assets
+        ports:
+            - 80
+        networks:
+            - taekwonsoftbd_network
+            - pm_public
+
+networks:
+    pm_public:
+        external: true
