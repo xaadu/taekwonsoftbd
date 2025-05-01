@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name v1.taekwonsoftbd.com;
+    server_name testtaekwonsoftbd.zayedabdullah.com v1.taekwonsoftbd.com;
 
     location /favicon.ico {
         alias /assets/static/favicon.ico;
