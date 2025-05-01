@@ -1,6 +1,5 @@
 services:
   taekwonsoftbd_db:
-    container_name: db_container
     image: postgres:13.2-alpine
     restart: unless-stopped
     env_file:
@@ -10,7 +9,6 @@ services:
     networks:
       - taekwonsoftbd_network
   taekwonsoftbd_app:
-    container_name: app_container
     restart: unless-stopped
     env_file:
       - .env
@@ -24,7 +22,6 @@ services:
     networks:
       - taekwonsoftbd_network
   taekwonsoftbd_proxy:
-    container_name: proxy_container
     restart: unless-stopped
     env_file:
       - .env
